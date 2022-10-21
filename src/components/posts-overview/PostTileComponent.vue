@@ -36,7 +36,7 @@ export default {
     <div v-if="post.image" class="pt-3 pr-2 pb-1 pl-2 h-44 flex">
       <img
         class="w-full max-h-full"
-        :src="getImageURL(post.image)"
+        :src="getImageURL(post.image.name)"
         alt="Post Image"
       />
     </div>

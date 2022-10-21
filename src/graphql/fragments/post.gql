@@ -4,10 +4,12 @@
 fragment Post on Post {
   slug
   title
-  image
+  image {
+    name
+  }
   dateCreated
-  likeCount
-  commentCount
+  #  likeCount
+  #  commentCount
   category {
     ...Category
   }
