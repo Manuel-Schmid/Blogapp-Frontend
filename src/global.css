@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* --variable-name: value; */
+  }
+}
+
+.dark a,
+.dark button {
+  @apply text-white;
+}
+
+.link-no-decoration {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+*:focus {
+  outline: none;
+}

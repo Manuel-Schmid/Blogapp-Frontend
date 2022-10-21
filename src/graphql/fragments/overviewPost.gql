@@ -1,0 +1,5 @@
+#import "./post.gql"
+
+fragment OverviewPost on Post {
+  ...Post
+}
