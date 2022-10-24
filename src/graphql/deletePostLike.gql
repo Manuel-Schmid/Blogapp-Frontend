@@ -1,5 +1,3 @@
 mutation DeletePostLike($postLikeInput: PostLikeInput!) {
-  deletePostLike(postLikeInput: $postLikeInput) {
-    success
-  }
+  deletePostLike(postLikeInput: $postLikeInput)
 }

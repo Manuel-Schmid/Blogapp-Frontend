@@ -1,5 +1,3 @@
 mutation DeleteComment($commentId: ID!) {
-  deleteComment(commentId: $commentId) {
-    success
-  }
+  deleteComment(commentId: $commentId)
 }

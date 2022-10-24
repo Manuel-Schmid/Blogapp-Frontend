@@ -101,7 +101,7 @@ export const usePostStore = defineStore("blog", {
             },
           },
         });
-        if (response.data.createPostLike.postLike) {
+        if (response.data.createPostLike) {
           await this.fetchPost(this.post.slug, false);
         }
       }
