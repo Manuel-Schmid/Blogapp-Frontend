@@ -8,8 +8,8 @@ fragment Post on Post {
     name
   }
   dateCreated
-  #  likeCount
-  #  commentCount
+  likeCount
+  commentCount
   category {
     ...Category
   }

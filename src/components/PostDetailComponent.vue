@@ -75,7 +75,7 @@ export default {
         <div v-if="postData.image" class="pt-2 pr-8 pb-2 pl-8 mt-6">
           <img
             class="w-full"
-            :src="getImageURL(postData.image)"
+            :src="getImageURL(postData.image.name)"
             alt="Post Image"
           />
         </div>
