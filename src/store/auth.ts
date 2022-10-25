@@ -53,14 +53,14 @@ export const useAuthStore = defineStore("auth", {
     async logoutUser() {
       this.user = this.refreshToken = null;
       // delete cookies
-      const responseDeleteTokenCookie = await apolloClient.query({
+      const ResponseDeleteTokenCookie = await apolloClient.query({
         query: DeleteTokenCookie,
       });
       const ResponseDeleteRefreshTokenCookie = await apolloClient.query({
         query: DeleteRefreshTokenCookie,
       });
       if (
-        responseDeleteTokenCookie.data.deleteTokenCookie.deleted &&
+        ResponseDeleteTokenCookie.data.deleteTokenCookie.deleted &&
         ResponseDeleteRefreshTokenCookie.data.deleteRefreshTokenCookie.deleted
       ) {
         await apolloClient.resetStore();

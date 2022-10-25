@@ -81,26 +81,28 @@ export default {
         </div>
         <div class="mt-4 w-full">
           <div class="w-full">
-            <div class="float-right text-center w-min mt-2 mr-16">
-              <font-awesome-icon
-                v-if="authStore.user"
-                icon="fa-thumbs-up"
-                class="text-3xl mb-0.5 cursor-pointer"
-                :class="[
-                  postLiked
-                    ? 'text-blue-700 dark:text-white'
-                    : 'dark:text-slate-500',
-                ]"
-                @click="togglePostLike(postData.id)"
-              ></font-awesome-icon>
-              <font-awesome-icon
-                v-else
-                icon="fa-thumbs-up"
-                class="text-3xl mb-0.5 dark:text-slate-500"
-              ></font-awesome-icon>
-              <span class="w-full cursor-default">{{
-                postData.likeCount
-              }}</span>
+            <div class="mt-2 mr-8">
+              <div class="text-center float-right w-max">
+                <font-awesome-icon
+                  v-if="authStore.user"
+                  icon="fa-thumbs-up"
+                  class="text-3xl mb-0.5 cursor-pointer w-full"
+                  :class="[
+                    postLiked
+                      ? 'text-blue-700 dark:text-white'
+                      : 'dark:text-slate-500',
+                  ]"
+                  @click="togglePostLike(postData.id)"
+                ></font-awesome-icon>
+                <font-awesome-icon
+                  v-else
+                  icon="fa-thumbs-up"
+                  class="text-3xl mb-0.5 dark:text-slate-500"
+                ></font-awesome-icon>
+                <span class="w-full cursor-default">{{
+                  postData.likeCount
+                }}</span>
+              </div>
             </div>
             <div class="mr-0 mb-1 ml-8 flex m-0">
               <p class="font-bold mr-1">Category:</p>
@@ -114,8 +116,8 @@ export default {
                 {{ postData.category.name }}
               </router-link>
             </div>
-            <div class="ml-8 flex m-0">
-              <p class="font-bold mr-1">Tags:</p>
+            <div class="ml-8 m-0 text-left w-[80%]">
+              <p class="font-bold mr-1 w-min float-left">Tags:</p>
               <router-link
                 v-for="tag in postData.tags"
                 :to="{ name: 'posts', query: { tag: tag.slug } }"
