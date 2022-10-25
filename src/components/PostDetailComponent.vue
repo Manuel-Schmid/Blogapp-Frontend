@@ -124,7 +124,10 @@ export default {
                 :key="tag.slug"
                 class="text-black no-underline mr-1"
               >
-                {{ tag.name }},
+                {{
+                  tag.name +
+                  (tag === postData.tags[postData.tags.length - 1] ? "" : ",")
+                }}
               </router-link>
             </div>
             <div class="w-full mt-8">
