@@ -120,7 +120,7 @@ export default {
               <p class="font-bold mr-1 w-min float-left">Tags:</p>
               <router-link
                 v-for="tag in postData.tags"
-                :to="{ name: 'posts', query: { tag: tag.slug } }"
+                :to="{ name: 'posts', query: { tags: tag.slug } }"
                 :key="tag.slug"
                 class="text-black no-underline mr-1"
               >
