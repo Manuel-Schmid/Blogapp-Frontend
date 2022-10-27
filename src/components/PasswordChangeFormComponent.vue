@@ -13,11 +13,13 @@ export default {
     let passwordChangeError = ref("");
 
     const changePassword = async () => {
-      const success = await useAuthStore().changePassword(
-        oldPassword.value,
-        newPassword1.value,
-        newPassword2.value
-      );
+      const passwordChangeInput = {
+        oldPassword: oldPassword.value,
+        newPassword1: newPassword1.value,
+        newPassword2: newPassword2.value,
+      };
+
+      const success = await useAuthStore().changePassword(passwordChangeInput);
 
       if (success) {
         ctxt.emit("toggle-password-change-form");

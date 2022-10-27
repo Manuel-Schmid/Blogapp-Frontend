@@ -71,6 +71,18 @@ export type PaginationPosts = {
   posts: Array<Post>;
 };
 
+export type PasswordChangeInput = {
+  newPassword1: Scalars["String"];
+  newPassword2: Scalars["String"];
+  oldPassword: Scalars["String"];
+};
+
+export type PasswordChangeType = {
+  __typename?: "PasswordChangeType";
+  errors?: Maybe<Scalars["JSON"]>;
+  success: Scalars["Boolean"];
+};
+
 export type PayloadType = {
   __typename?: "PayloadType";
   payload: TokenPayloadType;
@@ -138,6 +150,7 @@ export type RootMutation = {
   deletePostLike: Scalars["Boolean"];
   deleteRefreshTokenCookie: DeleteType;
   deleteTokenCookie: DeleteType;
+  passwordChange: PasswordChangeType;
   refreshToken: RefreshedTokenType;
   register: RegisterAccountType;
   tokenAuth: TokenDataType;
@@ -171,6 +184,10 @@ export type RootMutationDeleteCommentArgs = {
 
 export type RootMutationDeletePostLikeArgs = {
   postLikeInput: PostLikeInput;
+};
+
+export type RootMutationPasswordChangeArgs = {
+  passwordChangeInput: PasswordChangeInput;
 };
 
 export type RootMutationRefreshTokenArgs = {
