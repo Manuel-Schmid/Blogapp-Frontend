@@ -1,6 +1,7 @@
 <script lang="ts">
 import { ref } from "vue";
 import { useAuthStore } from "../store/auth";
+import { usePostStore } from "../store/blog";
 
 export default {
   name: "RegistrationComponent",
@@ -22,11 +23,15 @@ export default {
     };
 
     const submitRegistration = async () => {
+      const userRegistrationInput = {
+        email: email.value,
+        username: username.value,
+        password1: password1.value,
+        password2: password2.value,
+      };
+
       signupSuccess.value = await useAuthStore().registerUser(
-        email.value,
-        username.value,
-        password1.value,
-        password2.value
+        userRegistrationInput
       );
       if (signupSuccess.value) {
         await clearInputs();

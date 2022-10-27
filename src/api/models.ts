@@ -17,6 +17,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   DateTime: any;
+  JSON: any;
 };
 
 export type Category = {
@@ -95,7 +96,7 @@ export type Post = {
 
 export type PostInput = {
   category: Scalars["ID"];
-  owner: Scalars["ID"];
+  owner?: InputMaybe<Scalars["ID"]>;
   slug?: InputMaybe<Scalars["String"]>;
   text: Scalars["String"];
   title: Scalars["String"];
@@ -121,6 +122,12 @@ export type RefreshedTokenType = {
   token: Scalars["String"];
 };
 
+export type RegisterAccountType = {
+  __typename?: "RegisterAccountType";
+  errors?: Maybe<Scalars["JSON"]>;
+  success: Scalars["Boolean"];
+};
+
 export type RootMutation = {
   __typename?: "RootMutation";
   createCategory?: Maybe<Category>;
@@ -129,13 +136,16 @@ export type RootMutation = {
   createPostLike?: Maybe<PostLike>;
   deleteComment: Scalars["Boolean"];
   deletePostLike: Scalars["Boolean"];
+  deleteRefreshTokenCookie: DeleteType;
   deleteTokenCookie: DeleteType;
   refreshToken: RefreshedTokenType;
+  register: RegisterAccountType;
   tokenAuth: TokenDataType;
   updateCategory?: Maybe<Category>;
   updateComment?: Maybe<Comment>;
   updatePost?: Maybe<Post>;
   updateUserEmail?: Maybe<User>;
+  verifyAccount: VerifyAccountType;
   verifyToken: PayloadType;
 };
 
@@ -168,6 +178,10 @@ export type RootMutationRefreshTokenArgs = {
   token?: InputMaybe<Scalars["String"]>;
 };
 
+export type RootMutationRegisterArgs = {
+  userRegistrationInput: UserRegistrationInput;
+};
+
 export type RootMutationTokenAuthArgs = {
   password: Scalars["String"];
   refreshToken?: InputMaybe<Scalars["String"]>;
@@ -189,6 +203,10 @@ export type RootMutationUpdatePostArgs = {
 
 export type RootMutationUpdateUserEmailArgs = {
   newEmail: Scalars["String"];
+};
+
+export type RootMutationVerifyAccountArgs = {
+  token: Scalars["String"];
 };
 
 export type RootMutationVerifyTokenArgs = {
@@ -257,4 +275,16 @@ export type User = {
   posts: Array<Post>;
   /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
   username: Scalars["String"];
+};
+
+export type UserRegistrationInput = {
+  email: Scalars["String"];
+  password1: Scalars["String"];
+  password2: Scalars["String"];
+  username: Scalars["String"];
+};
+
+export type VerifyAccountType = {
+  __typename?: "VerifyAccountType";
+  success: Scalars["Boolean"];
 };
