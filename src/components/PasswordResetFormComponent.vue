@@ -14,11 +14,13 @@ export default {
     const newPassword2 = ref("");
 
     const confirmReset = async () => {
-      resetSuccess.value = await authStore.resetPassword(
-        route.params.token as string,
-        newPassword1.value,
-        newPassword2.value
-      );
+      const passwordResetInput = {
+        newPassword1: newPassword1.value,
+        newPassword2: newPassword2.value,
+        token: route.params.token as string,
+      };
+
+      resetSuccess.value = await authStore.resetPassword(passwordResetInput);
     };
 
     return { confirmReset, newPassword1, newPassword2, resetSuccess };

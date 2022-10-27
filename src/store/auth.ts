@@ -13,7 +13,11 @@ import Register from "../graphql/register.gql";
 import VerifyAccount from "../graphql/verifyAccount.gql";
 import ResendActivationEmail from "../graphql/resendActivationEmail.gql";
 import UpdateAccount from "../graphql/updateAccount.gql";
-import { PasswordChangeInput, UserRegistrationInput } from "../api/models";
+import {
+  PasswordChangeInput,
+  PasswordResetInput,
+  UserRegistrationInput,
+} from "../api/models";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -103,17 +107,11 @@ export const useAuthStore = defineStore("auth", {
       });
       return response.data.sendPasswordResetEmail.success;
     },
-    async resetPassword(
-      token: string | undefined,
-      newPassword1: string,
-      newPassword2: string
-    ) {
+    async resetPassword(passwordResetInput: PasswordResetInput) {
       const response = await apolloClient.query({
         query: PasswordReset,
         variables: {
-          token: token,
-          newPassword1: newPassword1,
-          newPassword2: newPassword2,
+          passwordResetInput: passwordResetInput,
         },
       });
       return response.data.passwordReset.success;
@@ -133,7 +131,7 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: PasswordChange,
         variables: {
-          passwordChangeInput,
+          passwordChangeInput: passwordChangeInput,
         },
       });
       return response.data.passwordChange.success;
