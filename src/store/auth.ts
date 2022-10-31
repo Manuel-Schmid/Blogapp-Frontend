@@ -6,6 +6,7 @@ import User from "../graphql/getUser.gql";
 import DeleteTokenCookie from "../graphql/deleteTokenCookie.gql";
 import DeleteRefreshTokenCookie from "../graphql/deleteRefreshTokenCookie.gql";
 import SendPasswordResetEmail from "../graphql/sendPasswordResetEmail.gql";
+import SendEmailChangeEmail from "../graphql/sendEmailChangeEmail.gql";
 import PasswordReset from "../graphql/passwordReset.gql";
 import PasswordChange from "../graphql/passwordChange.gql";
 import UpdateUserEmail from "../graphql/updateUserEmail.gql";
@@ -97,6 +98,15 @@ export const useAuthStore = defineStore("auth", {
         },
       });
       return response.data.verifyAccount.success;
+    },
+    async sendEmailChangeEmail(email: string) {
+      const response = await apolloClient.query({
+        query: SendEmailChangeEmail,
+        variables: {
+          email: email,
+        },
+      });
+      return response.data.sendEmailChangeEmail.success;
     },
     async sendResetPasswordEmail(email: string) {
       const response = await apolloClient.query({
