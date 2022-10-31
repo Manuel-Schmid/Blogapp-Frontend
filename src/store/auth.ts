@@ -9,11 +9,13 @@ import SendPasswordResetEmail from "../graphql/sendPasswordResetEmail.gql";
 import SendEmailChangeEmail from "../graphql/sendEmailChangeEmail.gql";
 import PasswordReset from "../graphql/passwordReset.gql";
 import PasswordChange from "../graphql/passwordChange.gql";
+import EmailChange from "../graphql/emailChange.gql";
 import Register from "../graphql/register.gql";
 import VerifyAccount from "../graphql/verifyAccount.gql";
 import ResendActivationEmail from "../graphql/resendActivationEmail.gql";
 import UpdateAccount from "../graphql/updateAccount.gql";
 import {
+  EmailChangeInput,
   PasswordChangeInput,
   PasswordResetInput,
   UserRegistrationInput,
@@ -145,18 +147,18 @@ export const useAuthStore = defineStore("auth", {
       });
       return response.data.passwordChange.success;
     },
-    // async changeEmail(newEmail: string) {
-    //   const response = await apolloClient.query({
-    //     query: , // todo
-    //     variables: {
-    //       newEmail: newEmail,
-    //     },
-    //   });
-    //   if (response.data.updateUserEmail.success) {
-    //     this.user = response.data.updateUserEmail.user;
-    //     return true;
-    //   }
-    //   return false;
-    // },
+    async changeEmail(emailChangeInput: EmailChangeInput) {
+      const response = await apolloClient.query({
+        query: EmailChange,
+        variables: {
+          emailChangeInput: emailChangeInput,
+        },
+      });
+      if (response.data.emailChange.success) {
+        this.user = response.data.emailChange.user;
+        return true;
+      }
+      return false;
+    },
   },
 });
