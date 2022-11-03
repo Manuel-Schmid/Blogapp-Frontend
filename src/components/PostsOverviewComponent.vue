@@ -30,7 +30,7 @@ export default {
       >
         Posts:
       </p>
-      <div v-if="postsData">
+      <div v-if="postsData" class="pl-[50px]">
         <PostTileComponent
           v-for="post in postsData.posts"
           :key="post.id"

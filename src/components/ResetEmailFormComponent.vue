@@ -27,7 +27,7 @@ export default {
           <h1
             class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center"
           >
-            Which E-Mail should we send the reset link to?
+            Which E-Mail should we send the password reset link to?
           </h1>
           <form @submit.prevent="sendEmail">
             <div>
