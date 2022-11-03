@@ -77,7 +77,7 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: Register,
         variables: {
-          userRegistrationInput: userRegistrationInput,
+          userRegistrationInput,
         },
       });
       return response.data.register.success;
@@ -86,7 +86,7 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: ResendActivationEmail,
         variables: {
-          email: email,
+          email,
         },
       });
       return response.data.resendActivationEmail.errors;
@@ -95,7 +95,7 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: VerifyAccount,
         variables: {
-          token: token,
+          token,
         },
       });
       return response.data.verifyAccount.success;
@@ -104,7 +104,7 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: SendEmailChangeEmail,
         variables: {
-          email: email,
+          email,
         },
       });
       return response.data.sendEmailChangeEmail.success;
@@ -113,7 +113,7 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: SendPasswordResetEmail,
         variables: {
-          email: email,
+          email,
         },
       });
       return response.data.sendPasswordResetEmail.success;
@@ -122,7 +122,7 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: PasswordReset,
         variables: {
-          passwordResetInput: passwordResetInput,
+          passwordResetInput,
         },
       });
       return response.data.passwordReset.success;
@@ -142,7 +142,7 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: PasswordChange,
         variables: {
-          passwordChangeInput: passwordChangeInput,
+          passwordChangeInput,
         },
       });
       return response.data.passwordChange.success;
@@ -151,7 +151,7 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: EmailChange,
         variables: {
-          emailChangeInput: emailChangeInput,
+          emailChangeInput,
         },
       });
       if (response.data.emailChange.success) {
