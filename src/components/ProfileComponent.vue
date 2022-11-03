@@ -32,7 +32,12 @@ export default {
 
     const updateAccount = async (firstName: string, lastName: string) => {
       if (firstName && lastName) {
-        const success = await useAuthStore().updateAccount(firstName, lastName);
+        const updateAccountInput = {
+          firstName,
+          lastName,
+        };
+
+        const success = await useAuthStore().updateAccount(updateAccountInput);
         if (success) {
           firstNameEditable.value = false;
           lastNameEditable.value = false;
