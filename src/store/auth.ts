@@ -18,6 +18,7 @@ import {
   EmailChangeInput,
   PasswordChangeInput,
   PasswordResetInput,
+  UpdateAccountInput,
   UserRegistrationInput,
 } from "../api/models";
 
@@ -127,12 +128,11 @@ export const useAuthStore = defineStore("auth", {
       });
       return response.data.passwordReset.success;
     },
-    async updateAccount(firstName: string, lastName: string) {
+    async updateAccount(updateAccountInput: UpdateAccountInput) {
       const response = await apolloClient.query({
         query: UpdateAccount,
         variables: {
-          firstName: firstName,
-          lastName: lastName,
+          updateAccountInput,
         },
       });
       await this.fetchUser();

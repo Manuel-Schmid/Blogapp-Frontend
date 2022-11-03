@@ -1,5 +1,5 @@
-mutation UpdateAccount($firstName: String!, $lastName: String!) {
-  updateAccount(firstName: $firstName, lastName: $lastName) {
+mutation UpdateAccount($updateAccountInput: UpdateAccountInput!) {
+  updateAccount(updateAccountInput: $updateAccountInput) {
     success
     errors
   }
