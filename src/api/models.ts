@@ -75,6 +75,7 @@ export type EmailChangeType = {
   __typename?: "EmailChangeType";
   errors?: Maybe<Scalars["JSON"]>;
   success: Scalars["Boolean"];
+  user?: Maybe<User>;
 };
 
 export type PaginationPosts = {
@@ -164,6 +165,12 @@ export type RegisterAccountType = {
   success: Scalars["Boolean"];
 };
 
+export type ResendActivationEmailType = {
+  __typename?: "ResendActivationEmailType";
+  errors?: Maybe<Scalars["JSON"]>;
+  success: Scalars["Boolean"];
+};
+
 export type RootMutation = {
   __typename?: "RootMutation";
   createCategory?: Maybe<Category>;
@@ -179,9 +186,11 @@ export type RootMutation = {
   passwordReset: PasswordResetType;
   refreshToken: RefreshedTokenType;
   register: RegisterAccountType;
+  resendActivationEmail: ResendActivationEmailType;
   sendEmailChangeEmail: SendEmailChangeEmailType;
   sendPasswordResetEmail: SendPasswordResetEmailType;
   tokenAuth: TokenDataType;
+  updateAccount: UpdateAccountType;
   updateCategory?: Maybe<Category>;
   updateComment?: Maybe<Comment>;
   updatePost?: Maybe<Post>;
@@ -235,6 +244,10 @@ export type RootMutationRegisterArgs = {
   userRegistrationInput: UserRegistrationInput;
 };
 
+export type RootMutationResendActivationEmailArgs = {
+  email: Scalars["String"];
+};
+
 export type RootMutationSendEmailChangeEmailArgs = {
   email: Scalars["String"];
 };
@@ -248,6 +261,10 @@ export type RootMutationTokenAuthArgs = {
   refreshToken?: InputMaybe<Scalars["String"]>;
   token?: InputMaybe<Scalars["String"]>;
   username: Scalars["String"];
+};
+
+export type RootMutationUpdateAccountArgs = {
+  updateAccountInput: UpdateAccountInput;
 };
 
 export type RootMutationUpdateCategoryArgs = {
@@ -334,6 +351,17 @@ export type TokenPayloadType = {
   exp: Scalars["Int"];
   origIat: Scalars["Int"];
   username: Scalars["String"];
+};
+
+export type UpdateAccountInput = {
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+};
+
+export type UpdateAccountType = {
+  __typename?: "UpdateAccountType";
+  errors?: Maybe<Scalars["JSON"]>;
+  success: Scalars["Boolean"];
 };
 
 export type User = {
