@@ -65,6 +65,19 @@ export type DjangoImageType = {
   width: Scalars["Int"];
 };
 
+export type EmailChangeInput = {
+  newEmail1: Scalars["String"];
+  newEmail2: Scalars["String"];
+  token: Scalars["String"];
+};
+
+export type EmailChangeType = {
+  __typename?: "EmailChangeType";
+  errors?: Maybe<Scalars["JSON"]>;
+  success: Scalars["Boolean"];
+  user?: Maybe<User>;
+};
+
 export type PaginationPosts = {
   __typename?: "PaginationPosts";
   numPostPages: Scalars["Int"];
@@ -152,6 +165,12 @@ export type RegisterAccountType = {
   success: Scalars["Boolean"];
 };
 
+export type ResendActivationEmailType = {
+  __typename?: "ResendActivationEmailType";
+  errors?: Maybe<Scalars["JSON"]>;
+  success: Scalars["Boolean"];
+};
+
 export type RootMutation = {
   __typename?: "RootMutation";
   createCategory?: Maybe<Category>;
@@ -162,12 +181,16 @@ export type RootMutation = {
   deletePostLike: Scalars["Boolean"];
   deleteRefreshTokenCookie: DeleteType;
   deleteTokenCookie: DeleteType;
+  emailChange: EmailChangeType;
   passwordChange: PasswordChangeType;
   passwordReset: PasswordResetType;
   refreshToken: RefreshedTokenType;
   register: RegisterAccountType;
+  resendActivationEmail: ResendActivationEmailType;
+  sendEmailChangeEmail: SendEmailChangeEmailType;
   sendPasswordResetEmail: SendPasswordResetEmailType;
   tokenAuth: TokenDataType;
+  updateAccount: UpdateAccountType;
   updateCategory?: Maybe<Category>;
   updateComment?: Maybe<Comment>;
   updatePost?: Maybe<Post>;
@@ -200,6 +223,10 @@ export type RootMutationDeletePostLikeArgs = {
   postLikeInput: PostLikeInput;
 };
 
+export type RootMutationEmailChangeArgs = {
+  emailChangeInput: EmailChangeInput;
+};
+
 export type RootMutationPasswordChangeArgs = {
   passwordChangeInput: PasswordChangeInput;
 };
@@ -217,6 +244,14 @@ export type RootMutationRegisterArgs = {
   userRegistrationInput: UserRegistrationInput;
 };
 
+export type RootMutationResendActivationEmailArgs = {
+  email: Scalars["String"];
+};
+
+export type RootMutationSendEmailChangeEmailArgs = {
+  email: Scalars["String"];
+};
+
 export type RootMutationSendPasswordResetEmailArgs = {
   email: Scalars["String"];
 };
@@ -226,6 +261,10 @@ export type RootMutationTokenAuthArgs = {
   refreshToken?: InputMaybe<Scalars["String"]>;
   token?: InputMaybe<Scalars["String"]>;
   username: Scalars["String"];
+};
+
+export type RootMutationUpdateAccountArgs = {
+  updateAccountInput: UpdateAccountInput;
 };
 
 export type RootMutationUpdateCategoryArgs = {
@@ -283,6 +322,11 @@ export type RootQueryUsedTagsArgs = {
   categorySlug?: InputMaybe<Scalars["String"]>;
 };
 
+export type SendEmailChangeEmailType = {
+  __typename?: "SendEmailChangeEmailType";
+  success: Scalars["Boolean"];
+};
+
 export type SendPasswordResetEmailType = {
   __typename?: "SendPasswordResetEmailType";
   success: Scalars["Boolean"];
@@ -307,6 +351,17 @@ export type TokenPayloadType = {
   exp: Scalars["Int"];
   origIat: Scalars["Int"];
   username: Scalars["String"];
+};
+
+export type UpdateAccountInput = {
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+};
+
+export type UpdateAccountType = {
+  __typename?: "UpdateAccountType";
+  errors?: Maybe<Scalars["JSON"]>;
+  success: Scalars["Boolean"];
 };
 
 export type User = {
