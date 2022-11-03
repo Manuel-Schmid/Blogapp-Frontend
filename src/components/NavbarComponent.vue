@@ -1,12 +1,14 @@
 <script lang="ts">
 import { ref } from "vue";
 import { useAuthStore } from "../store/auth";
+import { useRoute } from "vue-router";
 
 export default {
   name: "NavbarComponent",
 
   setup() {
     const isDarkMode = ref(localStorage.theme === "dark");
+    let route = useRoute();
 
     const toggleDarkMode = () => {
       if (localStorage.theme === "light") {
@@ -21,7 +23,7 @@ export default {
 
     const authStore = useAuthStore();
 
-    return { toggleDarkMode, isDarkMode, authStore };
+    return { toggleDarkMode, isDarkMode, authStore, route };
   },
 
   mounted() {
@@ -43,7 +45,7 @@ function updateTheme() {
 </script>
 <template>
   <header
-    class="header fixed top-0 left-0 w-full shadow-md bg-white dark:bg-gray-900 dark:text-white"
+    class="header fixed top-0 left-0 w-full shadow-md bg-white dark:bg-[#152133] dark:text-white"
   >
     <nav class="navbar h-full flex flex-row items-center">
       <label
@@ -66,17 +68,27 @@ function updateTheme() {
         >
       </label>
       <div class="w-auto flex flex-row absolute right-0 mr-5">
-        <router-link class="nav-item" :to="{ name: 'posts' }">
+        <router-link
+          class="nav-item"
+          :class="route.name === 'posts' ? 'nav-item-active' : ''"
+          :to="{ name: 'posts' }"
+        >
           Posts
         </router-link>
         <router-link
           v-if="authStore.user"
           class="nav-item"
+          :class="route.name === 'profile' ? 'nav-item-active' : ''"
           :to="{ name: 'profile' }"
         >
           {{ authStore.user.username }}
         </router-link>
-        <router-link v-else class="nav-item" :to="{ name: 'login' }">
+        <router-link
+          v-else
+          class="nav-item"
+          :class="route.name === 'login' ? 'nav-item-active' : ''"
+          :to="{ name: 'login' }"
+        >
           Login
         </router-link>
       </div>
@@ -94,6 +106,10 @@ function updateTheme() {
   @apply pt-2 pr-5 pb-2 pl-5 mt-0 mr-1 mb-0 ml-1 leading-5 font-bold text-center hover:cursor-pointer hover:bg-zinc-200 dark:hover:bg-gray-700 dark:border-white;
 }
 .nav-item:hover {
+  border-bottom: 1px solid;
+  padding-bottom: calc(0.5rem - 1px);
+}
+.nav-item-active {
   border-bottom: 1px solid;
   padding-bottom: calc(0.5rem - 1px);
 }

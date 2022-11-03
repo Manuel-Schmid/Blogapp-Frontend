@@ -82,7 +82,7 @@ export default {
         <div class="mt-4 w-full">
           <div class="w-full">
             <div class="mt-2 mr-8">
-              <div class="text-center float-right w-max">
+              <div class="text-center float-right w-max flex flex-col">
                 <font-awesome-icon
                   v-if="authStore.user"
                   icon="fa-thumbs-up"

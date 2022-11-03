@@ -36,10 +36,10 @@ function slicePaginationPageNums(numPostPages: any, activePage: number) {
 </script>
 
 <template>
-  <div class="float-left w-full h-min my-10">
+  <div class="float-left pagination-wrapper h-min my-10">
     <div class="m-auto w-max">
       <div
-        class="pagination-link-wrapper mr-3"
+        class="pagination-link-wrapper mr-3 min-w-[72px]"
         :class="!firstPage && 'invisible'"
       >
         <router-link
@@ -70,7 +70,10 @@ function slicePaginationPageNums(numPostPages: any, activePage: number) {
           {{ pageNr }}
         </router-link>
       </div>
-      <div v-if="lastPage" class="pagination-link-wrapper ml-3">
+      <div
+        class="pagination-link-wrapper ml-3 min-w-[72px]"
+        :class="!lastPage && 'invisible'"
+      >
         <router-link
           :to="{ name: route.name, query: { ...route.query, page: lastPage } }"
           class="pagination-special-link-wrapper"
@@ -89,6 +92,9 @@ function slicePaginationPageNums(numPostPages: any, activePage: number) {
 </template>
 
 <style scoped>
+.pagination-wrapper {
+  width: calc(100% - 50px);
+}
 .pagination-link {
   @apply rounded-3xl min-w-[1.75rem] px-2 h-7 text-black mx-1 text-center leading-[1.85rem] dark:text-white;
 }

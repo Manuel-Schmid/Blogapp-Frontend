@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-  <div class="mb-2" v-if="tagsData">
+  <div class="mb-2 px-10" v-if="tagsData">
     <p class="mb-0 font-bold">Tags:</p>
     <div class="mt-2 inline-block items-center justify-center">
       <div v-for="tag in tagsData" :key="tag.slug" class="float-left">
