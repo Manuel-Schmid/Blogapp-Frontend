@@ -6,6 +6,7 @@ import LoginComponent from "../components/LoginComponent.vue";
 import PasswordResetFormComponent from "../components/PasswordResetFormComponent.vue";
 import ResetEmailFormComponent from "../components/ResetEmailFormComponent.vue";
 import RegistrationComponent from "../components/RegistrationComponent.vue";
+import EmailChangeFormComponent from "../components/EmailChangeFormComponent.vue";
 import ActivationContainer from "../container/ActivationContainer.vue";
 
 const routes: any = [
@@ -23,6 +24,11 @@ const routes: any = [
     path: "/signup",
     name: "registration",
     component: RegistrationComponent,
+  },
+  {
+    path: "/email-change/:token",
+    name: "emailChange",
+    component: EmailChangeFormComponent,
   },
   {
     path: "/password-reset/:token",

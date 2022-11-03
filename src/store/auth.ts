@@ -6,14 +6,16 @@ import User from "../graphql/getUser.gql";
 import DeleteTokenCookie from "../graphql/deleteTokenCookie.gql";
 import DeleteRefreshTokenCookie from "../graphql/deleteRefreshTokenCookie.gql";
 import SendPasswordResetEmail from "../graphql/sendPasswordResetEmail.gql";
+import SendEmailChangeEmail from "../graphql/sendEmailChangeEmail.gql";
 import PasswordReset from "../graphql/passwordReset.gql";
 import PasswordChange from "../graphql/passwordChange.gql";
-import UpdateUserEmail from "../graphql/updateUserEmail.gql";
+import EmailChange from "../graphql/emailChange.gql";
 import Register from "../graphql/register.gql";
 import VerifyAccount from "../graphql/verifyAccount.gql";
 import ResendActivationEmail from "../graphql/resendActivationEmail.gql";
 import UpdateAccount from "../graphql/updateAccount.gql";
 import {
+  EmailChangeInput,
   PasswordChangeInput,
   PasswordResetInput,
   UserRegistrationInput,
@@ -75,7 +77,7 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: Register,
         variables: {
-          userRegistrationInput: userRegistrationInput,
+          userRegistrationInput,
         },
       });
       return response.data.register.success;
@@ -84,7 +86,7 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: ResendActivationEmail,
         variables: {
-          email: email,
+          email,
         },
       });
       return response.data.resendActivationEmail.errors;
@@ -93,16 +95,25 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: VerifyAccount,
         variables: {
-          token: token,
+          token,
         },
       });
       return response.data.verifyAccount.success;
+    },
+    async sendEmailChangeEmail(email: string) {
+      const response = await apolloClient.query({
+        query: SendEmailChangeEmail,
+        variables: {
+          email,
+        },
+      });
+      return response.data.sendEmailChangeEmail.success;
     },
     async sendResetPasswordEmail(email: string) {
       const response = await apolloClient.query({
         query: SendPasswordResetEmail,
         variables: {
-          email: email,
+          email,
         },
       });
       return response.data.sendPasswordResetEmail.success;
@@ -111,7 +122,7 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: PasswordReset,
         variables: {
-          passwordResetInput: passwordResetInput,
+          passwordResetInput,
         },
       });
       return response.data.passwordReset.success;
@@ -131,20 +142,20 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: PasswordChange,
         variables: {
-          passwordChangeInput: passwordChangeInput,
+          passwordChangeInput,
         },
       });
       return response.data.passwordChange.success;
     },
-    async changeEmail(newEmail: string) {
+    async changeEmail(emailChangeInput: EmailChangeInput) {
       const response = await apolloClient.query({
-        query: UpdateUserEmail,
+        query: EmailChange,
         variables: {
-          newEmail: newEmail,
+          emailChangeInput,
         },
       });
-      if (response.data.updateUserEmail.success) {
-        this.user = response.data.updateUserEmail.user;
+      if (response.data.emailChange.success) {
+        this.user = response.data.emailChange.user;
         return true;
       }
       return false;
