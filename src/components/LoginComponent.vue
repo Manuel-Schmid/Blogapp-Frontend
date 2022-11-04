@@ -1,31 +1,21 @@
 <script lang="ts">
-import { Ref, ref } from "vue";
-import { useAuthStore } from "../store/auth";
-import { useRoute } from "vue-router/dist/vue-router";
+import { ref } from "vue";
 
 export default {
   name: "LoginComponent",
+  props: ["verifiedQuery"],
 
-  setup() {
+  setup(props: { verifiedQuery: string }) {
     const username = ref("");
     const password = ref("");
-
-    const verifiedQuery = useRoute().query.verified as string;
-    const verifiedQueryExists = ref(verifiedQuery != undefined);
-    const accountVerified = ref(verifiedQuery === "true");
-
-    const authStore = useAuthStore();
-
-    const submitLogin = () => {
-      authStore.fetchRefreshToken(username.value, password.value);
-    };
+    const verifiedQueryExists = ref(props.verifiedQuery != undefined);
+    const accountVerified = ref(props.verifiedQuery === "true");
 
     return {
       username,
       password,
       verifiedQueryExists,
       accountVerified,
-      submitLogin,
     };
   },
 };
@@ -69,7 +59,7 @@ export default {
           >
             Sign in to your account
           </h1>
-          <form class="space-y-4 md:space-y-6" @submit.prevent="submitLogin">
+          <form class="space-y-4 md:space-y-6" @submit.prevent="">
             <div>
               <label
                 for="email"
@@ -112,7 +102,7 @@ export default {
               </router-link>
             </div>
             <button
-              @click="submitLogin"
+              @click="$emit('submitLogin', username, password)"
               class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               Sign in

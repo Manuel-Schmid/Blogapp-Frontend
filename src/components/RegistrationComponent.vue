@@ -1,20 +1,18 @@
 <script lang="ts">
 import { ref } from "vue";
-import { useAuthStore } from "../store/auth";
-import { usePostStore } from "../store/blog";
 
 export default {
   name: "RegistrationComponent",
-  setup() {
+  props: ["signupSuccess", "alreadyVerified"],
+  setup(props: {}, ctx: any) {
     let usedEmail = "";
     const email = ref("");
     const username = ref("");
     const password1 = ref("");
     const password2 = ref("");
-    const signupSuccess: any = ref(undefined);
-    const alreadyVerified = ref(false);
 
     const clearInputs = async () => {
+      console.log("clearInputs");
       usedEmail = await email.value;
       email.value = "";
       username.value = "";
@@ -22,44 +20,9 @@ export default {
       password2.value = "";
     };
 
-    const submitRegistration = async () => {
-      const userRegistrationInput = {
-        email: email.value,
-        username: username.value,
-        password1: password1.value,
-        password2: password2.value,
-      };
+    ctx.expose({ clearInputs });
 
-      signupSuccess.value = await useAuthStore().registerUser(
-        userRegistrationInput
-      );
-      if (signupSuccess.value) {
-        await clearInputs();
-      }
-    };
-
-    const resendActivationEmail = async () => {
-      const responseErrors = await useAuthStore().resendActivationEmail(
-        usedEmail
-      );
-      if (responseErrors === null) {
-        signupSuccess.value = true;
-      } else {
-        alreadyVerified.value =
-          responseErrors.email[0].code === "already_verified";
-      }
-    };
-
-    return {
-      submitRegistration,
-      resendActivationEmail,
-      email,
-      username,
-      password1,
-      password2,
-      resetSuccess: signupSuccess,
-      alreadyVerified,
-    };
+    return { usedEmail, email, username, password1, password2, clearInputs };
   },
 };
 </script>
@@ -79,7 +42,7 @@ export default {
           <form
             ref="signupForm"
             class="space-y-4 md:space-y-5"
-            @submit.prevent="submitRegistration"
+            @submit.prevent=""
           >
             <div>
               <label
@@ -145,7 +108,7 @@ export default {
                 required=""
               />
             </div>
-            <div v-if="resetSuccess" class="flex items-center justify-between">
+            <div v-if="signupSuccess" class="flex items-center justify-between">
               <div>
                 <p class="text-green-500">Account activation email was sent.</p>
                 <p v-if="alreadyVerified" class="text-red-600">
@@ -153,7 +116,7 @@ export default {
                 </p>
                 <p
                   v-else
-                  @click="resendActivationEmail"
+                  @click="$emit('resendActivationEmail', usedEmail)"
                   class="text-green-500 underline cursor-pointer"
                 >
                   Send activation link again
@@ -161,7 +124,7 @@ export default {
               </div>
             </div>
             <div
-              v-else-if="resetSuccess === false"
+              v-else-if="signupSuccess === false"
               class="flex items-center justify-between"
             >
               <div class="flex items-start text-red-600">
@@ -169,7 +132,15 @@ export default {
               </div>
             </div>
             <button
-              @click="submitRegistration"
+              @click="
+                $emit(
+                  'submitRegistration',
+                  email,
+                  username,
+                  password1,
+                  password2
+                )
+              "
               class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               Sign up

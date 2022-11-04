@@ -117,7 +117,9 @@ export const useAuthStore = defineStore("auth", {
           email,
         },
       });
-      return response.data.sendPasswordResetEmail.success;
+      if (response.data != null) {
+        return response.data.sendPasswordResetEmail.success;
+      } else return false;
     },
     async resetPassword(passwordResetInput: PasswordResetInput) {
       const response = await apolloClient.query({
@@ -148,6 +150,7 @@ export const useAuthStore = defineStore("auth", {
       return response.data.passwordChange.success;
     },
     async changeEmail(emailChangeInput: EmailChangeInput) {
+      console.log("store called");
       const response = await apolloClient.query({
         query: EmailChange,
         variables: {

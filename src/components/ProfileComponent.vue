@@ -1,58 +1,24 @@
 <script lang="ts">
-import router from "../router/router";
-import { useAuthStore } from "../store/auth";
-import PasswordChangeFormComponent from "./PasswordChangeFormComponent.vue";
+import PasswordChangeFormContainer from "../container/PasswordChangeFormContainer.vue";
 import { ref } from "vue";
 
 export default {
   name: "profileComponent",
-  components: { PasswordChangeFormComponent },
-
-  props: ["userData"],
+  components: { PasswordChangeFormContainer },
+  props: [
+    "userData",
+    "firstNameEditable",
+    "lastNameEditable",
+    "emailChangeEmailSent",
+  ],
 
   setup() {
-    const firstNameEditable = ref(false);
     const newFirstName = ref("");
-    const lastNameEditable = ref(false);
     const newLastName = ref("");
     const passwordChangeFormActive = ref(false);
-    const emailChangeEmailSent = ref(false);
-
-    const logout = async () => {
-      await useAuthStore().logoutUser();
-      await router.push({ name: "posts" });
-    };
-
-    const sendEmailChangeEmail = async (email: string) => {
-      const success = await useAuthStore().sendEmailChangeEmail(email);
-      if (success) {
-        emailChangeEmailSent.value = true;
-      }
-    };
-
-    const updateAccount = async (firstName: string, lastName: string) => {
-      if (firstName && lastName) {
-        const updateAccountInput = {
-          firstName,
-          lastName,
-        };
-
-        const success = await useAuthStore().updateAccount(updateAccountInput);
-        if (success) {
-          firstNameEditable.value = false;
-          lastNameEditable.value = false;
-        }
-      }
-    };
 
     return {
-      logout,
-      sendEmailChangeEmail,
-      emailChangeEmailSent,
-      updateAccount,
-      firstNameEditable,
       newFirstName,
-      lastNameEditable,
       newLastName,
       passwordChangeFormActive,
     };
@@ -98,7 +64,7 @@ export default {
                     class="input-field-icon ml-2 mr-1"
                   />
                   <font-awesome-icon
-                    @click="updateAccount(newFirstName, newLastName)"
+                    @click="$emit('updateAccount', newFirstName, newLastName)"
                     icon="fa-solid fa-check"
                     class="input-field-icon mx-1"
                   />
@@ -133,7 +99,7 @@ export default {
                     class="input-field-icon ml-2 mr-1"
                   />
                   <font-awesome-icon
-                    @click="updateAccount(newFirstName, newLastName)"
+                    @click="$emit('updateAccount', newFirstName, newLastName)"
                     icon="fa-solid fa-check"
                     class="input-field-icon mx-1"
                   />
@@ -161,7 +127,7 @@ export default {
                   @click="
                     firstNameEditable = false;
                     lastNameEditable = false;
-                    sendEmailChangeEmail(userData.email);
+                    $emit('sendEmailChangeEmail', userData.email);
                   "
                   icon="fa-regular fa-pen-to-square"
                   class="cursor-pointer pl-2"
@@ -180,15 +146,15 @@ export default {
           >
             Change Password
           </button>
-          <PasswordChangeFormComponent
+          <PasswordChangeFormContainer
             v-if="passwordChangeFormActive"
             @toggle-password-change-form="
               passwordChangeFormActive = !passwordChangeFormActive
             "
-          ></PasswordChangeFormComponent>
+          ></PasswordChangeFormContainer>
         </div>
         <button
-          @click="logout"
+          @click="$emit('logout')"
           class="float-right mt-6 py-2.5 px-6 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
         >
           Logout

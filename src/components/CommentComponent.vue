@@ -1,16 +1,12 @@
 <script lang="ts">
 import { formatFullname } from "../helper/helper";
-import { usePostStore } from "../store/blog";
-import { useAuthStore } from "../store/auth";
 
 export default {
   name: "CommentComponent",
   props: ["comment", "isOwnComment"],
 
   setup() {
-    const postStore = usePostStore();
-
-    return { formatFullname, postStore };
+    return { formatFullname };
   },
 };
 </script>
@@ -23,7 +19,7 @@ export default {
       </span>
       <span
         class="float-right pr-1.5 pt-0.5 cursor-pointer"
-        @click="postStore.deleteComment(comment.id)"
+        @click="$emit('deleteComment')"
       >
         <font-awesome-icon icon="fa-solid fa-trash" class="dark:text-white" />
       </span>

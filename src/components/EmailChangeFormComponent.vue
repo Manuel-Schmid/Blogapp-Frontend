@@ -1,29 +1,15 @@
 <script lang="ts">
-import { useRoute } from "vue-router/dist/vue-router";
-import { useAuthStore } from "../store/auth";
 import { ref } from "vue";
 
 export default {
   name: "EmailChangeFormComponent",
+  props: ["emailChangeSuccess"],
 
   setup() {
-    const route = useRoute();
-    const authStore = useAuthStore();
-    const resetSuccess = ref(undefined);
     const newEmail1 = ref("");
     const newEmail2 = ref("");
 
-    const confirmChange = async () => {
-      const emailChangeInput = {
-        newEmail1: newEmail1.value,
-        newEmail2: newEmail2.value,
-        token: route.params.token as string,
-      };
-
-      resetSuccess.value = await authStore.changeEmail(emailChangeInput);
-    };
-
-    return { confirmChange, newEmail1, newEmail2, resetSuccess };
+    return { newEmail1, newEmail2 };
   },
 };
 </script>
@@ -40,7 +26,7 @@ export default {
           >
             Change your email address
           </h1>
-          <form @submit.prevent="confirmChange">
+          <form @submit.prevent="">
             <div>
               <label
                 for="email"
@@ -74,7 +60,7 @@ export default {
               />
             </div>
             <div
-              v-if="resetSuccess"
+              v-if="emailChangeSuccess"
               class="flex items-center justify-between mt-1 mb-3"
             >
               <div class="flex items-start text-green-500">
@@ -82,7 +68,7 @@ export default {
               </div>
             </div>
             <div
-              v-else-if="resetSuccess === false"
+              v-else-if="emailChangeSuccess === false"
               class="flex items-center justify-between mt-1 mb-3"
             >
               <div class="flex items-start text-red-600">
@@ -91,7 +77,7 @@ export default {
             </div>
             <div v-else class="my-7"></div>
             <button
-              @click="confirmChange"
+              @click="$emit('emailChange', newEmail1, newEmail2)"
               class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               Change Email
