@@ -8,6 +8,7 @@ import ResetEmailFormContainer from "../container/ResetEmailFormContainer.vue";
 import RegistrationContainer from "../container/RegistrationContainer.vue";
 import EmailChangeFormContainer from "../container/EmailChangeFormContainer.vue";
 import ActivationContainer from "../container/ActivationContainer.vue";
+import RegistrationConfirmationContainer from "../container/RegistrationConfirmationContainer.vue";
 
 const routes: any = [
   {
@@ -24,6 +25,11 @@ const routes: any = [
     path: "/signup",
     name: "registration",
     component: RegistrationContainer,
+  },
+  {
+    path: "/signup-confirmation",
+    name: "registrationConfirmation",
+    component: RegistrationConfirmationContainer,
   },
   {
     path: "/email-change/:token",

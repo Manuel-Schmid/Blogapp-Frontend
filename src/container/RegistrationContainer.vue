@@ -10,8 +10,7 @@ export default {
   setup() {
     const authStore = useAuthStore();
     const signupSuccess: any = ref(undefined);
-    const alreadyVerified = ref(false);
-    const registrationComponentRef = ref();
+    const usedEmail = ref("");
 
     const submitRegistration = async (
       email: string,
@@ -27,27 +26,13 @@ export default {
       };
 
       signupSuccess.value = await authStore.registerUser(userRegistrationInput);
-      if (signupSuccess.value) {
-        console.log(registrationComponentRef.value);
-        await registrationComponentRef.value.clearInputs();
-      }
-    };
-
-    const resendActivationEmail = async (usedEmail: string) => {
-      const responseErrors = await authStore.resendActivationEmail(usedEmail);
-      if (responseErrors === null) {
-        signupSuccess.value = true;
-      } else {
-        alreadyVerified.value =
-          responseErrors.email[0].code === "already_verified";
-      }
+      usedEmail.value = email;
     };
 
     return {
+      usedEmail,
       signupSuccess,
-      alreadyVerified,
       submitRegistration,
-      resendActivationEmail,
     };
   },
 };
@@ -56,9 +41,8 @@ export default {
 <template>
   <RegistrationComponent
     ref="registrationComponentRef"
+    :used-email="usedEmail"
     :signup-success="signupSuccess"
-    :already-verified="alreadyVerified"
     @submit-registration="submitRegistration"
-    @resend-activation-email="resendActivationEmail"
   ></RegistrationComponent>
 </template>

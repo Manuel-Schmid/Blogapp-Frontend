@@ -1,34 +1,30 @@
 <script lang="ts">
 import { ref } from "vue";
+import RegistrationConfirmationContainer from "../container/RegistrationConfirmationContainer.vue";
 
 export default {
   name: "RegistrationComponent",
-  props: ["signupSuccess", "alreadyVerified"],
-  setup(props: {}, ctx: any) {
-    let usedEmail = "";
+  components: { RegistrationConfirmationContainer },
+  props: ["usedEmail", "signupSuccess"],
+
+  setup() {
     const email = ref("");
     const username = ref("");
     const password1 = ref("");
     const password2 = ref("");
 
-    const clearInputs = async () => {
-      console.log("clearInputs");
-      usedEmail = await email.value;
-      email.value = "";
-      username.value = "";
-      password1.value = "";
-      password2.value = "";
-    };
-
-    ctx.expose({ clearInputs });
-
-    return { usedEmail, email, username, password1, password2, clearInputs };
+    return { email, username, password1, password2 };
   },
 };
 </script>
 
 <template>
-  <div class="mt-[9vh] h-[91vh]">
+  <div v-if="signupSuccess">
+    <RegistrationConfirmationContainer
+      :used-email="usedEmail"
+    ></RegistrationConfirmationContainer>
+  </div>
+  <div v-else class="mt-[9vh] h-[91vh]">
     <div class="w-full h-full flex justify-center items-center text-left">
       <div
         class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
@@ -108,29 +104,6 @@ export default {
                 required=""
               />
             </div>
-            <div v-if="signupSuccess" class="flex items-center justify-between">
-              <div>
-                <p class="text-green-500">Account activation email was sent.</p>
-                <p v-if="alreadyVerified" class="text-red-600">
-                  This account has already been verified
-                </p>
-                <p
-                  v-else
-                  @click="$emit('resendActivationEmail', usedEmail)"
-                  class="text-green-500 underline cursor-pointer"
-                >
-                  Send activation link again
-                </p>
-              </div>
-            </div>
-            <div
-              v-else-if="signupSuccess === false"
-              class="flex items-center justify-between"
-            >
-              <div class="flex items-start text-red-600">
-                Registration failed
-              </div>
-            </div>
             <button
               @click="
                 $emit(
@@ -159,5 +132,3 @@ export default {
     </div>
   </div>
 </template>
-
-<style scoped></style>
