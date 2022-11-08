@@ -22,7 +22,6 @@ export default {
           category: category,
         });
         const postSlug = await postStore.post?.slug;
-        console.log(postSlug);
         await router.push({
           name: "postDetail",
           params: { slug: postSlug },
