@@ -23,6 +23,7 @@ import {
 import {
   faCircleXmark,
   faPenToSquare,
+  faSquarePlus,
 } from "@fortawesome/free-regular-svg-icons";
 
 library.add(
@@ -37,7 +38,8 @@ library.add(
   faXmark,
   faCheck,
   faCircleXmark,
-  faPenToSquare
+  faPenToSquare,
+  faSquarePlus
 );
 
 const app = createApp({

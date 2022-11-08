@@ -1,0 +1,37 @@
+#    ...DetailPost
+
+mutation CreatePost($postInput: PostInput!) {
+  createPost(postInput: $postInput) {
+    id
+    text
+    isLiked
+    slug
+    title
+    dateCreated
+    likeCount
+    commentCount
+    category {
+      name
+      slug
+    }
+    owner {
+      id
+      firstName
+      lastName
+    }
+    comments {
+      id
+      title
+      text
+      owner {
+        id
+        firstName
+        lastName
+      }
+    }
+    tags {
+      name
+      slug
+    }
+  }
+}

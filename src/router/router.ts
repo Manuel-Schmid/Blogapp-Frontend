@@ -9,6 +9,7 @@ import RegistrationContainer from "../container/RegistrationContainer.vue";
 import EmailChangeFormContainer from "../container/EmailChangeFormContainer.vue";
 import ActivationContainer from "../container/ActivationContainer.vue";
 import RegistrationConfirmationContainer from "../container/RegistrationConfirmationContainer.vue";
+import CreatePostFormContainer from "../container/CreatePostFormContainer.vue";
 
 const routes: any = [
   {
@@ -60,6 +61,11 @@ const routes: any = [
     path: "/posts/:slug",
     name: "postDetail",
     component: PostDetailContainer,
+  },
+  {
+    path: "/create-post",
+    name: "createPost",
+    component: CreatePostFormContainer,
   },
 ];
 

@@ -33,6 +33,14 @@ export default {
       </label>
       <div class="w-auto flex flex-row absolute right-0 mr-5">
         <router-link
+          v-if="user"
+          class="nav-item"
+          :class="routeName === 'createPost' ? 'nav-item-active' : ''"
+          :to="{ name: 'createPost' }"
+        >
+          <font-awesome-icon icon="fa-regular fa-square-plus" />
+        </router-link>
+        <router-link
           class="nav-item"
           :class="routeName === 'posts' ? 'nav-item-active' : ''"
           :to="{ name: 'posts' }"
