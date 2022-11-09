@@ -33,7 +33,7 @@ export default {
       </label>
       <div class="w-auto flex flex-row absolute right-0 mr-5">
         <router-link
-          v-if="user"
+          v-if="user?.userStatus.isAuthor"
           class="nav-item"
           :class="routeName === 'createPost' ? 'nav-item-active' : ''"
           :to="{ name: 'createPost' }"
