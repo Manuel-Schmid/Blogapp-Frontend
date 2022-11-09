@@ -82,15 +82,13 @@ export const usePostStore = defineStore("blog", {
       }
     },
     async fetchUsedTags(category: string | undefined) {
-      if (this.usedTags.length === 0 || category) {
-        const response = await apolloClient.query({
-          query: UsedTags,
-          variables: {
-            categorySlug: category,
-          },
-        });
-        this.usedTags = response.data.usedTags;
-      }
+      const response = await apolloClient.query({
+        query: UsedTags,
+        variables: {
+          categorySlug: category,
+        },
+      });
+      this.usedTags = response.data.usedTags;
     },
     async createComment(commentInput: any) {
       if (this.post) {

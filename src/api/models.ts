@@ -135,6 +135,7 @@ export type PostInput = {
   category: Scalars["ID"];
   owner?: InputMaybe<Scalars["ID"]>;
   slug?: InputMaybe<Scalars["String"]>;
+  tags?: InputMaybe<Scalars["String"]>;
   text: Scalars["String"];
   title: Scalars["String"];
 };
@@ -194,7 +195,6 @@ export type RootMutation = {
   updateCategory?: Maybe<Category>;
   updateComment?: Maybe<Comment>;
   updatePost?: Maybe<Post>;
-  updateUserEmail?: Maybe<User>;
   verifyAccount: VerifyAccountType;
   verifyToken: PayloadType;
 };
@@ -277,10 +277,6 @@ export type RootMutationUpdateCommentArgs = {
 
 export type RootMutationUpdatePostArgs = {
   postInput: PostInput;
-};
-
-export type RootMutationUpdateUserEmailArgs = {
-  newEmail: Scalars["String"];
 };
 
 export type RootMutationVerifyAccountArgs = {

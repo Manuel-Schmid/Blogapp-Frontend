@@ -1134,6 +1134,18 @@
             "deprecationReason": null
           },
           {
+            "name": "tags",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": "null",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "text",
             "description": null,
             "type": {
@@ -2100,35 +2112,6 @@
             "type": {
               "kind": "OBJECT",
               "name": "Post",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updateUserEmail",
-            "description": null,
-            "args": [
-              {
-                "name": "newEmail",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "User",
               "ofType": null
             },
             "isDeprecated": false,
