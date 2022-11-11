@@ -5,11 +5,15 @@ export default {
   name: "EmailChangeFormComponent",
   props: ["emailChangeSuccess"],
 
-  setup() {
+  setup(props: {}, { emit }: any) {
     const newEmail1 = ref("");
     const newEmail2 = ref("");
 
-    return { newEmail1, newEmail2 };
+    const onSubmit = () => {
+      emit("emailChange", newEmail1.value, newEmail2.value);
+    };
+
+    return { newEmail1, newEmail2, onSubmit };
   },
 };
 </script>
@@ -77,7 +81,7 @@ export default {
             </div>
             <div v-else class="my-7"></div>
             <button
-              @click="$emit('emailChange', newEmail1, newEmail2)"
+              @click="onSubmit"
               class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               Change Email

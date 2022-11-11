@@ -2,8 +2,11 @@
 export default {
   name: "NavbarComponent",
   props: ["isDarkMode", "routeName", "user"],
-  setup() {
-    return {};
+  setup(props: {}, { emit }: any) {
+    const onToggleTheme = () => {
+      emit("toggleDarkMode");
+    };
+    return { onToggleTheme };
   },
 };
 </script>
@@ -21,7 +24,7 @@ export default {
           :checked="isDarkMode"
           id="default-toggle"
           class="sr-only peer"
-          @click="$emit('toggleDarkMode')"
+          @click="onToggleTheme"
         />
         <div
           class="w-11 h-6 bg-slate-800 dark:bg-gray-200 dark:after:border-gray-300 after:bg-gray-50 :focus:outline-none peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-300"

@@ -5,9 +5,14 @@ export default {
   name: "ResetEmailFormComponent",
   props: ["emailSentSuccessfully"],
 
-  setup() {
+  setup(props: {}, { emit }: any) {
     const emailInput = ref("");
-    return { emailInput };
+
+    const onSubmit = () => {
+      emit("sendEmail", emailInput.value);
+    };
+
+    return { emailInput, onSubmit };
   },
 };
 </script>
@@ -46,7 +51,7 @@ export default {
             </div>
             <div v-else class="my-5"></div>
             <button
-              @click="$emit('sendEmail', emailInput)"
+              @click="onSubmit"
               class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               Send Reset E-Mail

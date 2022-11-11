@@ -5,15 +5,25 @@ export default {
   name: "PasswordChangeFormComponent",
   props: ["passwordChangeError"],
 
-  setup() {
+  setup(props: {}, { emit }: any) {
     let oldPassword = ref("");
     let newPassword1 = ref("");
     let newPassword2 = ref("");
+
+    const onSubmit = () => {
+      emit(
+        "changePassword",
+        oldPassword.value,
+        newPassword1.value,
+        newPassword2.value
+      );
+    };
 
     return {
       oldPassword,
       newPassword1,
       newPassword2,
+      onSubmit,
     };
   },
 };
@@ -43,7 +53,7 @@ export default {
       <div class="text-red-600">{{ passwordChangeError }}</div>
     </div>
     <button
-      @click="$emit('changePassword', oldPassword, newPassword1, newPassword2)"
+      @click="onSubmit"
       class="py-2 px-8 mt-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-600 hover:dark:bg-slate-700"
     >
       Save

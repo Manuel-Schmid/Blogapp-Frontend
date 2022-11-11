@@ -5,17 +5,22 @@ export default {
   name: "LoginComponent",
   props: ["verifiedQuery"],
 
-  setup(props: { verifiedQuery: string }) {
+  setup(props: { verifiedQuery: string }, { emit }: any) {
     const username = ref("");
     const password = ref("");
     const verifiedQueryExists = ref(props.verifiedQuery != undefined);
     const accountVerified = ref(props.verifiedQuery === "true");
+
+    const onSubmit = () => {
+      emit("submitLogin", username.value, password.value);
+    };
 
     return {
       username,
       password,
       verifiedQueryExists,
       accountVerified,
+      onSubmit,
     };
   },
 };
@@ -102,7 +107,7 @@ export default {
               </router-link>
             </div>
             <button
-              @click="$emit('submitLogin', username, password)"
+              @click="onSubmit"
               class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               Sign in

@@ -24,16 +24,18 @@ export default {
         emailChangeSuccess.value = await authStore.changeEmail(
           emailChangeInput
         );
+        console.log(emailChangeSuccess.value);
       }
     };
 
-    return { emailChange };
+    return { emailChangeSuccess, emailChange };
   },
 };
 </script>
 
 <template>
   <EmailChangeFormComponent
+    :email-change-success="emailChangeSuccess"
     @email-change="emailChange"
   ></EmailChangeFormComponent>
 </template>
