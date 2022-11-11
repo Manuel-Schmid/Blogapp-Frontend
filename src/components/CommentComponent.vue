@@ -5,8 +5,11 @@ export default {
   name: "CommentComponent",
   props: ["comment", "isOwnComment"],
 
-  setup() {
-    return { formatFullname };
+  setup(props: {}, { emit }: any) {
+    const onDelete = () => {
+      emit("deleteComment");
+    };
+    return { formatFullname, onDelete };
   },
 };
 </script>
@@ -17,10 +20,7 @@ export default {
       <span class="font-bold">
         {{ comment.title }}
       </span>
-      <span
-        class="float-right pr-1.5 pt-0.5 cursor-pointer"
-        @click="$emit('deleteComment')"
-      >
+      <span class="float-right pr-1.5 pt-0.5 cursor-pointer" @click="onDelete">
         <font-awesome-icon icon="fa-solid fa-trash" class="dark:text-white" />
       </span>
     </div>

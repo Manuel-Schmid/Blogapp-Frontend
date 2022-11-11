@@ -2,8 +2,12 @@
 export default {
   name: "RegistrationConfirmationComponent",
   props: ["usedEmail", "resendSuccess", "alreadyVerified"],
-  setup() {
-    return {};
+  setup(props: {}, { emit }: any) {
+    const onResendEmail = (email: string) => {
+      emit("resendActivationEmail", email);
+    };
+
+    return { onResendEmail };
   },
 };
 </script>
@@ -30,7 +34,7 @@ export default {
                 Activation email was sent again
               </p>
               <p
-                @click="$emit('resendActivationEmail', usedEmail)"
+                @click="onResendEmail(usedEmail)"
                 class="dark:text-white underline cursor-pointer"
               >
                 Send activation link again

@@ -7,7 +7,7 @@ export default {
   components: { PasswordChangeFormComponent },
   emits: ["togglePasswordChangeForm"],
 
-  setup(props: {}, ctx: { emit: (arg0: string) => void }) {
+  setup(props: {}, { emit }: any) {
     let passwordChangeError = ref("");
 
     const changePassword = async (
@@ -23,7 +23,7 @@ export default {
 
       const success = await useAuthStore().changePassword(passwordChangeInput);
       if (success) {
-        ctx.emit("togglePasswordChangeForm");
+        emit("togglePasswordChangeForm");
       } else {
         passwordChangeError.value = "An error occurred";
       }

@@ -11,7 +11,7 @@ export default {
   setup() {
     const authStore = useAuthStore();
     const route = useRoute();
-    const emailChangeSuccess = ref(undefined);
+    const emailChangeSuccess: any = ref(undefined);
 
     const emailChange = async (newEmail1: string, newEmail2: string) => {
       console.log(newEmail1, newEmail2);
@@ -24,16 +24,18 @@ export default {
         emailChangeSuccess.value = await authStore.changeEmail(
           emailChangeInput
         );
+        console.log(emailChangeSuccess.value);
       }
     };
 
-    return { emailChange };
+    return { emailChangeSuccess, emailChange };
   },
 };
 </script>
 
 <template>
   <EmailChangeFormComponent
+    :email-change-success="emailChangeSuccess"
     @email-change="emailChange"
   ></EmailChangeFormComponent>
 </template>

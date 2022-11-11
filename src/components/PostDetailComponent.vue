@@ -9,11 +9,16 @@ export default {
     CommentSectionContainer,
   },
 
-  setup() {
+  setup(props: {}, { emit }: any) {
+    const toggleLike = () => {
+      emit("togglePostLike");
+    };
+
     return {
       formatDateLong,
       getImageURL,
       formatFullname,
+      toggleLike,
     };
   },
 };
@@ -70,7 +75,7 @@ export default {
                       ? 'text-blue-700 dark:text-white'
                       : 'dark:text-slate-500',
                   ]"
-                  @click="$emit('togglePostLike')"
+                  @click="toggleLike"
                 ></font-awesome-icon>
                 <font-awesome-icon
                   v-else

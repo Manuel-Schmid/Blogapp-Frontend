@@ -12,15 +12,28 @@ export default {
     "emailChangeEmailSent",
   ],
 
-  setup() {
+  setup(props: {}, { emit }: any) {
     const newFirstName = ref("");
     const newLastName = ref("");
     const passwordChangeFormActive = ref(false);
+
+    const onUpdateAccount = () => {
+      emit("updateAccount", newFirstName.value, newLastName.value);
+    };
+    const onEmailChange = (email: string) => {
+      emit("sendEmailChangeEmail", email);
+    };
+    const onLogout = () => {
+      emit("logout");
+    };
 
     return {
       newFirstName,
       newLastName,
       passwordChangeFormActive,
+      onUpdateAccount,
+      onEmailChange,
+      onLogout,
     };
   },
 };
@@ -64,7 +77,7 @@ export default {
                     class="input-field-icon ml-2 mr-1"
                   />
                   <font-awesome-icon
-                    @click="$emit('updateAccount', newFirstName, newLastName)"
+                    @click="onUpdateAccount"
                     icon="fa-solid fa-check"
                     class="input-field-icon mx-1"
                   />
@@ -99,7 +112,7 @@ export default {
                     class="input-field-icon ml-2 mr-1"
                   />
                   <font-awesome-icon
-                    @click="$emit('updateAccount', newFirstName, newLastName)"
+                    @click="onUpdateAccount"
                     icon="fa-solid fa-check"
                     class="input-field-icon mx-1"
                   />
@@ -127,7 +140,7 @@ export default {
                   @click="
                     firstNameEditable = false;
                     lastNameEditable = false;
-                    $emit('sendEmailChangeEmail', userData.email);
+                    onEmailChange(userData.email);
                   "
                   icon="fa-regular fa-pen-to-square"
                   class="cursor-pointer pl-2"
@@ -154,7 +167,7 @@ export default {
           ></PasswordChangeFormContainer>
         </div>
         <button
-          @click="$emit('logout')"
+          @click="onLogout"
           class="float-right mt-6 py-2.5 px-6 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
         >
           Logout
