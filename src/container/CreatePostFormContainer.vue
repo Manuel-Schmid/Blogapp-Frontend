@@ -13,21 +13,24 @@ export default {
     const createPost = async (
       title: string,
       text: string,
+      image: any,
       category: string,
       tags: string
     ) => {
       if (title && text && category) {
+        console.log(image);
         await postStore.createPost({
           title,
           text,
+          image,
           category,
           tags,
         });
-        const postSlug = await postStore.post?.slug;
-        await router.push({
-          name: "postDetail",
-          params: { slug: postSlug },
-        });
+        // const postSlug = await postStore.post?.slug;
+        // await router.push({
+        //   name: "postDetail",
+        //   params: { slug: postSlug },
+        // });
       }
     };
 
