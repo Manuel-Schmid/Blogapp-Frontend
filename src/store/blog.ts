@@ -63,8 +63,7 @@ export const usePostStore = defineStore("blog", {
           postInput,
         },
       });
-      console.log(response.data);
-      // this.post = response.data.createPost;
+      this.post = response.data.createPost;
     },
     async fetchCategories() {
       if (this.categories.length === 0) {

@@ -13,7 +13,7 @@ export default {
     const imageFile = ref(undefined);
 
     const onFileChange = (e: { target: { files: any[] } }) => {
-      if (e.target.files[0]) {
+      if (e.target.files.length > 0) {
         imageFile.value = e.target.files[0];
       }
     };

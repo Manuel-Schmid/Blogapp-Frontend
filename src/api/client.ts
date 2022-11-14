@@ -1,14 +1,11 @@
 import {
   ApolloClient,
+  ApolloLink,
   createHttpLink,
   DefaultOptions,
   InMemoryCache,
 } from "@apollo/client/core";
-
-const httpLink = createHttpLink({
-  uri: import.meta.env.VITE_GRAPHQL_API_URL,
-  credentials: "include",
-});
+import { createUploadLink } from "apollo-upload-client";
 
 const defaultOptions: DefaultOptions = {
   watchQuery: {
@@ -24,7 +21,12 @@ const defaultOptions: DefaultOptions = {
 const cache = new InMemoryCache();
 
 export const apolloClient = new ApolloClient({
-  link: httpLink,
+  link: ApolloLink.from([
+    createUploadLink({
+      uri: import.meta.env.VITE_GRAPHQL_API_URL,
+      credentials: "include",
+    }),
+  ]),
   cache,
   defaultOptions,
 });
