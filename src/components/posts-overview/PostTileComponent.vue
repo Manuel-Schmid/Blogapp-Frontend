@@ -19,10 +19,9 @@ export default {
   <router-link
     :to="{ name: 'postDetail', params: { slug: post.slug } }"
     :class="[
-      'post rounded-2xl shadow-lg mt-2 mb-4 pt-5 pr-2 pb-1 pl-2 float-left inline-block text-black no-underline dark:bg-[#182333] hover:shadow-2xl',
+      'post rounded-2xl shadow-lg mt-2 mb-4 pt-5 px-2 pb-1 float-left inline-block text-black no-underline bg-3 hover:shadow-2xl',
     ]"
   >
-    <!--  todo::: #0e2339  -->
     <div
       class="post-title tracking-wide tracking-wide pt-0 pr-4 pb-0 pl-4 leading-5 text-black font-bold dark:text-white"
     >
@@ -34,7 +33,7 @@ export default {
         {{ formatDateShort(post.dateCreated) }}
       </p>
     </div>
-    <div v-if="post.image" class="pt-3 pr-2 pb-1 pl-2 h-44 flex">
+    <div v-if="post.image" class="pt-3 pb-1 px-2 h-44 flex">
       <img
         class="w-full max-h-full"
         :src="getImageURL(post.image.name)"

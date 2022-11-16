@@ -21,3 +21,17 @@
 *:focus {
   outline: none;
 }
+
+@layer utilities {
+  .bg-1 {
+    @apply bg-gray-300 dark:bg-slate-500
+  }
+
+  .bg-2 {
+    @apply bg-gray-100 dark:bg-slate-700
+  }
+
+  .bg-3 {
+    @apply bg-white dark:bg-[#182333]
+  }
+}

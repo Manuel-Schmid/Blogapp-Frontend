@@ -19,7 +19,7 @@ export default {
       <div v-for="tag in tagsData" :key="tag.slug" class="float-left">
         <router-link
           v-if="route.query.tags?.split(',').includes(tag.slug)"
-          class="tag-link bg-gray-300 dark:bg-slate-500 dark:text-white"
+          class="tag-link bg-1"
           :to="{
             name: route.name,
             query: {
@@ -38,7 +38,7 @@ export default {
         </router-link>
         <router-link
           v-else
-          class="tag-link bg-gray-100 dark:bg-slate-700 dark:text-white"
+          class="tag-link bg-2 hover:bg-1"
           :to="{
             name: route.name,
             query: {
@@ -59,6 +59,6 @@ export default {
 
 <style scoped>
 .tag-link {
-  @apply rounded-3xl pt-1 pr-4 pb-1 pl-4 m-1 float-left text-black no-underline hover:bg-gray-300 dark:hover:bg-slate-500 cursor-pointer;
+  @apply rounded-3xl pt-1 pr-4 pb-1 pl-4 m-1 float-left text-black no-underline dark:text-white cursor-pointer;
 }
 </style>
