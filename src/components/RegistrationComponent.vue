@@ -1,71 +1,40 @@
 <script lang="ts">
 import { ref } from "vue";
-import { useAuthStore } from "../store/auth";
-import { usePostStore } from "../store/blog";
+import RegistrationConfirmationContainer from "../container/RegistrationConfirmationContainer.vue";
 
 export default {
   name: "RegistrationComponent",
-  setup() {
-    let usedEmail = "";
+  components: { RegistrationConfirmationContainer },
+  props: ["usedEmail", "signupSuccess"],
+
+  setup(props: {}, { emit }: any) {
     const email = ref("");
     const username = ref("");
     const password1 = ref("");
     const password2 = ref("");
-    const signupSuccess: any = ref(undefined);
-    const alreadyVerified = ref(false);
 
-    const clearInputs = async () => {
-      usedEmail = await email.value;
-      email.value = "";
-      username.value = "";
-      password1.value = "";
-      password2.value = "";
-    };
-
-    const submitRegistration = async () => {
-      const userRegistrationInput = {
-        email: email.value,
-        username: username.value,
-        password1: password1.value,
-        password2: password2.value,
-      };
-
-      signupSuccess.value = await useAuthStore().registerUser(
-        userRegistrationInput
+    const onSubmit = () => {
+      emit(
+        "submitRegistration",
+        email.value,
+        username.value,
+        password1.value,
+        password2.value
       );
-      if (signupSuccess.value) {
-        await clearInputs();
-      }
     };
 
-    const resendActivationEmail = async () => {
-      const responseErrors = await useAuthStore().resendActivationEmail(
-        usedEmail
-      );
-      if (responseErrors === null) {
-        signupSuccess.value = true;
-      } else {
-        alreadyVerified.value =
-          responseErrors.email[0].code === "already_verified";
-      }
-    };
-
-    return {
-      submitRegistration,
-      resendActivationEmail,
-      email,
-      username,
-      password1,
-      password2,
-      resetSuccess: signupSuccess,
-      alreadyVerified,
-    };
+    return { email, username, password1, password2, onSubmit };
   },
 };
 </script>
 
 <template>
-  <div class="mt-[9vh] h-[91vh]">
+  <div v-if="signupSuccess">
+    <RegistrationConfirmationContainer
+      :used-email="usedEmail"
+    ></RegistrationConfirmationContainer>
+  </div>
+  <div v-else class="mt-[9vh] h-[91vh]">
     <div class="w-full h-full flex justify-center items-center text-left">
       <div
         class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
@@ -79,7 +48,7 @@ export default {
           <form
             ref="signupForm"
             class="space-y-4 md:space-y-5"
-            @submit.prevent="submitRegistration"
+            @submit.prevent=""
           >
             <div>
               <label
@@ -145,31 +114,8 @@ export default {
                 required=""
               />
             </div>
-            <div v-if="resetSuccess" class="flex items-center justify-between">
-              <div>
-                <p class="text-green-500">Account activation email was sent.</p>
-                <p v-if="alreadyVerified" class="text-red-600">
-                  This account has already been verified
-                </p>
-                <p
-                  v-else
-                  @click="resendActivationEmail"
-                  class="text-green-500 underline cursor-pointer"
-                >
-                  Send activation link again
-                </p>
-              </div>
-            </div>
-            <div
-              v-else-if="resetSuccess === false"
-              class="flex items-center justify-between"
-            >
-              <div class="flex items-start text-red-600">
-                Registration failed
-              </div>
-            </div>
             <button
-              @click="submitRegistration"
+              @click="onSubmit"
               class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               Sign up
@@ -188,5 +134,3 @@ export default {
     </div>
   </div>
 </template>
-
-<style scoped></style>

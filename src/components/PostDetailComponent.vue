@@ -1,41 +1,24 @@
 <script lang="ts">
-import CommentSectionComponent from "../components/CommentSectionComponent.vue";
 import { formatDateLong, getImageURL, formatFullname } from "../helper/helper";
-import { ref } from "vue";
-import { usePostStore } from "../store/blog";
-import { useAuthStore } from "../store/auth";
-import { useRoute } from "vue-router/dist/vue-router";
+import CommentSectionContainer from "../container/CommentSectionContainer.vue";
 
 export default {
   name: "PostDetailComponent",
-  props: ["postData"],
+  props: ["postData", "postLiked", "loggedIn"],
   components: {
-    CommentSectionComponent,
+    CommentSectionContainer,
   },
 
-  setup(props: { postData: any }) {
-    const postLiked = ref(!!props.postData?.isLiked);
-    let postStore = usePostStore();
-    let authStore = useAuthStore();
-    const route = useRoute();
-
-    const togglePostLike = async (post: Number) => {
-      if (postLiked.value) {
-        await postStore.deletePostLike();
-      } else {
-        await postStore.createPostLike();
-      }
-      postLiked.value = !postLiked.value;
+  setup(props: {}, { emit }: any) {
+    const toggleLike = () => {
+      emit("togglePostLike");
     };
 
     return {
       formatDateLong,
       getImageURL,
       formatFullname,
-      postLiked,
-      togglePostLike,
-      authStore,
-      route,
+      toggleLike,
     };
   },
 };
@@ -84,7 +67,7 @@ export default {
             <div class="mt-2 mr-8">
               <div class="text-center float-right w-max flex flex-col">
                 <font-awesome-icon
-                  v-if="authStore.user"
+                  v-if="loggedIn"
                   icon="fa-thumbs-up"
                   class="text-3xl mb-0.5 cursor-pointer w-full"
                   :class="[
@@ -92,7 +75,7 @@ export default {
                       ? 'text-blue-700 dark:text-white'
                       : 'dark:text-slate-500',
                   ]"
-                  @click="togglePostLike(postData.id)"
+                  @click="toggleLike"
                 ></font-awesome-icon>
                 <font-awesome-icon
                   v-else
@@ -131,10 +114,11 @@ export default {
               </router-link>
             </div>
             <div class="w-full mt-8">
-              <CommentSectionComponent
+              <CommentSectionContainer
                 :post-id="postData.id"
                 :comments="postData.comments"
-              ></CommentSectionComponent>
+                :logged-in="loggedIn"
+              ></CommentSectionContainer>
             </div>
           </div>
         </div>

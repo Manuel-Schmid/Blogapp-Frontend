@@ -1,39 +1,29 @@
 <script lang="ts">
 import { ref } from "vue";
-import { useAuthStore } from "../store/auth";
 
 export default {
   name: "PasswordChangeFormComponent",
-  emits: ["toggle-password-change-form"],
+  props: ["passwordChangeError"],
 
-  setup(props: any, ctxt: { emit: (arg0: string) => void }) {
+  setup(props: {}, { emit }: any) {
     let oldPassword = ref("");
     let newPassword1 = ref("");
     let newPassword2 = ref("");
-    let passwordChangeError = ref("");
 
-    const changePassword = async () => {
-      const passwordChangeInput = {
-        oldPassword: oldPassword.value,
-        newPassword1: newPassword1.value,
-        newPassword2: newPassword2.value,
-      };
-
-      const success = await useAuthStore().changePassword(passwordChangeInput);
-
-      if (success) {
-        ctxt.emit("toggle-password-change-form");
-      } else {
-        passwordChangeError.value = "An error occurred";
-      }
+    const onSubmit = () => {
+      emit(
+        "changePassword",
+        oldPassword.value,
+        newPassword1.value,
+        newPassword2.value
+      );
     };
 
     return {
       oldPassword,
       newPassword1,
       newPassword2,
-      passwordChangeError,
-      changePassword,
+      onSubmit,
     };
   },
 };
@@ -63,7 +53,7 @@ export default {
       <div class="text-red-600">{{ passwordChangeError }}</div>
     </div>
     <button
-      @click="changePassword"
+      @click="onSubmit"
       class="py-2 px-8 mt-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-600 hover:dark:bg-slate-700"
     >
       Save

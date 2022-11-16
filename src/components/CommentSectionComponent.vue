@@ -1,24 +1,23 @@
 <script lang="ts">
-import CommentFormComponent from "./CommentFormComponent.vue";
-import CommentComponent from "./CommentComponent.vue";
+import CommentFormContainer from "../container/CommentFormContainer.vue";
+import CommentContainer from "../container/CommentContainer.vue";
 import { ref } from "vue";
-import { useAuthStore } from "../store/auth";
 
 export default {
   name: "CommentSectionComponent",
   props: {
     postId: String,
+    loggedIn: Boolean,
     comments: {},
   },
   components: {
-    CommentFormComponent,
-    CommentComponent,
+    CommentFormContainer,
+    CommentContainer,
   },
 
   setup() {
     let commentFormActive = ref(false);
-    let authStore = useAuthStore();
-    return { commentFormActive, authStore };
+    return { commentFormActive };
   },
 };
 </script>
@@ -28,7 +27,7 @@ export default {
     <span>Comments:</span>
   </p>
   <button
-    v-if="authStore.user"
+    v-if="loggedIn"
     @click="commentFormActive = !commentFormActive"
     class="py-2 px-4 border-b border-black bg-gray-50 hover:bg-gray-100 dark:bg-slate-700 hover:dark:bg-slate-600 rounded-3xl"
   >
@@ -39,18 +38,17 @@ export default {
     Add a comment
   </button>
   <div class="w-3/4 m-auto my-4 flex">
-    <CommentFormComponent
+    <CommentFormContainer
       v-if="commentFormActive"
       :post-id="postId"
       @toggle-comment-form="commentFormActive = !commentFormActive"
-    ></CommentFormComponent>
+    ></CommentFormContainer>
   </div>
   <div class="mt-3">
-    <CommentComponent
+    <CommentContainer
       v-for="comment in comments"
       :comment="comment"
-      :is-own-comment="comment.owner.id === authStore.user?.id"
-    ></CommentComponent>
+    ></CommentContainer>
   </div>
 </template>
 

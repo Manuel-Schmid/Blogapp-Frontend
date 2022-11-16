@@ -2,18 +2,19 @@ import { createRouter, createWebHistory } from "vue-router";
 import PostsOverviewContainer from "../container/PostsOverviewContainer.vue";
 import PostDetailContainer from "../container/PostDetailContainer.vue";
 import ProfileContainer from "../container/ProfileContainer.vue";
-import LoginComponent from "../components/LoginComponent.vue";
-import PasswordResetFormComponent from "../components/PasswordResetFormComponent.vue";
-import ResetEmailFormComponent from "../components/ResetEmailFormComponent.vue";
-import RegistrationComponent from "../components/RegistrationComponent.vue";
-import EmailChangeFormComponent from "../components/EmailChangeFormComponent.vue";
+import LoginContainer from "../container/LoginContainer.vue";
+import PasswordResetFormContainer from "../container/PasswordResetFormContainer.vue";
+import ResetEmailFormContainer from "../container/ResetEmailFormContainer.vue";
+import RegistrationContainer from "../container/RegistrationContainer.vue";
+import EmailChangeFormContainer from "../container/EmailChangeFormContainer.vue";
 import ActivationContainer from "../container/ActivationContainer.vue";
+import RegistrationConfirmationContainer from "../container/RegistrationConfirmationContainer.vue";
 
 const routes: any = [
   {
     path: "/login/:verified?",
     name: "login",
-    component: LoginComponent,
+    component: LoginContainer,
   },
   {
     path: "/activate/:token",
@@ -23,22 +24,27 @@ const routes: any = [
   {
     path: "/signup",
     name: "registration",
-    component: RegistrationComponent,
+    component: RegistrationContainer,
+  },
+  {
+    path: "/signup-confirmation",
+    name: "registrationConfirmation",
+    component: RegistrationConfirmationContainer,
   },
   {
     path: "/email-change/:token",
     name: "emailChange",
-    component: EmailChangeFormComponent,
+    component: EmailChangeFormContainer,
   },
   {
     path: "/password-reset/:token",
     name: "passwordReset",
-    component: PasswordResetFormComponent,
+    component: PasswordResetFormContainer,
   },
   {
     path: "/reset-email",
     name: "resetEmailForm",
-    component: ResetEmailFormComponent,
+    component: ResetEmailFormContainer,
   },
   {
     path: "/profile",

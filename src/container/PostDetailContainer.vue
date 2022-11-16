@@ -1,11 +1,9 @@
-<template>
-  <PostDetailComponent v-if="store.post" :post-data="store.post" />
-</template>
-
 <script lang="ts">
 import { useRoute } from "vue-router/dist/vue-router";
 import PostDetailComponent from "../components/PostDetailComponent.vue";
 import { usePostStore } from "../store/blog";
+import { useAuthStore } from "../store/auth";
+import { ref } from "vue";
 
 export default {
   name: "PostDetailView",
@@ -15,10 +13,31 @@ export default {
 
   setup() {
     const route = useRoute();
-    const store = usePostStore();
-    store.fetchPost(route.params.slug as string, true);
+    const postStore = usePostStore();
+    const authStore = useAuthStore();
+    let postLiked = ref(!!postStore.post?.isLiked);
+    postStore.fetchPost(route.params.slug as string, true);
 
-    return { store };
+    const togglePostLike = async () => {
+      if (postLiked.value) {
+        await postStore.deletePostLike();
+      } else {
+        await postStore.createPostLike();
+      }
+      postLiked.value = !postLiked.value;
+    };
+
+    return { postStore, authStore, postLiked, togglePostLike };
   },
 };
 </script>
+
+<template>
+  <PostDetailComponent
+    v-if="postStore.post"
+    :post-data="postStore.post"
+    :post-liked="postLiked"
+    :logged-in="!!authStore.user"
+    @toggle-post-like="togglePostLike"
+  />
+</template>

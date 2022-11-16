@@ -1,29 +1,19 @@
 <script lang="ts">
-import { useRoute } from "vue-router/dist/vue-router";
-import { useAuthStore } from "../store/auth";
 import { ref } from "vue";
 
 export default {
   name: "PasswordResetFormComponent",
+  props: ["resetSuccess"],
 
-  setup() {
-    const route = useRoute();
-    const authStore = useAuthStore();
-    const resetSuccess = ref(undefined);
+  setup(props: {}, { emit }: any) {
     const newPassword1 = ref("");
     const newPassword2 = ref("");
 
-    const confirmReset = async () => {
-      const passwordResetInput = {
-        newPassword1: newPassword1.value,
-        newPassword2: newPassword2.value,
-        token: route.params.token as string,
-      };
-
-      resetSuccess.value = await authStore.resetPassword(passwordResetInput);
+    const onSubmit = () => {
+      emit("resetPassword", newPassword1.value, newPassword2.value);
     };
 
-    return { confirmReset, newPassword1, newPassword2, resetSuccess };
+    return { newPassword1, newPassword2, onSubmit };
   },
 };
 </script>
@@ -40,7 +30,7 @@ export default {
           >
             Change your password
           </h1>
-          <form @submit.prevent="confirmReset">
+          <form @submit.prevent="">
             <div>
               <label
                 for="password"
@@ -91,7 +81,7 @@ export default {
             </div>
             <div v-else class="my-7"></div>
             <button
-              @click="confirmReset"
+              @click="onSubmit"
               class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               Reset Password

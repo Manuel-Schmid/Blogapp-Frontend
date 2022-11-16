@@ -1,5 +1,4 @@
 <script lang="ts">
-import { useRoute } from "vue-router";
 import PostTileComponent from "./posts-overview/PostTileComponent.vue";
 import TagListComponent from "./posts-overview/TagListComponent.vue";
 import PaginationComponent from "./posts-overview/PaginationComponent.vue";
@@ -15,8 +14,7 @@ export default {
   props: ["postsData", "tagsData", "activePage"],
 
   setup() {
-    const route = useRoute();
-    return { route };
+    return {};
   },
 };
 </script>

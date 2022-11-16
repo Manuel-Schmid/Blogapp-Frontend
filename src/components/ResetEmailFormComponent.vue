@@ -1,18 +1,18 @@
 <script lang="ts">
 import { ref } from "vue";
-import { useAuthStore } from "../store/auth";
 
 export default {
   name: "ResetEmailFormComponent",
-  setup() {
-    let emailSentSuccessfully = ref(false);
-    let emailInput = ref("");
-    const sendEmail = async () => {
-      emailSentSuccessfully.value = await useAuthStore().sendResetPasswordEmail(
-        emailInput.value
-      );
+  props: ["emailSentSuccessfully"],
+
+  setup(props: {}, { emit }: any) {
+    const emailInput = ref("");
+
+    const onSubmit = () => {
+      emit("sendEmail", emailInput.value);
     };
-    return { emailSentSuccessfully, sendEmail, emailInput };
+
+    return { emailInput, onSubmit };
   },
 };
 </script>
@@ -29,7 +29,7 @@ export default {
           >
             Which E-Mail should we send the password reset link to?
           </h1>
-          <form @submit.prevent="sendEmail">
+          <form @submit.prevent="">
             <div>
               <label
                 for="email"
@@ -51,7 +51,7 @@ export default {
             </div>
             <div v-else class="my-5"></div>
             <button
-              @click="sendEmail"
+              @click="onSubmit"
               class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               Send Reset E-Mail

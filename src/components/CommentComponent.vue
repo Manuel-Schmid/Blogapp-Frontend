@@ -1,16 +1,15 @@
 <script lang="ts">
 import { formatFullname } from "../helper/helper";
-import { usePostStore } from "../store/blog";
-import { useAuthStore } from "../store/auth";
 
 export default {
   name: "CommentComponent",
   props: ["comment", "isOwnComment"],
 
-  setup() {
-    const postStore = usePostStore();
-
-    return { formatFullname, postStore };
+  setup(props: {}, { emit }: any) {
+    const onDelete = () => {
+      emit("deleteComment");
+    };
+    return { formatFullname, onDelete };
   },
 };
 </script>
@@ -21,10 +20,7 @@ export default {
       <span class="font-bold">
         {{ comment.title }}
       </span>
-      <span
-        class="float-right pr-1.5 pt-0.5 cursor-pointer"
-        @click="postStore.deleteComment(comment.id)"
-      >
+      <span class="float-right pr-1.5 pt-0.5 cursor-pointer" @click="onDelete">
         <font-awesome-icon icon="fa-solid fa-trash" class="dark:text-white" />
       </span>
     </div>

@@ -1,47 +1,14 @@
 <script lang="ts">
-import { ref } from "vue";
-import { useAuthStore } from "../store/auth";
-import { useRoute } from "vue-router";
-
 export default {
   name: "NavbarComponent",
-
-  setup() {
-    const isDarkMode = ref(localStorage.theme === "dark");
-    let route = useRoute();
-
-    const toggleDarkMode = () => {
-      if (localStorage.theme === "light") {
-        localStorage.theme = "dark";
-        isDarkMode.value = true;
-      } else {
-        localStorage.theme = "light";
-        isDarkMode.value = false;
-      }
-      updateTheme();
+  props: ["isDarkMode", "routeName", "user"],
+  setup(props: {}, { emit }: any) {
+    const onToggleTheme = () => {
+      emit("toggleDarkMode");
     };
-
-    const authStore = useAuthStore();
-
-    return { toggleDarkMode, isDarkMode, authStore, route };
-  },
-
-  mounted() {
-    updateTheme();
+    return { onToggleTheme };
   },
 };
-
-function updateTheme() {
-  if (
-    localStorage.theme === "dark" ||
-    (!("theme" in localStorage) &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-}
 </script>
 <template>
   <header
@@ -57,7 +24,7 @@ function updateTheme() {
           :checked="isDarkMode"
           id="default-toggle"
           class="sr-only peer"
-          @click="toggleDarkMode()"
+          @click="onToggleTheme"
         />
         <div
           class="w-11 h-6 bg-slate-800 dark:bg-gray-200 dark:after:border-gray-300 after:bg-gray-50 :focus:outline-none peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-slate-300"
@@ -70,23 +37,23 @@ function updateTheme() {
       <div class="w-auto flex flex-row absolute right-0 mr-5">
         <router-link
           class="nav-item"
-          :class="route.name === 'posts' ? 'nav-item-active' : ''"
+          :class="routeName === 'posts' ? 'nav-item-active' : ''"
           :to="{ name: 'posts' }"
         >
           Posts
         </router-link>
         <router-link
-          v-if="authStore.user"
+          v-if="user"
           class="nav-item"
-          :class="route.name === 'profile' ? 'nav-item-active' : ''"
+          :class="routeName === 'profile' ? 'nav-item-active' : ''"
           :to="{ name: 'profile' }"
         >
-          {{ authStore.user.username }}
+          {{ user.username }}
         </router-link>
         <router-link
           v-else
           class="nav-item"
-          :class="route.name === 'login' ? 'nav-item-active' : ''"
+          :class="routeName === 'login' ? 'nav-item-active' : ''"
           :to="{ name: 'login' }"
         >
           Login
