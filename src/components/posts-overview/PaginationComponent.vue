@@ -58,14 +58,14 @@ function slicePaginationPageNums(numPostPages: any, activePage: number) {
       <div v-for="pageNr in paginationPageNums" class="pagination-link-wrapper">
         <span
           v-if="activePage === pageNr"
-          class="pagination-link bg-1 cursor-default"
+          class="pagination-link bg-2 cursor-default"
         >
           {{ pageNr }}
         </span>
         <router-link
           v-else
           :to="{ name: route.name, query: { ...route.query, page: pageNr } }"
-          class="pagination-link bg-2 cursor-pointer"
+          class="pagination-link bg-1 cursor-pointer"
         >
           {{ pageNr }}
         </router-link>

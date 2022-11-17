@@ -19,7 +19,7 @@ export default {
   <router-link
     :to="{ name: 'postDetail', params: { slug: post.slug } }"
     :class="[
-      'post rounded-2xl shadow-lg mt-2 mb-4 pt-5 px-2 pb-1 float-left inline-block text-black no-underline bg-3 hover:shadow-2xl',
+      'post rounded-2xl shadow-lg mt-2 mb-4 pt-5 px-2 pb-1 float-left inline-block text-black no-underline bg-4 hover:shadow-2xl',
     ]"
   >
     <div
@@ -52,7 +52,7 @@ export default {
         </span>
       </div>
     </div>
-    <div class="text-right float-right w-1/2">
+    <div class="w-1/2 float-right text-right">
       <p class="m-2">{{ post.category.name }}</p>
     </div>
   </router-link>
