@@ -27,7 +27,7 @@ export default {
     />
     <button
       @click="$emit('saveComment', title, text)"
-      class="py-2 px-8 mt-2 rounded-lg float-right button-bg-light-2 dark:button-bg-dark"
+      class="form-button w-32 float-right"
     >
       Save
     </button>

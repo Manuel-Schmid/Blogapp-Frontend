@@ -26,7 +26,7 @@ export default {
 
 <template>
   <div class="site-container p-12 dark:text-white">
-    <div class="post content-container">
+    <div class="post content-container m-auto">
       <div>
         <div class="w-full relative">
           <div
