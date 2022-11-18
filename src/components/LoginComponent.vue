@@ -67,7 +67,7 @@ export default {
           <form class="space-y-4 md:space-y-6" @submit.prevent="">
             <div>
               <label
-                for="email"
+                for="username"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >Your username</label
               >

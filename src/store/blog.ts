@@ -1,9 +1,11 @@
 import { defineStore } from "pinia";
 import { apolloClient } from "../api/client";
-import { PaginationPosts, Post, Tag } from "../api/models";
+import { Category, PaginationPosts, Post, PostInput, Tag } from "../api/models";
 import Posts from "../graphql/getPosts.gql";
 import PostBySlug from "../graphql/getPost.gql";
+import CreatePost from "../graphql/createPost.gql";
 import Tags from "../graphql/getTags.gql";
+import Categories from "../graphql/categories.gql";
 import UsedTags from "../graphql/getUsedTags.gql";
 import CreateComment from "../graphql/createComment.gql";
 import DeleteComment from "../graphql/deleteComment.gql";
@@ -14,6 +16,7 @@ export type PostState = {
   paginatedPosts: PaginationPosts | null;
   post: Post | null;
   tags: Tag[];
+  categories: Category[];
   usedTags: Tag[];
 };
 
@@ -23,6 +26,7 @@ export const usePostStore = defineStore("blog", {
       paginatedPosts: null,
       post: null,
       tags: [],
+      categories: [],
       usedTags: [],
     } as PostState),
   actions: {
@@ -52,6 +56,23 @@ export const usePostStore = defineStore("blog", {
       });
       this.post = response.data.postBySlug;
     },
+    async createPost(postInput: PostInput) {
+      const response = await apolloClient.mutate({
+        mutation: CreatePost,
+        variables: {
+          postInput,
+        },
+      });
+      this.post = response.data.createPost;
+    },
+    async fetchCategories() {
+      if (this.categories.length === 0) {
+        const response = await apolloClient.query({
+          query: Categories,
+        });
+        this.categories = response.data.categories;
+      }
+    },
     async fetchTags() {
       if (this.tags.length === 0) {
         const response = await apolloClient.query({
@@ -61,15 +82,13 @@ export const usePostStore = defineStore("blog", {
       }
     },
     async fetchUsedTags(category: string | undefined) {
-      if (this.usedTags.length === 0 || category) {
-        const response = await apolloClient.query({
-          query: UsedTags,
-          variables: {
-            categorySlug: category,
-          },
-        });
-        this.usedTags = response.data.usedTags;
-      }
+      const response = await apolloClient.query({
+        query: UsedTags,
+        variables: {
+          categorySlug: category,
+        },
+      });
+      this.usedTags = response.data.usedTags;
     },
     async createComment(commentInput: any) {
       if (this.post) {

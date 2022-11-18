@@ -135,6 +135,7 @@ export type PostInput = {
   category: Scalars["ID"];
   owner?: InputMaybe<Scalars["ID"]>;
   slug?: InputMaybe<Scalars["String"]>;
+  tags?: InputMaybe<Scalars["String"]>;
   text: Scalars["String"];
   title: Scalars["String"];
 };
@@ -194,7 +195,6 @@ export type RootMutation = {
   updateCategory?: Maybe<Category>;
   updateComment?: Maybe<Comment>;
   updatePost?: Maybe<Post>;
-  updateUserEmail?: Maybe<User>;
   verifyAccount: VerifyAccountType;
   verifyToken: PayloadType;
 };
@@ -277,10 +277,6 @@ export type RootMutationUpdateCommentArgs = {
 
 export type RootMutationUpdatePostArgs = {
   postInput: PostInput;
-};
-
-export type RootMutationUpdateUserEmailArgs = {
-  newEmail: Scalars["String"];
 };
 
 export type RootMutationVerifyAccountArgs = {
@@ -372,6 +368,7 @@ export type User = {
   lastName: Scalars["String"];
   password: Scalars["String"];
   posts: Array<Post>;
+  userStatus: UserStatus;
   /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
   username: Scalars["String"];
 };
@@ -381,6 +378,16 @@ export type UserRegistrationInput = {
   password1: Scalars["String"];
   password2: Scalars["String"];
   username: Scalars["String"];
+};
+
+export type UserStatus = {
+  __typename?: "UserStatus";
+  archived: Scalars["Boolean"];
+  id: Scalars["ID"];
+  isAuthor: Scalars["Boolean"];
+  secondaryEmail?: Maybe<Scalars["String"]>;
+  user: User;
+  verified: Scalars["Boolean"];
 };
 
 export type VerifyAccountType = {

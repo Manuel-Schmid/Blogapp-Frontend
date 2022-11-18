@@ -1,0 +1,6 @@
+fragment UserStatus on UserStatus {
+  verified
+  archived
+  secondaryEmail
+  isAuthor
+}

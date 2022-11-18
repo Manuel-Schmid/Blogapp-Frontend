@@ -136,6 +136,7 @@ export default {
 }
 .post {
   max-width: 940px;
+  min-width: 660px;
 }
 .post-title {
   letter-spacing: 1px;
