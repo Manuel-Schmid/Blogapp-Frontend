@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-  <div v-if="isOwnComment" class="comment-field bg-[#dce7f5] dark:bg-[#203757]">
+  <div v-if="isOwnComment" class="comment-field bg-3">
     <div class="text-lg w-full">
       <span class="font-bold">
         {{ comment.title }}
@@ -24,14 +24,14 @@ export default {
         <font-awesome-icon icon="fa-solid fa-trash" class="dark:text-white" />
       </span>
     </div>
-    <p class="pt-1 pb-1">{{ comment.text }}</p>
+    <p class="py-1">{{ comment.text }}</p>
     <p class="text-right px-3">
       {{ formatFullname(comment.owner.firstName, comment.owner.lastName) }}
     </p>
   </div>
-  <div v-else class="comment-field bg-gray-100 dark:bg-slate-700">
+  <div v-else class="comment-field bg-1">
     <p class="font-bold text-lg pt-0.5">{{ comment.title }}</p>
-    <p class="pt-1 pb-1">{{ comment.text }}</p>
+    <p class="py-1">{{ comment.text }}</p>
     <p class="text-right px-3">
       {{ formatFullname(comment.owner.firstName, comment.owner.lastName) }}
     </p>

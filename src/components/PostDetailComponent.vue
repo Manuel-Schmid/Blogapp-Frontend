@@ -25,10 +25,8 @@ export default {
 </script>
 
 <template>
-  <div
-    class="post-container p-12 flex justify-center items-center dark:text-white"
-  >
-    <div class="post">
+  <div class="site-container p-12 dark:text-white">
+    <div class="post content-container m-auto">
       <div>
         <div class="w-full relative">
           <div
@@ -42,7 +40,7 @@ export default {
             </p>
           </div>
         </div>
-        <div class="pt-8 pr-8 pb-0 pl-8 text-left">
+        <div class="px-8 pt-8 pb-0 text-left">
           <p>
             {{ postData.text }}
           </p>
@@ -55,7 +53,7 @@ export default {
             }}
           </p>
         </div>
-        <div v-if="postData.image" class="pt-2 pr-8 pb-2 pl-8 mt-6">
+        <div v-if="postData.image" class="px-8 py-2 mt-6">
           <img
             class="w-full"
             :src="getImageURL(postData.image.name)"
@@ -87,7 +85,7 @@ export default {
                 }}</span>
               </div>
             </div>
-            <div class="mr-0 mb-1 ml-8 flex m-0">
+            <div class="flex mb-1 ml-8 m-0">
               <p class="font-bold mr-1">Category:</p>
               <router-link
                 :to="{
@@ -128,15 +126,11 @@ export default {
 </template>
 
 <style scoped>
-.post-container {
-  margin-top: 9vh;
-}
-.post-container a:hover {
-  text-decoration: underline;
-}
 .post {
-  max-width: 940px;
   min-width: 660px;
+}
+.post a:hover {
+  text-decoration: underline;
 }
 .post-title {
   letter-spacing: 1px;

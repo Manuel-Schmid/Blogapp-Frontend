@@ -29,7 +29,7 @@ export default {
   <button
     v-if="loggedIn"
     @click="commentFormActive = !commentFormActive"
-    class="py-2 px-4 border-b border-black bg-gray-50 hover:bg-gray-100 dark:bg-slate-700 hover:dark:bg-slate-600 rounded-3xl"
+    class="py-2 px-4 border-b border-black button-bg-light-1 dark:button-bg-dark rounded-3xl"
   >
     <font-awesome-icon
       icon="fa-solid fa-plus"
@@ -55,10 +55,10 @@ export default {
 <style scoped>
 .icon-vertical {
   rotate: 0deg;
-  transition: 300ms;
+  transition: rotate 300ms;
 }
 .icon-diagonal {
   rotate: 135deg;
-  transition: 300ms;
+  transition: rotate 300ms;
 }
 </style>

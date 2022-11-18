@@ -40,7 +40,7 @@ export default {
 </script>
 
 <template>
-  <div class="profile-container">
+  <div class="site-container">
     <div v-if="userData" class="w-min m-auto mt-36 text-center">
       <p class="text-xl mb-8 dark:text-white">
         <font-awesome-icon icon="fa-solid fa-user" class="mr-2" />About
@@ -55,18 +55,18 @@ export default {
           <tbody>
             <tr class="profile-table-row">
               <th scope="row">Username</th>
-              <td class="py-4 px-6">
+              <td class="profile-table-row-value">
                 {{ userData.username }}
               </td>
             </tr>
             <tr class="profile-table-row">
               <th scope="row">First name</th>
-              <td class="py-4 px-6">
+              <td class="profile-table-row-value">
                 <div v-if="firstNameEditable">
                   <input
                     type="text"
                     v-model="newFirstName"
-                    class="bg-gray-100 dark:bg-slate-700 px-2 max-w-[58%]"
+                    class="editable-name-input"
                   />
                   <font-awesome-icon
                     @click="
@@ -99,12 +99,12 @@ export default {
             </tr>
             <tr class="profile-table-row">
               <th scope="row">Last name</th>
-              <td class="py-4 px-6">
+              <td class="profile-table-row-value">
                 <div v-if="lastNameEditable">
                   <input
                     type="text"
                     v-model="newLastName"
-                    class="bg-gray-100 dark:bg-slate-700 px-2 max-w-[58%]"
+                    class="editable-name-input"
                   />
                   <font-awesome-icon
                     @click="lastNameEditable = false"
@@ -134,7 +134,7 @@ export default {
             </tr>
             <tr class="profile-table-row">
               <th scope="row">Email</th>
-              <td class="py-4 px-6">
+              <td class="profile-table-row-value">
                 {{ userData.email }}
                 <font-awesome-icon
                   @click="
@@ -145,7 +145,7 @@ export default {
                   icon="fa-regular fa-pen-to-square"
                   class="cursor-pointer pl-2"
                 />
-                <p v-if="emailChangeEmailSent" class="text-green-500">
+                <p v-if="emailChangeEmailSent" class="text-color-success">
                   Check your inbox for the email change link
                 </p>
               </td>
@@ -178,16 +178,18 @@ export default {
 </template>
 
 <style scoped>
-.profile-container {
-  margin-top: 9vh;
-}
 .profile-table-row {
   @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700;
 }
 .profile-table-row th {
   @apply py-4 px-6 font-bold text-gray-900 whitespace-nowrap dark:text-white;
 }
-
+.profile-table-row-value {
+  @apply py-4 px-6;
+}
+.editable-name-input {
+  @apply bg-gray-100 dark:bg-slate-700 px-2 max-w-[58%];
+}
 .input-field-icon {
   @apply text-lg cursor-pointer mb-[-0.125rem];
 }

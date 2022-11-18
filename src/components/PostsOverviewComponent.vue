@@ -20,7 +20,7 @@ export default {
 </script>
 
 <template>
-  <div class="post-overview-container p-12 dark:text-white">
+  <div class="site-container p-12 dark:text-white">
     <div class="content-container m-auto w-full">
       <TagListComponent :tags-data="tagsData"></TagListComponent>
       <p
@@ -45,11 +45,4 @@ export default {
   </div>
 </template>
 
-<style scoped>
-.post-overview-container {
-  margin-top: 9vh;
-}
-.content-container {
-  max-width: 970px;
-}
-</style>
+<style scoped></style>

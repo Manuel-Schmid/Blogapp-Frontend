@@ -19,38 +19,26 @@ export default {
 </script>
 
 <template>
-  <div class="pw-reset-container h-[91vh]">
-    <div class="w-full h-full flex justify-center items-center text-left">
-      <div
-        class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
-      >
-        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1
-            class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center"
-          >
-            Change your password
-          </h1>
+  <div class="site-container">
+    <div class="flex-container-centered">
+      <div class="form-wrapper">
+        <div class="form-layout">
+          <h1 class="form-title">Change your password</h1>
           <form @submit.prevent="">
             <div>
-              <label
-                for="password"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >New Password</label
-              >
+              <label for="password" class="form-label">New Password</label>
               <input
                 type="password"
                 name="password"
                 v-model="newPassword1"
                 id="password"
                 placeholder="••••••••"
-                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="form-input"
                 required=""
               />
             </div>
             <div class="mt-3">
-              <label
-                for="password"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              <label for="password" class="form-label"
                 >Confirm new password</label
               >
               <input
@@ -59,31 +47,18 @@ export default {
                 v-model="newPassword2"
                 id="passwordConfirm"
                 placeholder="••••••••"
-                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="form-input"
                 required=""
               />
             </div>
-            <div
-              v-if="resetSuccess"
-              class="flex items-center justify-between mt-1 mb-3"
-            >
-              <div class="flex items-start text-green-500">
-                Password reset successful.
-              </div>
+            <div v-if="resetSuccess" class="mt-1 mb-3">
+              <div class="text-color-success">Password reset successful.</div>
             </div>
-            <div
-              v-else-if="resetSuccess === false"
-              class="flex items-center justify-between mt-1 mb-3"
-            >
-              <div class="flex items-start text-red-600">
-                Password reset failed.
-              </div>
+            <div v-else-if="resetSuccess === false" class="mt-1 mb-3">
+              <div class="text-color-error">Password reset failed.</div>
             </div>
             <div v-else class="my-7"></div>
-            <button
-              @click="onSubmit"
-              class="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-            >
+            <button @click="onSubmit" class="form-button">
               Reset Password
             </button>
           </form>
@@ -93,8 +68,4 @@ export default {
   </div>
 </template>
 
-<style scoped>
-.pw-reset-container {
-  margin-top: 9vh;
-}
-</style>
+<style scoped></style>
