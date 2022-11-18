@@ -13,6 +13,7 @@ export default {
     const createPost = async (
       title: string,
       text: string,
+      image: any,
       category: string,
       tags: string
     ) => {
@@ -20,6 +21,7 @@ export default {
         await postStore.createPost({
           title,
           text,
+          image,
           category,
           tags,
         });

@@ -18,6 +18,7 @@ export type Scalars = {
   Float: number;
   DateTime: any;
   JSON: any;
+  Upload: any;
 };
 
 export type Category = {
@@ -133,6 +134,7 @@ export type Post = {
 
 export type PostInput = {
   category: Scalars["ID"];
+  image?: InputMaybe<Scalars["Upload"]>;
   owner?: InputMaybe<Scalars["ID"]>;
   slug?: InputMaybe<Scalars["String"]>;
   tags?: InputMaybe<Scalars["String"]>;
