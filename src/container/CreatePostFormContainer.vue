@@ -18,7 +18,6 @@ export default {
       tags: string
     ) => {
       if (title && text && category) {
-        console.log(image);
         await postStore.createPost({
           title,
           text,
@@ -26,11 +25,11 @@ export default {
           category,
           tags,
         });
-        // const postSlug = await postStore.post?.slug;
-        // await router.push({
-        //   name: "postDetail",
-        //   params: { slug: postSlug },
-        // });
+        const postSlug = await postStore.post?.slug;
+        await router.push({
+          name: "postDetail",
+          params: { slug: postSlug },
+        });
       }
     };
 
