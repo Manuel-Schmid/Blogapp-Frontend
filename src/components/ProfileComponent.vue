@@ -52,7 +52,7 @@ export default {
       <div>
         <div
           v-if="userData.userStatus.isAuthor"
-          class="author-request-popup max-w-[16rem] text-color-success border-color-success"
+          class="author-request-popup max-w-[16rem] dark:text-color-success border-color-success bg-color-success bg-5"
         >
           <div class="popup-content-icon">
             <font-awesome-icon
@@ -71,7 +71,7 @@ export default {
         </button>
         <div
           v-else-if="authorRequest.status === 'PENDING'"
-          class="author-request-popup max-w-[16rem] text-color-pending border-color-pending"
+          class="author-request-popup max-w-[16rem] dark:text-color-pending border-color-pending bg-color-pending bg-5"
         >
           <div class="popup-content-icon">
             <font-awesome-icon icon="fa-regular fa-clock" class="h-6 pr-2" />
@@ -83,7 +83,7 @@ export default {
         </div>
         <div
           v-else-if="authorRequest.status === 'REJECTED'"
-          class="author-request-popup max-w-[14rem] text-color-error border-color-error"
+          class="author-request-popup max-w-[14rem] dark:text-color-error border-color-error bg-color-error bg-5"
         >
           <div class="popup-content-icon">
             <font-awesome-icon
@@ -235,7 +235,7 @@ export default {
   @apply absolute right-4;
 }
 .author-request-popup {
-  @apply author-request-layout flex justify-center items-center flex-row rounded-lg text-sm p-2.5 bg-5 border-2;
+  @apply author-request-layout flex justify-center items-center flex-row rounded-lg font-bold text-sm text-black p-2.5 border-2;
 }
 .popup-content-icon {
   @apply w-1/6 h-[100%];

@@ -90,7 +90,7 @@
   }
 
   .bg-5 {
-    @apply bg-white dark:bg-[#152133]
+    @apply dark:bg-[#152133]
   }
 
   .button-bg-light-1 {
@@ -113,6 +113,10 @@
     @apply border-green-500
   }
 
+  .bg-color-success {
+    @apply bg-green-500
+  }
+
   .text-color-pending {
     @apply text-amber-400
   }
@@ -121,11 +125,19 @@
     @apply border-amber-400
   }
 
+  .bg-color-pending {
+    @apply bg-amber-400
+  }
+
   .text-color-error {
     @apply text-red-600
   }
 
   .border-color-error {
     @apply border-red-600
+  }
+
+  .bg-color-error {
+    @apply bg-red-600
   }
 }
