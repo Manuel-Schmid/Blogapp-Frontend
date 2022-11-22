@@ -15,6 +15,7 @@ import VerifyAccount from "../graphql/verifyAccount.gql";
 import ResendActivationEmail from "../graphql/resendActivationEmail.gql";
 import UpdateAccount from "../graphql/updateAccount.gql";
 import AuthorRequestByUser from "../graphql/getAuthorRequestByUser.gql";
+import CreateAuthorRequest from "../graphql/createAuthorRequest.gql";
 import {
   EmailChangeInput,
   PasswordChangeInput,
@@ -170,8 +171,21 @@ export const useAuthStore = defineStore("auth", {
       const response = await apolloClient.query({
         query: AuthorRequestByUser,
       });
-      if (response.data !== null) {
+      if (response.data.authorRequestByUser !== null) {
         this.authorRequest = response.data.authorRequestByUser;
+        if (response.data.authorRequestByUser.status === "ACCEPTED") {
+          await this.fetchUser();
+        }
+      } else {
+        this.authorRequest = null;
+      }
+    },
+    async createAuthorRequest() {
+      const response = await apolloClient.mutate({
+        mutation: CreateAuthorRequest,
+      });
+      if (response.data.createAuthorRequest?.success) {
+        this.authorRequest = response.data.createAuthorRequest.authorRequest;
       }
     },
   },

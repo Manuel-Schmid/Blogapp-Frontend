@@ -109,7 +109,23 @@
     @apply text-green-500
   }
 
+  .border-color-success {
+    @apply border-green-500
+  }
+
+  .text-color-pending {
+    @apply text-amber-400
+  }
+
+  .border-color-pending {
+    @apply border-amber-400
+  }
+
   .text-color-error {
     @apply text-red-600
+  }
+
+  .border-color-error {
+    @apply border-red-600
   }
 }
