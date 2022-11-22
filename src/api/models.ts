@@ -21,6 +21,28 @@ export type Scalars = {
   Upload: any;
 };
 
+export type AuthorRequest = {
+  __typename?: "AuthorRequest";
+  dateClosed?: Maybe<Scalars["DateTime"]>;
+  dateOpened: Scalars["DateTime"];
+  id: Scalars["ID"];
+  status: Scalars["String"];
+  user: User;
+};
+
+export type AuthorRequestInput = {
+  dateClosed: Scalars["DateTime"];
+  id: Scalars["ID"];
+  status: Scalars["String"];
+};
+
+export type AuthorRequestWrapperType = {
+  __typename?: "AuthorRequestWrapperType";
+  authorRequest?: Maybe<AuthorRequest>;
+  errors?: Maybe<Scalars["JSON"]>;
+  success: Scalars["Boolean"];
+};
+
 export type Category = {
   __typename?: "Category";
   id: Scalars["ID"];
@@ -49,6 +71,13 @@ export type CommentInput = {
   post?: InputMaybe<Scalars["ID"]>;
   text: Scalars["String"];
   title: Scalars["String"];
+};
+
+export type CreatePostType = {
+  __typename?: "CreatePostType";
+  errors?: Maybe<Scalars["JSON"]>;
+  post?: Maybe<Post>;
+  success: Scalars["Boolean"];
 };
 
 export type DeleteType = {
@@ -176,9 +205,10 @@ export type ResendActivationEmailType = {
 
 export type RootMutation = {
   __typename?: "RootMutation";
+  createAuthorRequest: AuthorRequestWrapperType;
   createCategory?: Maybe<Category>;
   createComment?: Maybe<Comment>;
-  createPost?: Maybe<Post>;
+  createPost: CreatePostType;
   createPostLike?: Maybe<PostLike>;
   deleteComment: Scalars["Boolean"];
   deletePostLike: Scalars["Boolean"];
@@ -194,6 +224,7 @@ export type RootMutation = {
   sendPasswordResetEmail: SendPasswordResetEmailType;
   tokenAuth: TokenDataType;
   updateAccount: UpdateAccountType;
+  updateAuthorRequest: AuthorRequestWrapperType;
   updateCategory?: Maybe<Category>;
   updateComment?: Maybe<Comment>;
   updatePost?: Maybe<Post>;
@@ -269,6 +300,10 @@ export type RootMutationUpdateAccountArgs = {
   updateAccountInput: UpdateAccountInput;
 };
 
+export type RootMutationUpdateAuthorRequestArgs = {
+  authorRequestInput: AuthorRequestInput;
+};
+
 export type RootMutationUpdateCategoryArgs = {
   categoryInput: CategoryInput;
 };
@@ -291,6 +326,8 @@ export type RootMutationVerifyTokenArgs = {
 
 export type RootQuery = {
   __typename?: "RootQuery";
+  authorRequestByUser?: Maybe<AuthorRequest>;
+  authorRequests: Array<AuthorRequest>;
   categories: Array<Category>;
   categoryById: Category;
   me?: Maybe<User>;
@@ -300,6 +337,10 @@ export type RootQuery = {
   usedTags: Array<Tag>;
   user?: Maybe<User>;
   users: Array<User>;
+};
+
+export type RootQueryAuthorRequestsArgs = {
+  status?: InputMaybe<Scalars["String"]>;
 };
 
 export type RootQueryCategoryByIdArgs = {
