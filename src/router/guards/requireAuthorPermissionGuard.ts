@@ -5,8 +5,9 @@ const requireAuthorPermissionGuard = (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized
 ) => {
-  // @ts-ignore
-  return useAuthStore().user.userStatus.isAuthor
+  const user = useAuthStore().user;
+  if (user === null) return false;
+  return user["userStatus"]["isAuthor"]
     ? true
     : !!from.name
     ? false
