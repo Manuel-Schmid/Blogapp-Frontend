@@ -1,5 +1,4 @@
 <script lang="ts">
-import { useRoute } from "vue-router/dist/vue-router";
 import PostDetailComponent from "../components/PostDetailComponent.vue";
 import { usePostStore } from "../store/blog";
 import { useAuthStore } from "../store/auth";
@@ -12,11 +11,9 @@ export default {
   },
 
   setup() {
-    const route = useRoute();
     const postStore = usePostStore();
     const authStore = useAuthStore();
     let postLiked = ref(!!postStore.post?.isLiked);
-    postStore.fetchPost(route.params.slug as string, true);
 
     const togglePostLike = async () => {
       if (postLiked.value) {

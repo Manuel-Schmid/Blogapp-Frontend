@@ -48,13 +48,13 @@ export const useAuthStore = defineStore("auth", {
       }
     },
     async fetchUser() {
-      this.user = null;
       const response = await apolloClient.query({
         query: User,
       });
       if (response.data !== null) {
         this.user = response.data.user;
       } else {
+        this.user = null;
         // todo
       }
     },

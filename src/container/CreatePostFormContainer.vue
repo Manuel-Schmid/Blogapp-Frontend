@@ -9,7 +9,7 @@ export default {
 
   setup() {
     const postStore = usePostStore();
-    postStore.fetchCategories();
+
     const createPost = async (
       title: string,
       text: string,
