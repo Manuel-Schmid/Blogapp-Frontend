@@ -10,6 +10,8 @@ import EmailChangeFormContainer from "../container/EmailChangeFormContainer.vue"
 import ActivationContainer from "../container/ActivationContainer.vue";
 import RegistrationConfirmationContainer from "../container/RegistrationConfirmationContainer.vue";
 import CreatePostFormContainer from "../container/CreatePostFormContainer.vue";
+import { requireLogin } from "./guards/requireLogin";
+import { requireAuthorPermission } from "./guards/requireAuthorPermission";
 
 const routes: any = [
   {
@@ -51,6 +53,7 @@ const routes: any = [
     path: "/profile",
     name: "profile",
     component: ProfileContainer,
+    beforeEnter: [requireLogin],
   },
   {
     path: "/posts/:category?:tags?:page?",
@@ -66,6 +69,7 @@ const routes: any = [
     path: "/create-post",
     name: "createPost",
     component: CreatePostFormContainer,
+    beforeEnter: [requireLogin, requireAuthorPermission],
   },
 ];
 
