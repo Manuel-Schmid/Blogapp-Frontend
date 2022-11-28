@@ -54,7 +54,6 @@ export const useAuthStore = defineStore("auth", {
       if (response.data !== null) {
         this.user = response.data.user;
       } else {
-        this.user = null;
         // todo
       }
     },
