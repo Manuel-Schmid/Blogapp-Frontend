@@ -1,0 +1,7 @@
+#import "./fragments/authorRequest.gql"
+
+query AuthorRequestByUser {
+  authorRequestByUser {
+    ...AuthorRequest
+  }
+}

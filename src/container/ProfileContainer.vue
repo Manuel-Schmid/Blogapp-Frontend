@@ -14,6 +14,8 @@ export default {
     const lastNameEditable = ref(false);
     const emailChangeEmailSent = ref(false);
 
+    authStore.fetchAuthorRequestByUser();
+
     const logout = async () => {
       await authStore.logoutUser();
       await router.push({ name: "posts" });
@@ -62,6 +64,8 @@ export default {
     @logout="logout"
     @send-email-change-email="sendEmailChangeEmail"
     @update-account="updateAccount"
+    @create-author-request="authStore.createAuthorRequest"
     :user-data="authStore.user"
+    :author-request="authStore.authorRequest"
   />
 </template>
