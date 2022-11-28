@@ -35,7 +35,6 @@ export const usePostStore = defineStore("blog", {
       categorySlugParam: string | undefined,
       activePage: number
     ) {
-      this.paginatedPosts = null;
       const response = await apolloClient.query({
         query: Posts,
         variables: {

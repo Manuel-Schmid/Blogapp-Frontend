@@ -1,15 +1,13 @@
-<template>
-  <PostsOverviewComponent
-    :posts-data="store.paginatedPosts"
-    :active-page="activePage"
-    :tags-data="store.usedTags"
-  />
-</template>
-
 <script lang="ts">
 import PostsOverviewComponent from "../components/PostsOverviewComponent.vue";
-import { useRoute } from "vue-router";
+import {
+  onBeforeRouteUpdate,
+  RouteLocationNormalized,
+  useRoute,
+} from "vue-router";
 import { usePostStore } from "../store/blog";
+import { fetchPostsGuard } from "../router/guards/fetchPostsGuard";
+import { fetchUsedTagsGuard } from "../router/guards/fetchUsedTagsGuard";
 
 export default {
   name: "PostsOverviewContainer",
@@ -21,13 +19,23 @@ export default {
     const route = useRoute();
     const store = usePostStore();
     const activePage: number = route.query.page ? +route.query.page : 1;
-    const tags = route.query.tags as string;
-    const category = route.query.category as string;
 
-    store.fetchPosts(tags, category, activePage);
-    store.fetchUsedTags(category);
+    onBeforeRouteUpdate(
+      async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
+        await fetchPostsGuard(to, from);
+        await fetchUsedTagsGuard(to, from);
+      }
+    );
 
     return { store, activePage };
   },
 };
 </script>
+
+<template>
+  <PostsOverviewComponent
+    :posts-data="store.paginatedPosts"
+    :active-page="activePage"
+    :tags-data="store.usedTags"
+  />
+</template>
