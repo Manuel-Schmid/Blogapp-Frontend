@@ -2,36 +2,36 @@ import { describe, it, expect } from "vitest";
 import { shallowMount } from "@vue/test-utils";
 import ProfileComponent from "../../components/ProfileComponent.vue";
 
-const defaultProps = {
-  userData: {
-    id: "1",
-    username: "admin",
-    email: "admin@example.lo",
-    firstName: "Winston",
-    lastName: "Smith",
-    userStatus: {
-      verified: true,
-      archived: false,
-      secondaryEmail: null,
-      isAuthor: false,
+describe("ProfileComponent", () => {
+  const defaultProps = {
+    userData: {
+      id: "1",
+      username: "admin",
+      email: "admin@example.lo",
+      firstName: "Winston",
+      lastName: "Smith",
+      userStatus: {
+        verified: true,
+        archived: false,
+        secondaryEmail: null,
+        isAuthor: false,
+      },
     },
-  },
-  authorRequest: null,
-  firstNameEditable: false,
-  lastNameEditable: false,
-  emailChangeEmailSent: false,
-};
+    authorRequest: null,
+    firstNameEditable: false,
+    lastNameEditable: false,
+    emailChangeEmailSent: false,
+  };
 
-const mountOptions = {
-  global: {
-    stubs: {
-      FontAwesomeIcon: true,
+  const mountOptions = {
+    global: {
+      stubs: {
+        FontAwesomeIcon: true,
+      },
     },
-  },
-  propsData: defaultProps,
-};
+    propsData: defaultProps,
+  };
 
-describe("ProfileComponent.vue Tests", () => {
   it("should display the user data in a table", () => {
     const wrapper = shallowMount(ProfileComponent, mountOptions);
 
