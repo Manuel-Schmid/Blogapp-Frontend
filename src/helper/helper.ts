@@ -18,7 +18,7 @@ const getImageURL = (image: string) => {
 };
 
 const formatFullname = (firstName: string, lastName: string) => {
-  return `${firstName} ${lastName}`;
+  return `${firstName} ${lastName}`.trim();
 };
 
 export { formatDateShort, formatDateLong, formatFullname, getImageURL };
