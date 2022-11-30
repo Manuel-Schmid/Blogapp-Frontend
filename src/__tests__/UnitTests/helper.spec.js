@@ -48,17 +48,17 @@ describe("Helper functions", () => {
   });
 
   it("should return first and last name separated by a whitespace", () => {
-    const imageURL = formatFullname("Winston", "Smith");
-    expect(imageURL).toMatch("Winston Smith");
+    const fullName = formatFullname("Winston", "Smith");
+    expect(fullName).toMatch("Winston Smith");
   });
 
   it("should return a trimmed string of just the first name", () => {
-    const imageURL = formatFullname("George", "");
-    expect(imageURL).toEqual("George");
+    const fullName = formatFullname("George", "");
+    expect(fullName).toEqual("George");
   });
 
   it("should return a trimmed string of just the last name", () => {
-    const imageURL = formatFullname("", "Orwell");
-    expect(imageURL).toEqual("Orwell");
+    const fullName = formatFullname("", "Orwell");
+    expect(fullName).toEqual("Orwell");
   });
 });
