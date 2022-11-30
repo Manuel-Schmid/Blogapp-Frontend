@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "codegen": "graphql-codegen --config codegen.yml",
     "prettier": "prettier --write src",
-    "test:unit": "vitest run --environment jsdom"
+    "test:unit": "vitest run --environment jsdom",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
@@ -42,6 +43,7 @@
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/test-utils": "^2.2.4",
     "autoprefixer": "^10.4.8",
+    "cypress": "^11.2.0",
     "graphql-codegen": "^0.4.0",
     "jsdom": "^20.0.3",
     "postcss": "^8.4.16",
