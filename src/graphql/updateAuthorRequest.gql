@@ -1,0 +1,11 @@
+#import "./fragments/authorRequest.gql"
+
+mutation UpdateAuthorRequest($authorRequestInput: AuthorRequestInput!) {
+  updateAuthorRequest(authorRequestInput: $authorRequestInput) {
+    success
+    errors
+    authorRequest {
+      ...AuthorRequest
+    }
+  }
+}

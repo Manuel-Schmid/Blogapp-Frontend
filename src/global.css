@@ -70,6 +70,16 @@
   .input-bordered {
     @apply border dark:border-slate-600 dark:bg-slate-600
   }
+
+  .table-row {
+    @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700;
+  }
+  .table-row th {
+    @apply py-4 px-6 font-bold text-gray-900 whitespace-nowrap dark:text-white;
+  }
+  .table-row-value {
+    @apply py-4 px-6;
+  }
 }
 
 @layer utilities {

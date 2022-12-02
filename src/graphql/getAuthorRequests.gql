@@ -1,0 +1,10 @@
+#import "./fragments/authorRequest.gql"
+
+query AuthorRequests($status: String, $activePage: Int) {
+  paginatedAuthorRequests(status: $status, activePage: $activePage) {
+    authorRequests {
+      ...AuthorRequest
+    }
+    numPages
+  }
+}

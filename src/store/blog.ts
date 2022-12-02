@@ -1,16 +1,27 @@
 import { defineStore } from "pinia";
 import { apolloClient } from "../api/client";
-import { Category, PaginationPosts, Post, PostInput, Tag } from "../api/models";
+import {
+  AuthorRequest,
+  AuthorRequestInput,
+  Category,
+  PaginationAuthorRequests,
+  PaginationPosts,
+  Post,
+  PostInput,
+  Tag,
+} from "../api/models";
 import Posts from "../graphql/getPosts.gql";
 import PostBySlug from "../graphql/getPost.gql";
 import CreatePost from "../graphql/createPost.gql";
 import Tags from "../graphql/getTags.gql";
 import Categories from "../graphql/categories.gql";
 import UsedTags from "../graphql/getUsedTags.gql";
+import AuthorRequests from "../graphql/getAuthorRequests.gql";
 import CreateComment from "../graphql/createComment.gql";
 import DeleteComment from "../graphql/deleteComment.gql";
 import CreatePostLike from "../graphql/createPostLike.gql";
 import DeletePostLike from "../graphql/deletePostLike.gql";
+import UpdateAuthorRequest from "../graphql/updateAuthorRequest.gql";
 
 export type PostState = {
   paginatedPosts: PaginationPosts | null;
@@ -18,6 +29,7 @@ export type PostState = {
   tags: Tag[];
   categories: Category[];
   usedTags: Tag[];
+  paginatedAuthorRequests: PaginationAuthorRequests | null;
 };
 
 export const usePostStore = defineStore("blog", {
@@ -28,6 +40,7 @@ export const usePostStore = defineStore("blog", {
       tags: [],
       categories: [],
       usedTags: [],
+      paginatedAuthorRequests: null,
     } as PostState),
   actions: {
     async fetchPosts(
@@ -88,6 +101,28 @@ export const usePostStore = defineStore("blog", {
         },
       });
       this.usedTags = response.data.usedTags;
+    },
+    async fetchAuthorRequests(
+      status: string | undefined,
+      activePage: number | undefined
+    ) {
+      const response = await apolloClient.query({
+        query: AuthorRequests,
+        variables: {
+          status,
+          activePage,
+        },
+      });
+      this.paginatedAuthorRequests = response.data.paginatedAuthorRequests;
+    },
+    async updateAuthorRequest(authorRequestInput: AuthorRequestInput) {
+      const response = await apolloClient.query({
+        query: UpdateAuthorRequest,
+        variables: {
+          authorRequestInput,
+        },
+      });
+      return response.data.updateAuthorRequest.success;
     },
     async createComment(commentInput: any) {
       if (this.post) {
