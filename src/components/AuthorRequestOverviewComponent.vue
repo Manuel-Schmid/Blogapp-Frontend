@@ -1,9 +1,13 @@
 <script lang="ts">
 import { formatDateShort } from "../helper/helper";
 import { Status } from "../api/models";
+import PaginationComponent from "./PaginationComponent.vue";
 
 export default {
   name: "AuthorRequestOverviewComponent",
+  components: {
+    PaginationComponent,
+  },
   props: ["authorRequestsData", "activePage"],
   setup(props: {}, { emit }: any) {
     const updateAuthorRequest = (user: string, status: Status) => {
@@ -104,6 +108,11 @@ export default {
           </tr>
         </tbody>
       </table>
+      <PaginationComponent
+        v-if="authorRequestsData.numPages > 1"
+        :num-pages="authorRequestsData.numPages"
+        :active-page="activePage"
+      ></PaginationComponent>
     </div>
   </div>
 </template>

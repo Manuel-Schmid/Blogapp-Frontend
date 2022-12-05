@@ -88,7 +88,7 @@ const routes: any = [
     path: "/author-requests",
     name: "authorRequests",
     component: AuthorRequestOverviewContainer,
-    beforeEnter: [fetchAuthorRequestsGuard],
+    beforeEnter: [fetchAuthorRequestsGuard], // when changing this also change onBeforeRouteUpdate() AuthorRequestOverviewContainer.vue
   },
 ];
 

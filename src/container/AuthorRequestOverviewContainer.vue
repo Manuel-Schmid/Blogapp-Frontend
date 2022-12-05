@@ -1,8 +1,13 @@
 <script lang="ts">
 import AuthorRequestOverviewComponent from "../components/AuthorRequestOverviewComponent.vue";
 import { usePostStore } from "../store/blog";
-import { useRoute } from "vue-router";
+import {
+  onBeforeRouteUpdate,
+  RouteLocationNormalized,
+  useRoute,
+} from "vue-router";
 import { Status } from "../api/models";
+import { fetchAuthorRequestsGuard } from "../router/guards/fetchAuthorRequestsGuard";
 export default {
   name: "AuthorRequestOverview",
   components: { AuthorRequestOverviewComponent },
@@ -10,6 +15,12 @@ export default {
     const route = useRoute();
     const postStore = usePostStore();
     const activePage: number = route.query.page ? +route.query.page : 1;
+
+    onBeforeRouteUpdate(
+      async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
+        await fetchAuthorRequestsGuard(to, from);
+      }
+    );
 
     const updateAuthorRequest = async (user: string, status: Status) => {
       if (user && status) {
