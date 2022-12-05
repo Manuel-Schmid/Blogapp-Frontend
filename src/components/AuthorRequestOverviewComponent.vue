@@ -2,6 +2,9 @@
 import { formatDateShort } from "../helper/helper";
 import { Status } from "../api/models";
 import PaginationComponent from "./PaginationComponent.vue";
+import { useRoute } from "vue-router";
+import router from "../router/router";
+import { ref } from "vue";
 
 export default {
   name: "AuthorRequestOverviewComponent",
@@ -13,8 +16,23 @@ export default {
     const updateAuthorRequest = (user: string, status: Status) => {
       emit("updateAuthorRequest", user, status);
     };
+    const route = useRoute();
+    const selectedFilter = ref("");
+    selectedFilter.value = route.query.status ? String(route.query.status) : "";
 
-    return { formatDateShort, Status, updateAuthorRequest };
+    const onFilterChange = (event: any) => {
+      router.push({
+        name: String(route.name),
+        query: { ...route.query, status: event.target.value },
+      });
+    };
+    return {
+      formatDateShort,
+      Status,
+      selectedFilter,
+      updateAuthorRequest,
+      onFilterChange,
+    };
   },
 };
 </script>
@@ -36,7 +54,31 @@ export default {
         <tbody>
           <tr class="table-row">
             <th>Username</th>
-            <th>Email</th>
+            <th class="dark:text-white">
+              <select @change="onFilterChange($event)" class="dark:bg-gray-800">
+                <option :selected="selectedFilter === ''" value="">
+                  Status: All
+                </option>
+                <option
+                  :selected="selectedFilter === 'accepted'"
+                  value="accepted"
+                >
+                  Status: Accepted
+                </option>
+                <option
+                  :selected="selectedFilter === 'pending'"
+                  value="pending"
+                >
+                  Status: Pending
+                </option>
+                <option
+                  :selected="selectedFilter === 'rejected'"
+                  value="rejected"
+                >
+                  Status: Rejected
+                </option>
+              </select>
+            </th>
             <th>Date opened</th>
             <th>Date closed</th>
             <th>Status</th>

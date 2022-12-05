@@ -6,8 +6,8 @@ const fetchAuthorRequestsGuard = async (
   from: RouteLocationNormalized
 ) => {
   const activePage: number = to.query.page ? +to.query.page : 1;
-  // todo: status
-  await usePostStore().fetchAuthorRequests(undefined, activePage);
+  const status: string = to.query.status ? String(to.query.status) : "";
+  await usePostStore().fetchAuthorRequests(status, activePage);
   return true;
 };
 
