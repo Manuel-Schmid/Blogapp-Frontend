@@ -6,6 +6,9 @@ fragment User on User {
   email
   firstName
   lastName
+  isSuperuser
+  isStaff
+  isActive
   userStatus {
     ...UserStatus
   }

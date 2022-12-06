@@ -108,15 +108,15 @@ export default {
             class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-50"
           ></thead>
           <tbody>
-            <tr class="profile-table-row">
+            <tr class="table-row">
               <th scope="row">Username</th>
-              <td class="profile-table-row-value">
+              <td class="table-row-value">
                 {{ userData.username }}
               </td>
             </tr>
-            <tr class="profile-table-row">
+            <tr class="table-row">
               <th scope="row">First name</th>
-              <td class="profile-table-row-value">
+              <td class="table-row-value">
                 <div v-if="firstNameEditable">
                   <input
                     type="text"
@@ -152,9 +152,9 @@ export default {
                 </div>
               </td>
             </tr>
-            <tr class="profile-table-row">
+            <tr class="table-row">
               <th scope="row">Last name</th>
-              <td class="profile-table-row-value">
+              <td class="table-row-value">
                 <div v-if="lastNameEditable">
                   <input
                     type="text"
@@ -187,9 +187,9 @@ export default {
                 </div>
               </td>
             </tr>
-            <tr class="profile-table-row">
+            <tr class="table-row">
               <th scope="row">Email</th>
-              <td class="profile-table-row-value">
+              <td class="table-row-value">
                 {{ userData.email }}
                 <font-awesome-icon
                   @click="
@@ -242,15 +242,6 @@ export default {
 }
 .popup-content-text {
   @apply w-5/6;
-}
-.profile-table-row {
-  @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700;
-}
-.profile-table-row th {
-  @apply py-4 px-6 font-bold text-gray-900 whitespace-nowrap dark:text-white;
-}
-.profile-table-row-value {
-  @apply py-4 px-6;
 }
 .editable-name-input {
   @apply bg-gray-100 dark:bg-slate-700 px-2 max-w-[58%];

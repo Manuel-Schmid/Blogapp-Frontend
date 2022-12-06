@@ -17,6 +17,8 @@ import { fetchPostsGuard } from "./guards/fetchPostsGuard";
 import { fetchUsedTagsGuard } from "./guards/fetchUsedTagsGuard";
 import { fetchCategoriesGuard } from "./guards/fetchCategoriesGuard";
 import { fetchPostGuard } from "./guards/fetchPostGuard";
+import AuthorRequestOverviewContainer from "../container/AuthorRequestOverviewContainer.vue";
+import { fetchAuthorRequestsGuard } from "./guards/fetchAuthorRequestsGuard";
 
 const routes: any = [
   {
@@ -81,6 +83,12 @@ const routes: any = [
       requireAuthorPermissionGuard,
       fetchCategoriesGuard,
     ],
+  },
+  {
+    path: "/author-requests",
+    name: "authorRequests",
+    component: AuthorRequestOverviewContainer,
+    beforeEnter: [fetchAuthorRequestsGuard], // when changing this also change onBeforeRouteUpdate() AuthorRequestOverviewContainer.vue
   },
 ];
 

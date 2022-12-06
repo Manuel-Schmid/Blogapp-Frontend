@@ -51,6 +51,14 @@ export default {
           Posts
         </router-link>
         <router-link
+          v-if="user?.isSuperuser"
+          class="nav-item"
+          :class="routeName === 'authorRequests' ? 'nav-item-active' : ''"
+          :to="{ name: 'authorRequests' }"
+        >
+          Author Requests
+        </router-link>
+        <router-link
           v-if="user"
           class="nav-item"
           :class="routeName === 'profile' ? 'nav-item-active' : ''"
