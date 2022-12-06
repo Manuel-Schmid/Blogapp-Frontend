@@ -104,12 +104,14 @@ export const usePostStore = defineStore("blog", {
     },
     async fetchAuthorRequests(
       status: string | undefined,
+      sort: string | undefined,
       activePage: number | undefined
     ) {
       const response = await apolloClient.query({
         query: AuthorRequests,
         variables: {
           status,
+          sort,
           activePage,
         },
       });

@@ -2,19 +2,41 @@
 import { formatDateShort } from "../helper/helper";
 import { Status } from "../api/models";
 import PaginationComponent from "./PaginationComponent.vue";
+import SortableTableHeaderContainer from "../container/SortableTableHeaderContainer.vue";
+import { useRoute } from "vue-router";
+import router from "../router/router";
 
 export default {
   name: "AuthorRequestOverviewComponent",
   components: {
     PaginationComponent,
+    SortableTableHeaderContainer,
   },
   props: ["authorRequestsData", "activePage"],
   setup(props: {}, { emit }: any) {
     const updateAuthorRequest = (user: string, status: Status) => {
       emit("updateAuthorRequest", user, status);
     };
+    const route = useRoute();
+    let selectedFilter = route.query.status ? String(route.query.status) : "";
 
-    return { formatDateShort, Status, updateAuthorRequest };
+    const onFilterChange = (event: any) => {
+      const status = event.target.value;
+      const query = { ...route.query, status: status ? status : undefined };
+
+      router.push({
+        name: String(route.name),
+        query: query,
+      });
+    };
+
+    return {
+      formatDateShort,
+      Status,
+      selectedFilter,
+      updateAuthorRequest,
+      onFilterChange,
+    };
   },
 };
 </script>
@@ -35,11 +57,55 @@ export default {
         ></thead>
         <tbody>
           <tr class="table-row">
-            <th>Username</th>
+            <th>
+              <SortableTableHeaderContainer
+                text="User"
+                sort-param="user"
+              ></SortableTableHeaderContainer>
+            </th>
             <th>Email</th>
-            <th>Date opened</th>
-            <th>Date closed</th>
-            <th>Status</th>
+            <th>
+              <SortableTableHeaderContainer
+                text="Date opened"
+                sort-param="date_opened"
+              >
+              </SortableTableHeaderContainer>
+            </th>
+            <th>
+              <SortableTableHeaderContainer
+                text="Date closed"
+                sort-param="date_closed"
+              >
+              </SortableTableHeaderContainer>
+            </th>
+            <th class="dark:text-white">
+              <select
+                @change="onFilterChange($event)"
+                class="dark:bg-gray-800 text-center"
+              >
+                <option :selected="selectedFilter === ''" value="">
+                  Status: All
+                </option>
+                <option
+                  :selected="selectedFilter === 'accepted'"
+                  value="accepted"
+                >
+                  Status: Accepted
+                </option>
+                <option
+                  :selected="selectedFilter === 'pending'"
+                  value="pending"
+                >
+                  Status: Pending
+                </option>
+                <option
+                  :selected="selectedFilter === 'rejected'"
+                  value="rejected"
+                >
+                  Status: Rejected
+                </option>
+              </select>
+            </th>
             <th>Actions</th>
           </tr>
           <tr

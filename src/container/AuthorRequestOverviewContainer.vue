@@ -31,8 +31,7 @@ export default {
 
         const success = await postStore.updateAuthorRequest(authorRequestInput);
         if (success) {
-          // todo: status
-          await postStore.fetchAuthorRequests(undefined, activePage);
+          await fetchAuthorRequestsGuard(route, route);
         }
       }
     };
