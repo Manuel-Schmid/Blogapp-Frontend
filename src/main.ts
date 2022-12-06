@@ -19,6 +19,9 @@ import {
   faTrash,
   faXmark,
   faCheck,
+  faSort,
+  faSortUp,
+  faSortDown,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faCircleXmark,
@@ -43,7 +46,10 @@ library.add(
   faPenToSquare,
   faSquarePlus,
   faClock,
-  faCircleCheck
+  faCircleCheck,
+  faSort,
+  faSortUp,
+  faSortDown
 );
 
 const app = createApp({

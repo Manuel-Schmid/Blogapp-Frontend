@@ -2,14 +2,15 @@
 import { formatDateShort } from "../helper/helper";
 import { Status } from "../api/models";
 import PaginationComponent from "./PaginationComponent.vue";
+import SortableTableHeaderContainer from "../container/SortableTableHeaderContainer.vue";
 import { useRoute } from "vue-router";
 import router from "../router/router";
-import { ref } from "vue";
 
 export default {
   name: "AuthorRequestOverviewComponent",
   components: {
     PaginationComponent,
+    SortableTableHeaderContainer,
   },
   props: ["authorRequestsData", "activePage"],
   setup(props: {}, { emit }: any) {
@@ -17,15 +18,18 @@ export default {
       emit("updateAuthorRequest", user, status);
     };
     const route = useRoute();
-    const selectedFilter = ref("");
-    selectedFilter.value = route.query.status ? String(route.query.status) : "";
+    let selectedFilter = route.query.status ? String(route.query.status) : "";
 
     const onFilterChange = (event: any) => {
+      const status = event.target.value;
+      const query = { ...route.query, status: status ? status : undefined };
+
       router.push({
         name: String(route.name),
-        query: { ...route.query, status: event.target.value },
+        query: query,
       });
     };
+
     return {
       formatDateShort,
       Status,
@@ -53,9 +57,17 @@ export default {
         ></thead>
         <tbody>
           <tr class="table-row">
-            <th>Username</th>
+            <th>
+              <SortableTableHeaderContainer
+                text="User"
+                sort-param="user"
+              ></SortableTableHeaderContainer>
+            </th>
             <th class="dark:text-white">
-              <select @change="onFilterChange($event)" class="dark:bg-gray-800">
+              <select
+                @change="onFilterChange($event)"
+                class="dark:bg-gray-800 text-center"
+              >
                 <option :selected="selectedFilter === ''" value="">
                   Status: All
                 </option>
@@ -79,8 +91,20 @@ export default {
                 </option>
               </select>
             </th>
-            <th>Date opened</th>
-            <th>Date closed</th>
+            <th>
+              <SortableTableHeaderContainer
+                text="Date opened"
+                sort-param="date_opened"
+              >
+              </SortableTableHeaderContainer>
+            </th>
+            <th>
+              <SortableTableHeaderContainer
+                text="Date closed"
+                sort-param="date_closed"
+              >
+              </SortableTableHeaderContainer>
+            </th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
