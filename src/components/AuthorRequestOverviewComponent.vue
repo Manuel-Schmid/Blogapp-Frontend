@@ -63,6 +63,21 @@ export default {
                 sort-param="user"
               ></SortableTableHeaderContainer>
             </th>
+            <th>Email</th>
+            <th>
+              <SortableTableHeaderContainer
+                text="Date opened"
+                sort-param="date_opened"
+              >
+              </SortableTableHeaderContainer>
+            </th>
+            <th>
+              <SortableTableHeaderContainer
+                text="Date closed"
+                sort-param="date_closed"
+              >
+              </SortableTableHeaderContainer>
+            </th>
             <th class="dark:text-white">
               <select
                 @change="onFilterChange($event)"
@@ -91,21 +106,6 @@ export default {
                 </option>
               </select>
             </th>
-            <th>
-              <SortableTableHeaderContainer
-                text="Date opened"
-                sort-param="date_opened"
-              >
-              </SortableTableHeaderContainer>
-            </th>
-            <th>
-              <SortableTableHeaderContainer
-                text="Date closed"
-                sort-param="date_closed"
-              >
-              </SortableTableHeaderContainer>
-            </th>
-            <th>Status</th>
             <th>Actions</th>
           </tr>
           <tr
