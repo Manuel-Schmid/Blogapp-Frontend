@@ -75,7 +75,7 @@ export default {
             </div>
             <div>
               <label for="category" class="form-label">{{
-                this.$t("components.create-post.form-category")
+                this.$t("shared.category")
               }}</label>
               <select
                 id="category"
@@ -96,7 +96,7 @@ export default {
             </div>
             <div>
               <label for="tags" class="form-label">{{
-                this.$t("components.create-post.form-tags")
+                this.$t("shared.tags")
               }}</label>
               <input
                 type="text"

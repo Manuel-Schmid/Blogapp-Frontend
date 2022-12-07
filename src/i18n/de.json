@@ -50,9 +50,7 @@
         "form-title": "Titel",
         "form-text": "Text",
         "form-image": "Bild",
-        "form-category": "Kategorie",
         "form-category-placeholder": "Kategorie auswählen",
-        "form-tags": "Tags",
         "form-tags-placeholder": "Komma-separierte Liste von Tags (z.B. Sports, News, ...)"
       },
       "author-request-overview": {
@@ -78,6 +76,8 @@
       "posts-title": "Posts",
       "new-password": "Neues Passwort",
       "new-password-confirm": "Neues Passwort bestätigen",
+      "category": "Kategorie",
+      "tags": "Tags",
       "save": "Speichern"
     }
   }
