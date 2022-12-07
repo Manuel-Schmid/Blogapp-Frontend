@@ -26,7 +26,7 @@ export default {
       <p
         class="text-3xl tracking-wide leading-5 text-black font-bold mb-8 mt-4 mt-9 dark:text-white"
       >
-        Posts:
+        {{ this.$t("shared.posts-title") }}:
       </p>
       <div v-if="postsData" class="pl-[50px]">
         <PostTileComponent

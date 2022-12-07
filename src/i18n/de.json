@@ -1,0 +1,84 @@
+{
+  "de": {
+    "components": {
+      "navbar": {
+        "light-mode": "Heller Modus",
+        "dark-mode": "Dunkler Modus",
+        "login": "Login"
+      },
+      "comment-section": {
+        "title": "Kommentare",
+        "add-comment": "Kommentar hinzufügen"
+      },
+      "comment-form": {
+        "title": "Titel",
+        "text": "Text"
+      },
+      "password-reset-form": {
+        "title": "Ändere dein Passwort",
+        "reset-password": "Passwort ändern",
+        "reset-success": "Password Änderung erfolgreich.",
+        "reset-fail": "Password Änderung fehlgeschlagen."
+      },
+      "password-change-form": {
+        "old-password-placeholder": "Altes Passwort"
+      },
+      "login": {
+        "verification": {
+          "success": "Account Verifizierung erfolgreich",
+          "error": "Account Verifizierung fehlgeschlagen"
+        },
+        "title": "Mit deinem Konto anmelden",
+        "username": "Dein Benutzername",
+        "username-placeholder": "Benutzername",
+        "password": "Passwort",
+        "forgot-password": "Passwort vergessen?",
+        "no-account": "Du hast noch kein Konto?",
+        "sign-in": "Anmelden",
+        "sign-up": "Registrieren"
+      },
+      "email-change-form": {
+        "title": "Ändere deine Email Addresse",
+        "email-label": "Neue Email Addresse",
+        "email-confirm-label": "Neue Email Addresse bestätigen",
+        "change-email": "Email ändern",
+        "change-success": "Email-Änderung erfolgreich.",
+        "change-fail": "Email-Änderung fehlgeschlagen."
+      },
+      "create-post": {
+        "title": "Erstelle deinen Post",
+        "form-title": "Titel",
+        "form-text": "Text",
+        "form-image": "Bild",
+        "form-category": "Kategorie",
+        "form-category-placeholder": "Kategorie auswählen",
+        "form-tags": "Tags",
+        "form-tags-placeholder": "Komma-separierte Liste von Tags (z.B. Sports, News, ...)"
+      },
+      "author-request-overview": {
+        "table": {
+          "user": "User",
+          "email": "Email",
+          "date_opened": "Eröffnungsdatum",
+          "date_closed": "Schliessdatum",
+          "actions": "Aktionen",
+          "accept": "Akzeptieren",
+          "reject": "Ablehnen"
+        },
+        "status": {
+          "accepted": "Status: Akzeptiert",
+          "pending": "Status: Ausstehend",
+          "rejected": "Status: Abgelehnt",
+          "all": "Status: Alle"
+        }
+      }
+    },
+    "shared": {
+      "author-request-title": "Author Anfragen",
+      "posts-title": "Posts",
+      "new-password": "Neues Passwort",
+      "new-password-confirm": "Neues Passwort bestätigen",
+      "save": "Speichern"
+    }
+  }
+}

@@ -6,6 +6,8 @@ import router from "./router/router";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { apolloClient } from "./api/client";
 import "./global.css";
+import * as en from "./i18n/en.json";
+import * as de from "./i18n/de.json";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
@@ -30,6 +32,7 @@ import {
   faClock,
   faCircleCheck,
 } from "@fortawesome/free-regular-svg-icons";
+import { createI18n } from "vue-i18n";
 
 library.add(
   faPlus,
@@ -52,6 +55,17 @@ library.add(
   faSortDown
 );
 
+const messages = {
+  ...en,
+  ...de,
+};
+
+const i18n = createI18n({
+  locale: "de",
+  fallbackLocale: "en",
+  messages,
+});
+
 const app = createApp({
   setup() {
     provide(DefaultApolloClient, apolloClient);
@@ -65,4 +79,5 @@ pinia.use(piniaPersist);
 app.use(router);
 app.use(pinia);
 
+app.use(i18n);
 app.mount("#app");

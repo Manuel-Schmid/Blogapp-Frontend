@@ -1,0 +1,84 @@
+{
+  "en": {
+    "components": {
+      "navbar": {
+        "light-mode": "Light Mode",
+        "dark-mode": "Dark Mode",
+        "login": "Login"
+      },
+      "comment-section": {
+        "title": "Comments",
+        "add-comment": "Add a comment"
+      },
+      "comment-form": {
+        "title": "Title",
+        "text": "Text"
+      },
+      "password-reset-form": {
+        "title": "Change your password",
+        "reset-password": "Change password",
+        "reset-success": "Password reset successful.",
+        "reset-fail": "Password reset failed."
+      },
+      "password-change-form": {
+        "old-password-placeholder": "Old Password"
+      },
+      "login": {
+        "verification": {
+          "success": "Account verification successful",
+          "error": "Account verification failed"
+        },
+        "title": "Sign in to your account",
+        "username": "Your username",
+        "username-placeholder": "Username",
+        "password": "Password",
+        "forgot-password": "Forgot password?",
+        "no-account": "Don’t have an account yet?",
+        "sign-in": "Sign in",
+        "sign-up": "Sign up"
+      },
+      "email-change-form": {
+        "title": "Change your email address",
+        "email-label": "New email address",
+        "email-confirm-label": "Confirm new email address",
+        "change-email": "Change Email",
+        "change-success": "Email change successful.",
+        "change-fail": "Email change failed."
+      },
+      "create-post": {
+        "title": "Create your post",
+        "form-title": "Title",
+        "form-text": "Text",
+        "form-image": "Image",
+        "form-category": "Category",
+        "form-category-placeholder": "Select a category",
+        "form-tags": "Tags",
+        "form-tags-placeholder": "Comma-separated list of tags (e.g. Sports, News, ...)"
+      },
+      "author-request-overview": {
+        "table": {
+          "user": "User",
+          "email": "Email",
+          "date_opened": "Date opened",
+          "date_closed": "Date closed",
+          "actions": "Actions",
+          "accept": "Accept",
+          "reject": "Reject"
+        },
+        "status": {
+          "accepted": "Status: Accepted",
+          "pending": "Status: Pending",
+          "rejected": "Status: Rejected",
+          "all": "Status: All"
+        }
+      }
+    },
+    "shared": {
+      "author-request-title": "Author Anfragen",
+      "posts-title": "Posts",
+      "new-password": "New Password",
+      "new-password-confirm": "Confirm new Password",
+      "save": "Save"
+    }
+  }
+}
