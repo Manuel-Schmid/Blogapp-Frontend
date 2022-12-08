@@ -1,0 +1,124 @@
+{
+  "de": {
+    "components": {
+      "navbar": {
+        "light-mode": "Heller Modus",
+        "dark-mode": "Dunkler Modus",
+        "login": "Anmelden"
+      },
+      "comment-section": {
+        "title": "Kommentare",
+        "add-comment": "Kommentar hinzufügen"
+      },
+      "comment-form": {
+        "title": "Titel",
+        "text": "Text"
+      },
+      "profile": {
+        "title": "Daten and Einstellungen",
+        "change-password": "Passwort ändern",
+        "change-email-success": "Der Email-Änderungslink wurde an deine Inbox gesendet",
+        "language": "Sprache",
+        "logout": "Abmelden",
+        "author-request-widget": {
+          "is-author": "Du bist ein Author",
+          "become-author": "Zum Author werden",
+          "request-pending-before-date": "Deine Author Anfrage wurde am",
+          "request-pending-after-date": "eröffnet und ist noch ausstehend",
+          "request-rejected": "Deine Author Anfrage wurde abgelehnt am "
+        },
+        "table": {
+          "username": "Benutzername",
+          "firstname": "Vorname",
+          "lastname": "Name"
+        }
+      },
+      "password-reset-form": {
+        "title": "Ändere dein Passwort",
+        "reset-password": "Passwort ändern",
+        "reset-success": "Password Änderung erfolgreich.",
+        "reset-fail": "Password Änderung fehlgeschlagen."
+      },
+      "password-reset-email": {
+        "title": "An welche Email soll der Zurücksetzungs-Link gesandt werden?",
+        "send-reset-email": "Zurücksetzungs-Link senden",
+        "email-success": "Email erfolgreich versandt."
+      },
+      "password-change-form": {
+        "old-password-placeholder": "Altes Passwort"
+      },
+      "registration": {
+        "title": "Neues Konto erstellen",
+        "existing-account": "Du hast bereits ein Konto?"
+      },
+      "registration-confirmation": {
+        "title": "Konto Aktivierungs-Email wurde versandt an:",
+        "already-verified": "Dieses Konto ist bereits verifiziert",
+        "send-email-again": "Aktivierungs-Link erneut senden",
+        "sent-email-again": "Aktivierungs-Email erneut versandt"
+      },
+      "login": {
+        "verification": {
+          "success": "Konto Verifizierung erfolgreich",
+          "error": "Konto Verifizierung fehlgeschlagen"
+        },
+        "title": "Mit deinem Konto anmelden",
+        "forgot-password": "Passwort vergessen?",
+        "no-account": "Du hast noch kein Konto?"
+      },
+      "email-change-form": {
+        "title": "Ändere deine Email Addresse",
+        "email-label": "Neue Email Addresse",
+        "email-confirm-label": "Neue Email Addresse bestätigen",
+        "change-email": "Email ändern",
+        "change-success": "Email-Änderung erfolgreich.",
+        "change-fail": "Email-Änderung fehlgeschlagen."
+      },
+      "create-post": {
+        "title": "Erstelle deinen Post",
+        "form-title": "Titel",
+        "form-text": "Text",
+        "form-image": "Bild",
+        "form-category-placeholder": "Kategorie auswählen",
+        "form-tags-placeholder": "Komma-separierte Liste von Tags (z.B. Sports, News, ...)"
+      },
+      "author-request-overview": {
+        "table": {
+          "user": "User",
+          "date_opened": "Eröffnungsdatum",
+          "date_closed": "Schliessdatum",
+          "actions": "Aktionen",
+          "accept": "Akzeptieren",
+          "reject": "Ablehnen"
+        },
+        "status": {
+          "accepted": "Status: Akzeptiert",
+          "pending": "Status: Ausstehend",
+          "rejected": "Status: Abgelehnt",
+          "all": "Status: Alle"
+        }
+      }
+    },
+    "languages": {
+      "en": "Englisch",
+      "de": "Deutsch"
+    },
+    "shared": {
+      "author-request-title": "Author Anfragen",
+      "posts-title": "Posts",
+      "new-password": "Neues Passwort",
+      "new-password-confirm": "Neues Passwort bestätigen",
+      "category": "Kategorie",
+      "your-username": "Dein Benutzername",
+      "username-placeholder": "Benutzername",
+      "your-email": "Deine Email",
+      "password": "Passwort",
+      "password-confirm": "Passwort bestätigen",
+      "sign-in": "Anmelden",
+      "sign-up": "Registrieren",
+      "tags": "Tags",
+      "email": "Email",
+      "save": "Speichern"
+    }
+  }
+}

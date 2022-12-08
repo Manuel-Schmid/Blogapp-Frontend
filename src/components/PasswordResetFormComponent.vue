@@ -23,10 +23,14 @@ export default {
     <div class="flex-container-centered">
       <div class="form-wrapper">
         <div class="form-layout">
-          <h1 class="form-title">Change your password</h1>
+          <h1 class="form-title">
+            {{ this.$t("components.password-reset-form.title") }}
+          </h1>
           <form @submit.prevent="">
             <div>
-              <label for="password" class="form-label">New Password</label>
+              <label for="password" class="form-label">{{
+                this.$t("shared.new-password")
+              }}</label>
               <input
                 type="password"
                 name="password"
@@ -38,9 +42,9 @@ export default {
               />
             </div>
             <div class="mt-3">
-              <label for="password" class="form-label"
-                >Confirm new password</label
-              >
+              <label for="password" class="form-label">{{
+                this.$t("shared.new-password-confirm")
+              }}</label>
               <input
                 type="password"
                 name="password"
@@ -52,14 +56,18 @@ export default {
               />
             </div>
             <div v-if="resetSuccess" class="mt-1 mb-3">
-              <div class="text-color-success">Password reset successful.</div>
+              <div class="text-color-success">
+                {{ this.$t("components.password-reset-form.reset-success") }}
+              </div>
             </div>
             <div v-else-if="resetSuccess === false" class="mt-1 mb-3">
-              <div class="text-color-error">Password reset failed.</div>
+              <div class="text-color-error">
+                {{ this.$t("components.password-reset-form.reset-fail") }}
+              </div>
             </div>
             <div v-else class="my-7"></div>
             <button @click="onSubmit" class="form-button">
-              Reset Password
+              {{ this.$t("components.password-reset-form.reset-password") }}
             </button>
           </form>
         </div>

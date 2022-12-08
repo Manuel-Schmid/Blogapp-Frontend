@@ -38,10 +38,14 @@ export default {
     <div class="flex-container-centered">
       <div class="form-wrapper">
         <div class="form-layout">
-          <h1 class="form-title">Create a new account</h1>
+          <h1 class="form-title">
+            {{ this.$t("components.registration.title") }}
+          </h1>
           <form ref="signupForm" class="form-inner-spacing" @submit.prevent="">
             <div>
-              <label for="email" class="form-label">Your email</label>
+              <label for="email" class="form-label">{{
+                this.$t("shared.your-email")
+              }}</label>
               <input
                 type="email"
                 name="email"
@@ -53,19 +57,23 @@ export default {
               />
             </div>
             <div>
-              <label for="username" class="form-label">Your Username</label>
+              <label for="username" class="form-label">{{
+                this.$t("shared.your-username")
+              }}</label>
               <input
                 type="text"
                 name="username"
                 v-model="username"
                 id="username"
                 class="form-input"
-                placeholder="Username"
+                :placeholder="this.$t('shared.username-placeholder')"
                 required=""
               />
             </div>
             <div>
-              <label for="password" class="form-label">Password</label>
+              <label for="password" class="form-label">{{
+                this.$t("shared.password")
+              }}</label>
               <input
                 type="password"
                 name="password1"
@@ -77,7 +85,9 @@ export default {
               />
             </div>
             <div>
-              <label for="password" class="form-label">Confirm Password</label>
+              <label for="password" class="form-label">{{
+                this.$t("shared.password-confirm")
+              }}</label>
               <input
                 type="password"
                 name="password2"
@@ -88,13 +98,15 @@ export default {
                 required=""
               />
             </div>
-            <button @click="onSubmit" class="form-button">Sign up</button>
+            <button @click="onSubmit" class="form-button">
+              {{ this.$t("shared.sign-up") }}
+            </button>
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-              Already have an account?
+              {{ this.$t("components.registration.existing-account") }}
               <router-link
                 class="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 :to="{ name: 'login' }"
-                >Sign in</router-link
+                >{{ this.$t("shared.sign-in") }}</router-link
               >
             </p>
           </form>
