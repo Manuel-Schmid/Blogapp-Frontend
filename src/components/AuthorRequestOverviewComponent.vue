@@ -44,11 +44,7 @@ export default {
 <template>
   <div class="site-container p-12 dark:text-white">
     <div class="content-container m-auto w-full">
-      <p
-        class="text-3xl tracking-wide leading-5 text-black font-bold mb-10 mt-4 mt-9 dark:text-white"
-      >
-        Author Requests:
-      </p>
+      <p class="page-title mb-10">Author Requests:</p>
       <table
         class="table-auto m-auto text-sm text-left text-gray-700 dark:text-gray-300 w-max text-center"
       >

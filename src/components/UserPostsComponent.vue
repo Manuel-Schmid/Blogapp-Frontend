@@ -1,18 +1,15 @@
 <script lang="ts">
 import PostTileComponent from "./posts-overview/PostTileComponent.vue";
-import TagListComponent from "./posts-overview/TagListComponent.vue";
 import PaginationComponent from "./PaginationComponent.vue";
 
 export default {
-  name: "PostsOverviewComponent",
+  name: "UserPostsComponent",
   components: {
     PostTileComponent,
-    TagListComponent,
     PaginationComponent,
   },
 
-  props: ["postsData", "tagsData", "activePage"],
-
+  props: ["postsData", "activePage"],
   setup() {
     return {};
   },
@@ -22,9 +19,8 @@ export default {
 <template>
   <div class="site-container p-12 dark:text-white">
     <div class="content-container m-auto w-full">
-      <TagListComponent :tags-data="tagsData"></TagListComponent>
-      <p class="page-title mb-8">Posts:</p>
-      <div v-if="postsData" class="pl-[50px]">
+      <p class="page-title mb-8">My Posts:</p>
+      <div v-if="postsData" class="pl-[50px] user-posts">
         <PostTileComponent
           v-for="post in postsData.posts"
           :key="post.id"
