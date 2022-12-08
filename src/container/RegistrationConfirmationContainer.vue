@@ -19,7 +19,7 @@ export default {
         resendSuccess.value = true;
       } else {
         alreadyVerified.value =
-          responseErrors.email[0].code === "already_verified";
+          String(responseErrors.userStatus) === "User already verified";
       }
     };
 

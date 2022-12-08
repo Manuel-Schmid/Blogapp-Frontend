@@ -23,11 +23,13 @@ export default {
       <div class="form-wrapper">
         <div class="form-layout">
           <h1 class="form-title">
-            Which E-Mail should we send the password reset link to?
+            {{ this.$t("components.password-reset-email.title") }}
           </h1>
           <form @submit.prevent="">
             <div>
-              <label for="email" class="form-label">Your E-Mail</label>
+              <label for="email" class="form-label">{{
+                this.$t("shared.your-email")
+              }}</label>
               <input
                 type="email"
                 name="email"
@@ -39,11 +41,13 @@ export default {
               />
             </div>
             <div v-if="emailSentSuccessfully" class="mt-1 mb-3">
-              <div class="text-color-success">E-Mail sent successfully.</div>
+              <div class="text-color-success">
+                {{ this.$t("components.password-reset-email.email-success") }}
+              </div>
             </div>
             <div v-else class="my-5"></div>
             <button @click="onSubmit" class="form-button">
-              Send Reset E-Mail
+              {{ this.$t("components.password-reset-email.send-reset-email") }}
             </button>
           </form>
         </div>

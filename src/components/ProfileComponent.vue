@@ -60,14 +60,18 @@ export default {
               class="h-6 pr-2"
             />
           </div>
-          <div class="popup-content-text text-right">You are an author</div>
+          <div class="popup-content-text text-right">
+            {{ this.$t("components.profile.author-request-widget.is-author") }}
+          </div>
         </div>
         <button
           v-else-if="!authorRequest"
           @click="createAuthorRequest"
           class="author-request-layout form-button w-max"
         >
-          Become an author
+          {{
+            this.$t("components.profile.author-request-widget.become-author")
+          }}
         </button>
         <div
           v-else-if="authorRequest.status === 'PENDING'"
@@ -77,8 +81,17 @@ export default {
             <font-awesome-icon icon="fa-regular fa-clock" class="h-6 pr-2" />
           </div>
           <div class="popup-content-text text-left">
-            Your author request was submitted on
-            {{ formatDateShort(authorRequest.dateOpened) }} and is still pending
+            {{
+              this.$t(
+                "components.profile.author-request-widget.request-pending-before-date"
+              )
+            }}
+            {{ formatDateShort(authorRequest.dateOpened) }}
+            {{
+              this.$t(
+                "components.profile.author-request-widget.request-pending-after-date"
+              )
+            }}
           </div>
         </div>
         <div
@@ -91,14 +104,20 @@ export default {
               class="h-6 py-2"
             />
           </div>
-          <div class="popup-content-text text-center">
-            Your author request was rejected on
+          <div class="popup-content-text text-left pl-2">
+            {{
+              this.$t(
+                "components.profile.author-request-widget.request-rejected"
+              )
+            }}
             {{ formatDateShort(authorRequest.dateClosed) }}
           </div>
         </div>
       </div>
       <p class="text-xl mb-8 dark:text-white">
-        <font-awesome-icon icon="fa-solid fa-user" class="mr-2" />About
+        <font-awesome-icon icon="fa-solid fa-user" class="mr-2" />{{
+          this.$t("components.profile.title")
+        }}
       </p>
       <div class="w-min">
         <table
@@ -109,13 +128,17 @@ export default {
           ></thead>
           <tbody>
             <tr class="table-row">
-              <th scope="row">Username</th>
+              <th scope="row">
+                {{ this.$t("components.profile.table.username") }}
+              </th>
               <td class="table-row-value">
                 {{ userData.username }}
               </td>
             </tr>
             <tr class="table-row">
-              <th scope="row">First name</th>
+              <th scope="row">
+                {{ this.$t("components.profile.table.firstname") }}
+              </th>
               <td class="table-row-value">
                 <div v-if="firstNameEditable">
                   <input
@@ -153,7 +176,9 @@ export default {
               </td>
             </tr>
             <tr class="table-row">
-              <th scope="row">Last name</th>
+              <th scope="row">
+                {{ this.$t("components.profile.table.lastname") }}
+              </th>
               <td class="table-row-value">
                 <div v-if="lastNameEditable">
                   <input
@@ -188,7 +213,7 @@ export default {
               </td>
             </tr>
             <tr class="table-row">
-              <th scope="row">Email</th>
+              <th scope="row">{{ this.$t("shared.email") }}</th>
               <td class="table-row-value">
                 {{ userData.email }}
                 <font-awesome-icon
@@ -200,8 +225,11 @@ export default {
                   icon="fa-regular fa-pen-to-square"
                   class="cursor-pointer pl-2"
                 />
-                <p v-if="emailChangeEmailSent" class="text-color-success">
-                  Check your inbox for the email change link
+                <p
+                  v-if="emailChangeEmailSent"
+                  class="text-color-success max-w-[15rem]"
+                >
+                  {{ this.$t("components.profile.change-email-success") }}
                 </p>
               </td>
             </tr>
@@ -212,7 +240,7 @@ export default {
             @click="passwordChangeFormActive = !passwordChangeFormActive"
             class="float-left px-8 profile-button"
           >
-            Change Password
+            {{ this.$t("components.profile.change-password") }}
           </button>
           <PasswordChangeFormContainer
             v-if="passwordChangeFormActive"
@@ -222,7 +250,7 @@ export default {
           ></PasswordChangeFormContainer>
         </div>
         <button @click="onLogout" class="float-right px-6 profile-button">
-          Logout
+          {{ this.$t("components.profile.logout") }}
         </button>
       </div>
     </div>

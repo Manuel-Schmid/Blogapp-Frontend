@@ -6,8 +6,8 @@ import router from "./router/router";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import { apolloClient } from "./api/client";
 import "./global.css";
-import * as en from "./i18n/en.json";
-import * as de from "./i18n/de.json";
+import * as en from "./translations/en.json";
+import * as de from "./translations/de.json";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {

@@ -59,7 +59,7 @@ export default {
           <form class="form-inner-spacing" @submit.prevent="">
             <div>
               <label for="username" class="form-label">{{
-                this.$t("components.login.username")
+                this.$t("shared.your-username")
               }}</label>
               <input
                 type="text"
@@ -67,13 +67,13 @@ export default {
                 v-model="username"
                 id="username"
                 class="form-input"
-                :placeholder="this.$t('components.login.username-placeholder')"
+                :placeholder="this.$t('shared.username-placeholder')"
                 required=""
               />
             </div>
             <div>
               <label for="password" class="form-label">{{
-                this.$t("components.login.password")
+                this.$t("shared.password")
               }}</label>
               <input
                 type="password"
@@ -95,14 +95,14 @@ export default {
               </router-link>
             </div>
             <button @click="onSubmit" class="form-button">
-              {{ this.$t("components.login.sign-in") }}
+              {{ this.$t("shared.sign-in") }}
             </button>
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
               {{ this.$t("components.login.no-account") }}
               <router-link
                 class="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 :to="{ name: 'registration' }"
-                >{{ this.$t("components.login.sign-up") }}</router-link
+                >{{ this.$t("shared.sign-up") }}</router-link
               >
             </p>
           </form>
