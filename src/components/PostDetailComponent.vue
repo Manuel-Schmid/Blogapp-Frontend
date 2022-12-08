@@ -86,7 +86,7 @@ export default {
               </div>
             </div>
             <div class="flex mb-1 ml-8 m-0">
-              <p class="font-bold mr-1">{{ this.$t("shared.category") }}:</p>
+              <p class="font-bold mr-1">Category:</p>
               <router-link
                 :to="{
                   name: 'posts',
@@ -98,9 +98,7 @@ export default {
               </router-link>
             </div>
             <div class="ml-8 m-0 text-left w-[80%]">
-              <p class="font-bold mr-1 w-min float-left">
-                {{ this.$t("shared.tags") }}:
-              </p>
+              <p class="font-bold mr-1 w-min float-left">Tags:</p>
               <router-link
                 v-for="tag in postData.tags"
                 :to="{ name: 'posts', query: { tags: tag.slug } }"

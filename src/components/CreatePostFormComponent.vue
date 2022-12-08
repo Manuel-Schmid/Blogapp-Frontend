@@ -28,14 +28,10 @@ export default {
     <div class="flex-container-centered">
       <div class="form-wrapper">
         <div class="form-layout">
-          <h1 class="form-title md:text-xl text-left">
-            {{ this.$t("components.create-post.title") }}
-          </h1>
+          <h1 class="form-title md:text-xl text-left">Create your post</h1>
           <form ref="signupForm" class="form-inner-spacing" @submit.prevent="">
             <div>
-              <label for="title" class="form-label">{{
-                this.$t("components.create-post.form-title")
-              }}</label>
+              <label for="title" class="form-label">Title</label>
               <input
                 type="text"
                 name="title"
@@ -47,9 +43,7 @@ export default {
               />
             </div>
             <div>
-              <label for="text" class="form-label">{{
-                this.$t("components.create-post.form-text")
-              }}</label>
+              <label for="text" class="form-label">Text</label>
               <input
                 type="text"
                 name="text"
@@ -61,9 +55,7 @@ export default {
               />
             </div>
             <div>
-              <label for="image" class="form-label">{{
-                this.$t("components.create-post.form-image")
-              }}</label>
+              <label for="image" class="form-label">Text</label>
               <input
                 type="file"
                 name="image"
@@ -74,9 +66,7 @@ export default {
               />
             </div>
             <div>
-              <label for="category" class="form-label">{{
-                this.$t("shared.category")
-              }}</label>
+              <label for="category" class="form-label">Category</label>
               <select
                 id="category"
                 name="category"
@@ -84,29 +74,21 @@ export default {
                 class="form-input"
                 required=""
               >
-                <option value="" disabled selected>
-                  {{
-                    this.$t("components.create-post.form-category-placeholder")
-                  }}
-                </option>
+                <option value="" disabled selected>Select a category</option>
                 <option v-for="category in categories" :value="category.id">
                   {{ category.name }}
                 </option>
               </select>
             </div>
             <div>
-              <label for="tags" class="form-label">{{
-                this.$t("shared.tags")
-              }}</label>
+              <label for="tags" class="form-label">Tags</label>
               <input
                 type="text"
                 name="tags"
                 v-model="tags"
                 id="tags"
                 class="form-input"
-                :placeholder="
-                  this.$t('components.create-post.form-tags-placeholder')
-                "
+                placeholder="Comma-separated list of tags (e.g. Sports, News, ...)"
                 required=""
               />
             </div>
