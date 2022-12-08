@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { shallowMount } from "@vue/test-utils";
 import ProfileComponent from "../../components/ProfileComponent.vue";
+import { Status } from "../../api/models";
 
 describe("ProfileComponent", () => {
   const defaultProps = {
@@ -64,7 +65,7 @@ describe("ProfileComponent", () => {
     customProps.authorRequest = {
       dateOpened: "2022-11-18T09:28:51.116911+00:00",
       dateClosed: null,
-      status: "PENDING",
+      status: Status.Pending,
     };
     const customMountOptions = JSON.parse(JSON.stringify(mountOptions));
     customMountOptions.propsData = customProps;
