@@ -31,7 +31,11 @@ export default {
         ></div>
         <span
           class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >{{ isDarkMode ? "Light Mode" : "Dark Mode" }}</span
+          >{{
+            isDarkMode
+              ? this.$t("components.navbar.light-mode")
+              : this.$t("components.navbar.dark-mode")
+          }}</span
         >
       </label>
       <div class="w-auto flex flex-row absolute right-0 mr-5">
@@ -48,7 +52,7 @@ export default {
           :class="routeName === 'posts' ? 'nav-item-active' : ''"
           :to="{ name: 'posts' }"
         >
-          Posts
+          {{ this.$t("shared.posts-title") }}
         </router-link>
         <router-link
           v-if="user?.isSuperuser"
@@ -56,7 +60,7 @@ export default {
           :class="routeName === 'authorRequests' ? 'nav-item-active' : ''"
           :to="{ name: 'authorRequests' }"
         >
-          Author Requests
+          {{ this.$t("shared.author-request-title") }}
         </router-link>
         <router-link
           v-if="user"
@@ -80,7 +84,7 @@ export default {
           :class="routeName === 'login' ? 'nav-item-active' : ''"
           :to="{ name: 'login' }"
         >
-          Login
+          {{ this.$t("components.navbar.login") }}
         </router-link>
       </div>
     </nav>

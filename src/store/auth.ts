@@ -93,7 +93,7 @@ export const useAuthStore = defineStore("auth", {
           email,
         },
       });
-      return response.data.resendActivationEmail.errors;
+      return response.data.resendActivationEmail.success;
     },
     async verifyAccount(token: string) {
       const response = await apolloClient.query({

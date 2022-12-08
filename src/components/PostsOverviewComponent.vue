@@ -23,7 +23,7 @@ export default {
   <div class="site-container p-12 dark:text-white">
     <div class="content-container m-auto w-full">
       <TagListComponent :tags-data="tagsData"></TagListComponent>
-      <p class="page-title mb-8">Posts:</p>
+      <p class="page-title mb-8">{{ this.$t("shared.posts-title") }}:</p>
       <div v-if="postsData" class="pl-[50px]">
         <PostTileComponent
           v-for="post in postsData.posts"
