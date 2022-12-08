@@ -33,7 +33,7 @@ export default {
         v-if="verifiedQueryExists && accountVerified"
         class="verification-popup bg-green-400 dark:bg-green-400"
       >
-        {{ this.$t("components.login.verification.success") }}
+        Account verification successful
         <router-link :to="{ name: 'login' }">
           <font-awesome-icon
             icon="fa-regular fa-circle-xmark"
@@ -45,7 +45,7 @@ export default {
         v-if="verifiedQueryExists && !accountVerified"
         class="verification-popup bg-red-400"
       >
-        {{ this.$t("components.login.verification.error") }}
+        Account verification failed
         <router-link :to="{ name: 'login' }">
           <font-awesome-icon
             icon="fa-regular fa-circle-xmark"
@@ -55,26 +55,22 @@ export default {
       </div>
       <div class="form-wrapper">
         <div class="form-layout">
-          <h1 class="form-title">{{ this.$t("components.login.title") }}</h1>
+          <h1 class="form-title">Sign in to your account</h1>
           <form class="form-inner-spacing" @submit.prevent="">
             <div>
-              <label for="username" class="form-label">{{
-                this.$t("shared.your-username")
-              }}</label>
+              <label for="username" class="form-label">Your username</label>
               <input
                 type="text"
                 name="username"
                 v-model="username"
                 id="username"
                 class="form-input"
-                :placeholder="this.$t('shared.username-placeholder')"
+                placeholder="Username"
                 required=""
               />
             </div>
             <div>
-              <label for="password" class="form-label">{{
-                this.$t("shared.password")
-              }}</label>
+              <label for="password" class="form-label">Password</label>
               <input
                 type="password"
                 name="password"
@@ -91,18 +87,16 @@ export default {
                 class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
                 :to="{ name: 'resetEmailForm' }"
               >
-                {{ this.$t("components.login.forgot-password") }}
+                Forgot password?
               </router-link>
             </div>
-            <button @click="onSubmit" class="form-button">
-              {{ this.$t("shared.sign-in") }}
-            </button>
+            <button @click="onSubmit" class="form-button">Sign in</button>
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-              {{ this.$t("components.login.no-account") }}
+              Don’t have an account yet?
               <router-link
                 class="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 :to="{ name: 'registration' }"
-                >{{ this.$t("shared.sign-up") }}</router-link
+                >Sign up</router-link
               >
             </p>
           </form>

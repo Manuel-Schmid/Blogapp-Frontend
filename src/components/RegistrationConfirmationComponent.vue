@@ -18,32 +18,22 @@ export default {
       <div class="form-wrapper">
         <div class="form-layout text-center">
           <h1 class="form-title md:text-xl">
-            {{ this.$t("components.registration-confirmation.title") }}
+            Account activation email was sent to:
             <div>{{ usedEmail }}</div>
           </h1>
           <div>
             <p v-if="alreadyVerified" class="text-color-error">
-              {{
-                this.$t("components.registration-confirmation.already-verified")
-              }}
+              This account has already been verified
             </p>
             <div v-else>
               <p v-if="resendSuccess" class="text-color-success">
-                {{
-                  this.$t(
-                    "components.registration-confirmation.sent-email-again"
-                  )
-                }}
+                Activation email was sent again
               </p>
               <p
                 @click="onResendEmail(usedEmail)"
                 class="dark:text-white underline cursor-pointer"
               >
-                {{
-                  this.$t(
-                    "components.registration-confirmation.send-email-again"
-                  )
-                }}
+                Send activation link again
               </p>
             </div>
           </div>

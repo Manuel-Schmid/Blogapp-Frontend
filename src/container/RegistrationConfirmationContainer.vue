@@ -14,11 +14,12 @@ export default {
     const alreadyVerified = ref(false);
 
     const resendActivationEmail = async (usedEmail: string) => {
-      const success = await authStore.resendActivationEmail(usedEmail);
-      if (success === true) {
+      const responseErrors = await authStore.resendActivationEmail(usedEmail);
+      if (responseErrors === null) {
         resendSuccess.value = true;
       } else {
-        alreadyVerified.value = success === false;
+        alreadyVerified.value =
+          responseErrors.email[0].code === "already_verified";
       }
     };
 

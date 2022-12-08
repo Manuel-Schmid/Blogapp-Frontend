@@ -24,7 +24,7 @@ export default {
 
 <template>
   <p class="font-bold text-xl mb-5">
-    <span>{{ this.$t("components.comment-section.title") }}:</span>
+    <span>Comments:</span>
   </p>
   <button
     v-if="loggedIn"
@@ -35,7 +35,7 @@ export default {
       icon="fa-solid fa-plus"
       :class="['mr-2', commentFormActive ? 'icon-diagonal' : 'icon-vertical']"
     />
-    {{ this.$t("components.comment-section.add-comment") }}
+    Add a comment
   </button>
   <div class="w-3/4 m-auto my-4 flex">
     <CommentFormContainer

@@ -2,7 +2,6 @@
 import PasswordChangeFormContainer from "../container/PasswordChangeFormContainer.vue";
 import { ref } from "vue";
 import { formatDateShort } from "../helper/helper";
-import { setI18nLanguage } from "../main";
 
 export default {
   name: "profileComponent",
@@ -32,20 +31,15 @@ export default {
     const createAuthorRequest = () => {
       emit("createAuthorRequest");
     };
-    const setLanguage = (event: any) => {
-      emit("setLanguage", event.target.value);
-    };
 
     return {
       newFirstName,
       newLastName,
       passwordChangeFormActive,
-      localStorage,
       onUpdateAccount,
       onEmailChange,
       onLogout,
       createAuthorRequest,
-      setLanguage,
       formatDateShort,
     };
   },
@@ -66,18 +60,14 @@ export default {
               class="h-6 pr-2"
             />
           </div>
-          <div class="popup-content-text text-right">
-            {{ this.$t("components.profile.author-request-widget.is-author") }}
-          </div>
+          <div class="popup-content-text text-right">You are an author</div>
         </div>
         <button
           v-else-if="!authorRequest"
           @click="createAuthorRequest"
           class="author-request-layout form-button w-max"
         >
-          {{
-            this.$t("components.profile.author-request-widget.become-author")
-          }}
+          Become an author
         </button>
         <div
           v-else-if="authorRequest.status === 'PENDING'"
@@ -87,17 +77,8 @@ export default {
             <font-awesome-icon icon="fa-regular fa-clock" class="h-6 pr-2" />
           </div>
           <div class="popup-content-text text-left">
-            {{
-              this.$t(
-                "components.profile.author-request-widget.request-pending-before-date"
-              )
-            }}
-            {{ formatDateShort(authorRequest.dateOpened) }}
-            {{
-              this.$t(
-                "components.profile.author-request-widget.request-pending-after-date"
-              )
-            }}
+            Your author request was submitted on
+            {{ formatDateShort(authorRequest.dateOpened) }} and is still pending
           </div>
         </div>
         <div
@@ -110,20 +91,14 @@ export default {
               class="h-6 py-2"
             />
           </div>
-          <div class="popup-content-text text-left pl-2">
-            {{
-              this.$t(
-                "components.profile.author-request-widget.request-rejected"
-              )
-            }}
+          <div class="popup-content-text text-center">
+            Your author request was rejected on
             {{ formatDateShort(authorRequest.dateClosed) }}
           </div>
         </div>
       </div>
       <p class="text-xl mb-8 dark:text-white">
-        <font-awesome-icon icon="fa-solid fa-user" class="mr-2" />{{
-          this.$t("components.profile.title")
-        }}
+        <font-awesome-icon icon="fa-solid fa-user" class="mr-2" />About
       </p>
       <div class="w-min">
         <table
@@ -134,17 +109,13 @@ export default {
           ></thead>
           <tbody>
             <tr class="table-row">
-              <th scope="row">
-                {{ this.$t("components.profile.table.username") }}
-              </th>
+              <th scope="row">Username</th>
               <td class="table-row-value">
                 {{ userData.username }}
               </td>
             </tr>
             <tr class="table-row">
-              <th scope="row">
-                {{ this.$t("components.profile.table.firstname") }}
-              </th>
+              <th scope="row">First name</th>
               <td class="table-row-value">
                 <div v-if="firstNameEditable">
                   <input
@@ -182,9 +153,7 @@ export default {
               </td>
             </tr>
             <tr class="table-row">
-              <th scope="row">
-                {{ this.$t("components.profile.table.lastname") }}
-              </th>
+              <th scope="row">Last name</th>
               <td class="table-row-value">
                 <div v-if="lastNameEditable">
                   <input
@@ -219,7 +188,7 @@ export default {
               </td>
             </tr>
             <tr class="table-row">
-              <th scope="row">{{ this.$t("shared.email") }}</th>
+              <th scope="row">Email</th>
               <td class="table-row-value">
                 {{ userData.email }}
                 <font-awesome-icon
@@ -231,28 +200,9 @@ export default {
                   icon="fa-regular fa-pen-to-square"
                   class="cursor-pointer pl-2"
                 />
-                <p
-                  v-if="emailChangeEmailSent"
-                  class="text-color-success max-w-[15rem]"
-                >
-                  {{ this.$t("components.profile.change-email-success") }}
+                <p v-if="emailChangeEmailSent" class="text-color-success">
+                  Check your inbox for the email change link
                 </p>
-              </td>
-            </tr>
-            <tr class="table-row">
-              <th scope="row">{{ this.$t("components.profile.language") }}</th>
-              <td class="table-row-value">
-                <select
-                  @change="setLanguage($event)"
-                  class="dark:bg-gray-800 text-center"
-                >
-                  <option :selected="localStorage.lang === 'en'" value="en">
-                    {{ this.$t("languages.en") }}
-                  </option>
-                  <option :selected="localStorage.lang === 'de'" value="de">
-                    {{ this.$t("languages.de") }}
-                  </option>
-                </select>
               </td>
             </tr>
           </tbody>
@@ -262,7 +212,7 @@ export default {
             @click="passwordChangeFormActive = !passwordChangeFormActive"
             class="float-left px-8 profile-button"
           >
-            {{ this.$t("components.profile.change-password") }}
+            Change Password
           </button>
           <PasswordChangeFormContainer
             v-if="passwordChangeFormActive"
@@ -272,7 +222,7 @@ export default {
           ></PasswordChangeFormContainer>
         </div>
         <button @click="onLogout" class="float-right px-6 profile-button">
-          {{ this.$t("components.profile.logout") }}
+          Logout
         </button>
       </div>
     </div>

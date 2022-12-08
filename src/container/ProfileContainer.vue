@@ -3,7 +3,6 @@ import ProfileComponent from "../components/ProfileComponent.vue";
 import { useAuthStore } from "../store/auth";
 import router from "../router/router";
 import { ref } from "vue";
-import { Locale, setI18nLanguage } from "../main";
 
 export default {
   name: "profileContainer",
@@ -44,11 +43,6 @@ export default {
       }
     };
 
-    const setLanguage = (lang: Locale) => {
-      localStorage.lang = lang;
-      setI18nLanguage(lang);
-    };
-
     return {
       firstNameEditable,
       lastNameEditable,
@@ -56,7 +50,6 @@ export default {
       logout,
       sendEmailChangeEmail,
       updateAccount,
-      setLanguage,
       authStore,
     };
   },
@@ -72,7 +65,6 @@ export default {
     @send-email-change-email="sendEmailChangeEmail"
     @update-account="updateAccount"
     @create-author-request="authStore.createAuthorRequest"
-    @set-language="setLanguage"
     :user-data="authStore.user"
     :author-request="authStore.authorRequest"
   />
