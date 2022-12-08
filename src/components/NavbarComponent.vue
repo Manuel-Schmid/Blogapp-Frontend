@@ -12,7 +12,7 @@ export default {
 </script>
 <template>
   <header
-    class="header fixed top-0 left-0 w-full shadow-md bg-5 dark:text-white"
+    class="header fixed top-0 left-0 w-full shadow-md bg-white bg-5 dark:text-white"
   >
     <nav class="navbar h-full flex flex-row items-center">
       <label
@@ -49,6 +49,14 @@ export default {
           :to="{ name: 'posts' }"
         >
           Posts
+        </router-link>
+        <router-link
+          v-if="user?.isSuperuser"
+          class="nav-item"
+          :class="routeName === 'authorRequests' ? 'nav-item-active' : ''"
+          :to="{ name: 'authorRequests' }"
+        >
+          Author Requests
         </router-link>
         <router-link
           v-if="user"

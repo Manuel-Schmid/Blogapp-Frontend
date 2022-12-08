@@ -1,7 +1,7 @@
 <script lang="ts">
 import PostTileComponent from "./posts-overview/PostTileComponent.vue";
 import TagListComponent from "./posts-overview/TagListComponent.vue";
-import PaginationComponent from "./posts-overview/PaginationComponent.vue";
+import PaginationComponent from "./PaginationComponent.vue";
 
 export default {
   name: "PostsOverviewComponent",
@@ -37,7 +37,7 @@ export default {
         </PostTileComponent>
         <PaginationComponent
           v-if="postsData.numPostPages > 1"
-          :num-post-pages="postsData.numPostPages"
+          :num-pages="postsData.numPostPages"
           :active-page="activePage"
         ></PaginationComponent>
       </div>

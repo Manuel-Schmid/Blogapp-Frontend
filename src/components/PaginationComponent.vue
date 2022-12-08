@@ -3,35 +3,32 @@ import { useRoute } from "vue-router/dist/vue-router";
 
 export default {
   name: "PaginationComponent",
-  props: ["numPostPages", "activePage"],
+  props: ["numPages", "activePage"],
 
-  setup(props: { numPostPages: number; activePage: number }) {
-    let numPostPagesList = Array.from(
-      { length: props.numPostPages },
-      (x, i) => ++i
-    );
+  setup(props: { numPages: number; activePage: number }) {
+    let numPagesList = Array.from({ length: props.numPages }, (x, i) => ++i);
 
     let paginationPageNums = slicePaginationPageNums(
-      numPostPagesList,
+      numPagesList,
       props.activePage
     );
 
     let firstPage = paginationPageNums.includes(1) ? 0 : 1;
-    let lastPage = paginationPageNums.includes(props.numPostPages)
+    let lastPage = paginationPageNums.includes(props.numPages)
       ? 0
-      : props.numPostPages;
+      : props.numPages;
 
     const route = useRoute();
     return { route, paginationPageNums, firstPage, lastPage };
   },
 };
 
-function slicePaginationPageNums(numPostPages: any, activePage: number) {
-  return numPostPages.length > 7 && activePage > numPostPages.length - 4
-    ? numPostPages.slice(numPostPages.length - 7, numPostPages.length)
-    : numPostPages.length > 7 && numPostPages.length > 4 && activePage > 4
-    ? numPostPages.slice(activePage - 4, activePage + 3)
-    : numPostPages.slice(0, 7);
+function slicePaginationPageNums(numPages: any, activePage: number) {
+  return numPages.length > 7 && activePage > numPages.length - 4
+    ? numPages.slice(numPages.length - 7, numPages.length)
+    : numPages.length > 7 && numPages.length > 4 && activePage > 4
+    ? numPages.slice(activePage - 4, activePage + 3)
+    : numPages.slice(0, 7);
 }
 </script>
 
