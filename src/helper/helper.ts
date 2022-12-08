@@ -14,11 +14,12 @@ const formatDateLong = (date: string) => {
 };
 
 const getImageURL = (image: string) => {
+  if (!image) return false;
   return `${import.meta.env.VITE_MEDIA_URL}${image}`;
 };
 
 const formatFullname = (firstName: string, lastName: string) => {
-  return `${firstName} ${lastName}`.trim();
+  return `${firstName.trim()} ${lastName.trim()}`.trim();
 };
 
 export { formatDateShort, formatDateLong, formatFullname, getImageURL };
