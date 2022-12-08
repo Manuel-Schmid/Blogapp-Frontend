@@ -42,6 +42,16 @@ describe("Helper functions", () => {
     expect(formattedDateLong).toMatch("Invalid Date");
   });
 
+  it("should return an invalid date", () => {
+    const formattedDateLong = formatDateLong("");
+    expect(formattedDateLong).toMatch("Invalid Date");
+  });
+
+  it("should return false instead of an image", () => {
+    const imageURL = getImageURL("");
+    expect(imageURL).toBeFalsy();
+  });
+
   it("should return a correctly formatted image url", () => {
     const imageURL = getImageURL("images/lake.jpg");
     expect(imageURL).toMatch("http://api.blogapp.com/media/images/lake.jpg");
@@ -49,6 +59,16 @@ describe("Helper functions", () => {
 
   it("should return first and last name separated by a whitespace", () => {
     const fullName = formatFullname("Winston", "Smith");
+    expect(fullName).toMatch("Winston Smith");
+  });
+
+  it("should return trimmed first and last name separated by a whitespace", () => {
+    const fullName = formatFullname(" Winston ", " Smith ");
+    expect(fullName).toMatch("Winston Smith");
+  });
+
+  it("should return trimmed first and last name separated by a whitespace", () => {
+    const fullName = formatFullname("Winston  ", "   Smith");
     expect(fullName).toMatch("Winston Smith");
   });
 
