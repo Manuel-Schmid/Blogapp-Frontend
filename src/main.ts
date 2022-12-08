@@ -60,11 +60,21 @@ const messages = {
   ...de,
 };
 
+export type Locale = "de" | "en";
+
 const i18n = createI18n({
-  locale: "de",
+  locale: "en",
   fallbackLocale: "en",
   messages,
 });
+
+export function setI18nLanguage(locale: Locale) {
+  i18n.global.locale = locale;
+  const html = document.querySelector("html");
+  html?.setAttribute("lang", locale);
+}
+
+setI18nLanguage(localStorage.lang);
 
 const app = createApp({
   setup() {

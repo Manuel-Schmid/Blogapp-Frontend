@@ -15,9 +15,10 @@
         "text": "Text"
       },
       "profile": {
-        "title": "Userdata",
+        "title": "Data and Settings",
         "change-password": "Change Password",
         "change-email-success": "Check your inbox for the email change link",
+        "language": "Language",
         "logout": "Logout",
         "author-request-widget": {
           "is-author": "You are an author",
@@ -98,8 +99,12 @@
         }
       }
     },
+    "languages": {
+      "en": "English",
+      "de": "German"
+    },
     "shared": {
-      "author-request-title": "Author Anfragen",
+      "author-request-title": "Author Requests",
       "posts-title": "Posts",
       "new-password": "New Password",
       "new-password-confirm": "Confirm new Password",

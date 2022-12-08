@@ -15,9 +15,10 @@
         "text": "Text"
       },
       "profile": {
-        "title": "Benutzerdaten",
+        "title": "Daten and Einstellungen",
         "change-password": "Passwort ändern",
         "change-email-success": "Der Email-Änderungslink wurde an deine Inbox gesendet",
+        "language": "Sprache",
         "logout": "Abmelden",
         "author-request-widget": {
           "is-author": "Du bist ein Author",
@@ -97,6 +98,10 @@
           "all": "Status: Alle"
         }
       }
+    },
+    "languages": {
+      "en": "Englisch",
+      "de": "Deutsch"
     },
     "shared": {
       "author-request-title": "Author Anfragen",

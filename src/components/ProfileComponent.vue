@@ -2,6 +2,7 @@
 import PasswordChangeFormContainer from "../container/PasswordChangeFormContainer.vue";
 import { ref } from "vue";
 import { formatDateShort } from "../helper/helper";
+import { setI18nLanguage } from "../main";
 
 export default {
   name: "profileComponent",
@@ -31,15 +32,20 @@ export default {
     const createAuthorRequest = () => {
       emit("createAuthorRequest");
     };
+    const setLanguage = (event: any) => {
+      emit("setLanguage", event.target.value);
+    };
 
     return {
       newFirstName,
       newLastName,
       passwordChangeFormActive,
+      localStorage,
       onUpdateAccount,
       onEmailChange,
       onLogout,
       createAuthorRequest,
+      setLanguage,
       formatDateShort,
     };
   },
@@ -231,6 +237,22 @@ export default {
                 >
                   {{ this.$t("components.profile.change-email-success") }}
                 </p>
+              </td>
+            </tr>
+            <tr class="table-row">
+              <th scope="row">{{ this.$t("components.profile.language") }}</th>
+              <td class="table-row-value">
+                <select
+                  @change="setLanguage($event)"
+                  class="dark:bg-gray-800 text-center"
+                >
+                  <option :selected="localStorage.lang === 'en'" value="en">
+                    {{ this.$t("languages.en") }}
+                  </option>
+                  <option :selected="localStorage.lang === 'de'" value="de">
+                    {{ this.$t("languages.de") }}
+                  </option>
+                </select>
               </td>
             </tr>
           </tbody>
