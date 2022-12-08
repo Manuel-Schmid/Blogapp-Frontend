@@ -19,8 +19,8 @@ describe("PostTileComponent", () => {
             name: "images/Landscape-Color.jpg",
           },
           dateCreated: "2022-08-16T06:31:23.250000+00:00",
-          likeCount: "3",
-          commentCount: "2",
+          likeCount: 3,
+          commentCount: 2,
           category: {
             name: "Comp Sci",
             slug: "comp-sci",

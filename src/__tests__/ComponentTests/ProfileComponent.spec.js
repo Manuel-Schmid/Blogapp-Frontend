@@ -6,7 +6,7 @@ import { Status } from "../../api/models";
 describe("ProfileComponent", () => {
   const defaultProps = {
     userData: {
-      id: "1",
+      id: 1,
       username: "admin",
       email: "admin@example.lo",
       firstName: "Winston",
