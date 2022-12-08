@@ -1,7 +1,7 @@
 #import "./fragments/overviewPost.gql"
 
-query UserPosts($user: Int!, $activePage: Int) {
-  paginatedUserPosts(user: $user, activePage: $activePage) {
+query UserPosts($activePage: Int) {
+  paginatedUserPosts(activePage: $activePage) {
     posts {
       ...OverviewPost
     }
