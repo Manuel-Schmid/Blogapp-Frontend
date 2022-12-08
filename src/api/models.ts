@@ -31,9 +31,8 @@ export type AuthorRequest = {
 };
 
 export type AuthorRequestInput = {
-  dateClosed: Scalars["DateTime"];
-  id: Scalars["ID"];
-  status: Scalars["String"];
+  status: Status;
+  user: Scalars["ID"];
 };
 
 export type AuthorRequestWrapperType = {
@@ -106,6 +105,12 @@ export type EmailChangeType = {
   errors?: Maybe<Scalars["JSON"]>;
   success: Scalars["Boolean"];
   user?: Maybe<User>;
+};
+
+export type PaginationAuthorRequests = {
+  __typename?: "PaginationAuthorRequests";
+  authorRequests: Array<AuthorRequest>;
+  numPages: Scalars["Int"];
 };
 
 export type PaginationPosts = {
@@ -327,10 +332,10 @@ export type RootMutationVerifyTokenArgs = {
 export type RootQuery = {
   __typename?: "RootQuery";
   authorRequestByUser?: Maybe<AuthorRequest>;
-  authorRequests: Array<AuthorRequest>;
   categories: Array<Category>;
   categoryById: Category;
   me?: Maybe<User>;
+  paginatedAuthorRequests: PaginationAuthorRequests;
   paginatedPosts: PaginationPosts;
   postBySlug: Post;
   tags: Array<Tag>;
@@ -339,12 +344,14 @@ export type RootQuery = {
   users: Array<User>;
 };
 
-export type RootQueryAuthorRequestsArgs = {
-  status?: InputMaybe<Scalars["String"]>;
-};
-
 export type RootQueryCategoryByIdArgs = {
   id: Scalars["ID"];
+};
+
+export type RootQueryPaginatedAuthorRequestsArgs = {
+  activePage?: InputMaybe<Scalars["Int"]>;
+  sort?: InputMaybe<Scalars["String"]>;
+  status?: InputMaybe<Scalars["String"]>;
 };
 
 export type RootQueryPaginatedPostsArgs = {
@@ -370,6 +377,13 @@ export type SendPasswordResetEmailType = {
   __typename?: "SendPasswordResetEmailType";
   success: Scalars["Boolean"];
 };
+
+/** An enumeration. */
+export enum Status {
+  Accepted = "ACCEPTED",
+  Pending = "PENDING",
+  Rejected = "REJECTED",
+}
 
 export type Tag = {
   __typename?: "Tag";
@@ -408,6 +422,12 @@ export type User = {
   email: Scalars["String"];
   firstName: Scalars["String"];
   id: Scalars["ID"];
+  /** Designates whether this user should be treated as active. Unselect this instead of deleting accounts. */
+  isActive: Scalars["Boolean"];
+  /** Designates whether the user can log into this admin site. */
+  isStaff: Scalars["Boolean"];
+  /** Designates that this user has all permissions without explicitly assigning them. */
+  isSuperuser: Scalars["Boolean"];
   lastName: Scalars["String"];
   password: Scalars["String"];
   posts: Array<Post>;
