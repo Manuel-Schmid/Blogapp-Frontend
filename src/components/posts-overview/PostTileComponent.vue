@@ -29,9 +29,7 @@ export default {
     </div>
     <div class="post-creation-info">
       <p>
-        <span class="post-owner"
-          >{{ formatFullname(post.owner.firstName, post.owner.lastName) }} -
-        </span>
+        {{ formatFullname(post.owner.firstName, post.owner.lastName) }} -
         {{ formatDateShort(post.dateCreated) }}
       </p>
     </div>
@@ -61,9 +59,6 @@ export default {
 </template>
 
 <style scoped>
-.user-posts .post-owner {
-  display: none;
-}
 .post {
   width: calc(40% - 25px);
   margin-right: 5%;

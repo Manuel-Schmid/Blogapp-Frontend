@@ -19,8 +19,6 @@ import { fetchCategoriesGuard } from "./guards/fetchCategoriesGuard";
 import { fetchPostGuard } from "./guards/fetchPostGuard";
 import AuthorRequestOverviewContainer from "../container/AuthorRequestOverviewContainer.vue";
 import { fetchAuthorRequestsGuard } from "./guards/fetchAuthorRequestsGuard";
-import { fetchUserPostsGuard } from "./guards/fetchUserPostsGuard";
-import UserPostsContainer from "../container/UserPostsContainer.vue";
 
 const routes: any = [
   {
@@ -75,12 +73,6 @@ const routes: any = [
     name: "postDetail",
     component: PostDetailContainer,
     beforeEnter: [fetchPostGuard],
-  },
-  {
-    path: "/my-posts",
-    name: "userPosts",
-    component: UserPostsContainer,
-    beforeEnter: [fetchUserPostsGuard],
   },
   {
     path: "/create-post",
