@@ -35,19 +35,21 @@ export default {
       class="pw-change-form-input mb-2 mt-4"
       v-model="oldPassword"
       type="password"
-      placeholder="Old password"
+      :placeholder="
+        this.$t('components.password-change-form.old-password-placeholder')
+      "
     />
     <input
       class="pw-change-form-input mb-2"
       v-model="newPassword1"
       type="password"
-      placeholder="New password"
+      :placeholder="this.$t('shared.new-password')"
     />
     <input
       class="pw-change-form-input"
       v-model="newPassword2"
       type="password"
-      placeholder="Confirm new password"
+      :placeholder="this.$t('shared.new-password-confirm')"
     />
     <div class="my-1" v-if="passwordChangeError">
       <div class="text-color-error">{{ passwordChangeError }}</div>
@@ -56,7 +58,7 @@ export default {
       @click="onSubmit"
       class="py-2 px-8 mt-2 rounded-lg button-bg-light-2 dark:button-bg-dark"
     >
-      Save
+      {{ this.$t("shared.save") }}
     </button>
   </div>
 </template>

@@ -1,0 +1,124 @@
+{
+  "en": {
+    "components": {
+      "navbar": {
+        "light-mode": "Light Mode",
+        "dark-mode": "Dark Mode",
+        "login": "Login"
+      },
+      "comment-section": {
+        "title": "Comments",
+        "add-comment": "Add a comment"
+      },
+      "comment-form": {
+        "title": "Title",
+        "text": "Text"
+      },
+      "profile": {
+        "title": "Data and Settings",
+        "change-password": "Change Password",
+        "change-email-success": "Check your inbox for the email change link",
+        "language": "Language",
+        "logout": "Logout",
+        "author-request-widget": {
+          "is-author": "You are an author",
+          "become-author": "Become an author",
+          "request-pending-before-date": "Your author request was submitted on",
+          "request-pending-after-date": "and is still pending",
+          "request-rejected": "Your author request was rejected on"
+        },
+        "table": {
+          "username": "Username",
+          "firstname": "First name",
+          "lastname": "Last name"
+        }
+      },
+      "password-reset-form": {
+        "title": "Change your password",
+        "reset-password": "Change password",
+        "reset-success": "Password reset successful.",
+        "reset-fail": "Password reset failed."
+      },
+      "password-reset-email": {
+        "title": "Which Email should we send the password reset link to?",
+        "send-reset-email": "Send Reset Email",
+        "email-success": "Email sent successfully."
+      },
+      "password-change-form": {
+        "old-password-placeholder": "Old Password"
+      },
+      "registration": {
+        "title": "Create a new account",
+        "existing-account": "Already have an account?"
+      },
+      "registration-confirmation": {
+        "title": "Account activation email was sent to:",
+        "already-verified": "This account has already been verified",
+        "send-email-again": "Send activation link again",
+        "sent-email-again": "Activation email was sent again"
+      },
+      "login": {
+        "verification": {
+          "success": "Account verification successful",
+          "error": "Account verification failed"
+        },
+        "title": "Sign in to your account",
+        "forgot-password": "Forgot password?",
+        "no-account": "Don’t have an account yet?"
+      },
+      "email-change-form": {
+        "title": "Change your email address",
+        "email-label": "New email address",
+        "email-confirm-label": "Confirm new email address",
+        "change-email": "Change Email",
+        "change-success": "Email change successful.",
+        "change-fail": "Email change failed."
+      },
+      "create-post": {
+        "title": "Create your post",
+        "form-title": "Title",
+        "form-text": "Text",
+        "form-image": "Image",
+        "form-category-placeholder": "Select a category",
+        "form-tags-placeholder": "Comma-separated list of tags (e.g. Sports, News, ...)"
+      },
+      "author-request-overview": {
+        "table": {
+          "user": "User",
+          "date_opened": "Date opened",
+          "date_closed": "Date closed",
+          "actions": "Actions",
+          "accept": "Accept",
+          "reject": "Reject"
+        },
+        "status": {
+          "accepted": "Status: Accepted",
+          "pending": "Status: Pending",
+          "rejected": "Status: Rejected",
+          "all": "Status: All"
+        }
+      }
+    },
+    "languages": {
+      "en": "English",
+      "de": "German"
+    },
+    "shared": {
+      "author-request-title": "Author Requests",
+      "posts-title": "Posts",
+      "new-password": "New Password",
+      "new-password-confirm": "Confirm new Password",
+      "category": "Category",
+      "your-username": "Your username",
+      "username-placeholder": "Username",
+      "your-email": "Your Email",
+      "password": "Password",
+      "password-confirm": "Confirm Password",
+      "sign-in": "Sign in",
+      "sign-up": "Sign up",
+      "tags": "Tags",
+      "email": "Email",
+      "save": "Save"
+    }
+  }
+}

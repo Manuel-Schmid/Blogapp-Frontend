@@ -18,18 +18,18 @@ export default {
     <input
       class="input-bordered p-2 w-full"
       v-model="title"
-      placeholder="Title"
+      :placeholder="this.$t('components.comment-form.title')"
     />
     <textarea
       class="input-bordered p-2 w-full h-36 mt-3"
       v-model="text"
-      placeholder="Text"
+      :placeholder="this.$t('components.comment-form.text')"
     />
     <button
       @click="$emit('saveComment', title, text)"
       class="form-button w-32 float-right"
     >
-      Save
+      {{ this.$t("shared.save") }}
     </button>
   </div>
 </template>
