@@ -1,6 +1,5 @@
 import { RouteLocationNormalized } from "vue-router";
 import { usePostStore } from "../../store/blog";
-import { useAuthStore } from "../../store/auth";
 
 const fetchUserPostsGuard = async (
   to: RouteLocationNormalized,
