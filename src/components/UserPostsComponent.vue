@@ -19,7 +19,7 @@ export default {
 <template>
   <div class="site-container p-12 dark:text-white">
     <div class="content-container m-auto w-full">
-      <p class="page-title mb-8">My Posts:</p>
+      <p class="page-title mb-8">{{ this.$t("shared.my-posts") }}:</p>
       <div v-if="postsData" class="pl-[50px] user-posts">
         <PostTileComponent
           v-for="post in postsData.posts"

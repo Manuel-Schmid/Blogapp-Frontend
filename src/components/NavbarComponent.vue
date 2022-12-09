@@ -68,7 +68,7 @@ export default {
           :class="routeName === 'userPosts' ? 'nav-item-active' : ''"
           :to="{ name: 'userPosts' }"
         >
-          My Posts
+          {{ this.$t("shared.my-posts") }}
         </router-link>
         <router-link
           v-if="user"
