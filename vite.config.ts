@@ -10,4 +10,9 @@ export default defineConfig({
     port: 8080,
     open: "http://frontend.blogapp.com:8080",
   },
+  define: {
+    __VUE_I18N_FULL_INSTALL__: true,
+    __VUE_I18N_LEGACY_API__: true,
+    __INTLIFY_PROD_DEVTOOLS__: false,
+  },
 });

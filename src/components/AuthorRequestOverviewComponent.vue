@@ -44,7 +44,7 @@ export default {
 <template>
   <div class="site-container p-12 dark:text-white">
     <div class="content-container m-auto w-full">
-      <p class="page-title mb-10">Author Requests:</p>
+      <p class="page-title mb-10">{{ this.$t("shared.author-request-title") }}</p>
       <table
         class="table-auto m-auto text-sm text-left text-gray-700 dark:text-gray-300 w-max text-center"
       >
@@ -55,21 +55,29 @@ export default {
           <tr class="table-row">
             <th>
               <SortableTableHeaderContainer
-                text="User"
+                :text="this.$t('components.author-request-overview.table.user')"
                 sort-param="user"
               ></SortableTableHeaderContainer>
             </th>
             <th>Email</th>
             <th>
               <SortableTableHeaderContainer
-                text="Date opened"
+                :text="
+                  this.$t(
+                    'components.author-request-overview.table.date_opened'
+                  )
+                "
                 sort-param="date_opened"
               >
               </SortableTableHeaderContainer>
             </th>
             <th>
               <SortableTableHeaderContainer
-                text="Date closed"
+                :text="
+                  this.$t(
+                    'components.author-request-overview.table.date_closed'
+                  )
+                "
                 sort-param="date_closed"
               >
               </SortableTableHeaderContainer>
@@ -80,29 +88,41 @@ export default {
                 class="dark:bg-gray-800 text-center"
               >
                 <option :selected="selectedFilter === ''" value="">
-                  Status: All
+                  {{ this.$t("components.author-request-overview.status.all") }}
                 </option>
                 <option
                   :selected="selectedFilter === 'accepted'"
                   value="accepted"
                 >
-                  Status: Accepted
+                  {{
+                    this.$t(
+                      "components.author-request-overview.status.accepted"
+                    )
+                  }}
                 </option>
                 <option
                   :selected="selectedFilter === 'pending'"
                   value="pending"
                 >
-                  Status: Pending
+                  {{
+                    this.$t("components.author-request-overview.status.pending")
+                  }}
                 </option>
                 <option
                   :selected="selectedFilter === 'rejected'"
                   value="rejected"
                 >
-                  Status: Rejected
+                  {{
+                    this.$t(
+                      "components.author-request-overview.status.rejected"
+                    )
+                  }}
                 </option>
               </select>
             </th>
-            <th>Actions</th>
+            <th>
+              {{ this.$t("components.author-request-overview.table.actions") }}
+            </th>
           </tr>
           <tr
             v-for="authorRequest in authorRequestsData.authorRequests"
@@ -124,14 +144,18 @@ export default {
                 v-if="authorRequest.status === 'PENDING'"
                 class="h-6 pr-2 text-color-pending"
               >
-                Pending
+                {{
+                  this.$t("components.author-request-overview.status.pending")
+                }}
                 <font-awesome-icon icon="fa-regular fa-clock" class="ml-1" />
               </div>
               <div
                 v-else-if="authorRequest.status === 'ACCEPTED'"
                 class="h-6 pr-2 text-color-success"
               >
-                Accepted
+                {{
+                  this.$t("components.author-request-overview.status.accepted")
+                }}
                 <font-awesome-icon
                   icon="fa-regular fa-circle-check"
                   class="ml-1"
@@ -141,7 +165,9 @@ export default {
                 v-else-if="authorRequest.status === 'REJECTED'"
                 class="h-6 pr-2 text-color-error"
               >
-                Rejected
+                {{
+                  this.$t("components.author-request-overview.status.rejected")
+                }}
                 <font-awesome-icon
                   icon="fa-regular fa-circle-xmark"
                   class="ml-1"
@@ -155,7 +181,7 @@ export default {
                 "
                 class="p-2 mx-1 bg-4"
               >
-                Accept
+                {{ this.$t("components.author-request-overview.table.accept") }}
               </button>
               <button
                 @click="
@@ -163,7 +189,7 @@ export default {
                 "
                 class="p-2 mx-1 bg-4"
               >
-                Reject
+                {{ this.$t("components.author-request-overview.table.reject") }}
               </button>
             </td>
             <td v-else></td>
