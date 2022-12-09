@@ -65,6 +65,14 @@ export default {
         <router-link
           v-if="user"
           class="nav-item"
+          :class="routeName === 'userPosts' ? 'nav-item-active' : ''"
+          :to="{ name: 'userPosts' }"
+        >
+          My Posts
+        </router-link>
+        <router-link
+          v-if="user"
+          class="nav-item"
           :class="routeName === 'profile' ? 'nav-item-active' : ''"
           :to="{ name: 'profile' }"
         >

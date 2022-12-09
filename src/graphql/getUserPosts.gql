@@ -1,0 +1,10 @@
+#import "./fragments/overviewPost.gql"
+
+query UserPosts($user: Int!, $activePage: Int) {
+  paginatedUserPosts(user: $user, activePage: $activePage) {
+    posts {
+      ...OverviewPost
+    }
+    numPostPages
+  }
+}
