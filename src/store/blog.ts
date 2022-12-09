@@ -62,14 +62,19 @@ export const usePostStore = defineStore("blog", {
       });
       this.paginatedPosts = response.data.paginatedPosts;
     },
-    async fetchUserPosts(activePage: number) {
-      const response = await apolloClient.query({
-        query: UserPosts,
-        variables: {
-          activePage,
-        },
-      });
-      this.paginatedUserPosts = response.data.paginatedUserPosts;
+    async fetchUserPosts(user: User | null, activePage: number) {
+      if (user) {
+        const response = await apolloClient.query({
+          query: UserPosts,
+          variables: {
+            user: +user.id,
+            activePage,
+          },
+        });
+        this.paginatedUserPosts = response.data.paginatedUserPosts;
+      } else {
+        this.paginatedUserPosts = null;
+      }
     },
     async fetchPost(postSlug: string | undefined, reload: boolean) {
       if (reload) this.post = null;
