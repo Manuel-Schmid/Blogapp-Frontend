@@ -7,7 +7,7 @@ const fetchUserPostsGuard = async (
   from: RouteLocationNormalized
 ) => {
   const activePage: number = to.query.page ? +to.query.page : 1;
-  await usePostStore().fetchUserPosts(useAuthStore().user, activePage);
+  await usePostStore().fetchUserPosts(activePage);
   return true;
 };
 
