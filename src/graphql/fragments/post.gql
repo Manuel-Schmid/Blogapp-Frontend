@@ -16,4 +16,5 @@ fragment Post on Post {
   owner {
     ...Owner
   }
+  status
 }
