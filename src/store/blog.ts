@@ -9,8 +9,10 @@ import {
   Post,
   PostInput,
   Tag,
+  User,
 } from "../api/models";
 import Posts from "../graphql/getPosts.gql";
+import UserPosts from "../graphql/getUserPosts.gql";
 import PostBySlug from "../graphql/getPost.gql";
 import CreatePost from "../graphql/createPost.gql";
 import Tags from "../graphql/getTags.gql";
@@ -25,6 +27,7 @@ import UpdateAuthorRequest from "../graphql/updateAuthorRequest.gql";
 
 export type PostState = {
   paginatedPosts: PaginationPosts | null;
+  paginatedUserPosts: PaginationPosts | null;
   post: Post | null;
   tags: Tag[];
   categories: Category[];
@@ -36,6 +39,7 @@ export const usePostStore = defineStore("blog", {
   state: () =>
     ({
       paginatedPosts: null,
+      paginatedUserPosts: null,
       post: null,
       tags: [],
       categories: [],
@@ -76,6 +80,15 @@ export const usePostStore = defineStore("blog", {
         },
       });
       this.post = response.data.createPost.post;
+    },
+    async fetchUserPosts(activePage: number) {
+      const response = await apolloClient.query({
+        query: UserPosts,
+        variables: {
+          activePage,
+        },
+      });
+      this.paginatedUserPosts = response.data.paginatedUserPosts;
     },
     async fetchCategories() {
       if (this.categories.length === 0) {

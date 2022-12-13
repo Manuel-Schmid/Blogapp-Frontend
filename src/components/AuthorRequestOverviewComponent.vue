@@ -44,7 +44,9 @@ export default {
 <template>
   <div class="site-container p-12 dark:text-white">
     <div class="content-container m-auto w-full">
-      <p class="page-title mb-10">{{ this.$t("shared.author-request-title") }}</p>
+      <p class="page-title mb-10">
+        {{ this.$t("shared.author-request-title") }}
+      </p>
       <table
         class="table-auto m-auto text-sm text-left text-gray-700 dark:text-gray-300 w-max text-center"
       >
@@ -59,7 +61,7 @@ export default {
                 sort-param="user"
               ></SortableTableHeaderContainer>
             </th>
-            <th>Email</th>
+            <th>{{ this.$t("shared.email") }}</th>
             <th>
               <SortableTableHeaderContainer
                 :text="
