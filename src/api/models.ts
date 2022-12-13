@@ -160,6 +160,7 @@ export type Post = {
   likeCount: Scalars["Int"];
   owner: User;
   slug: Scalars["String"];
+  status: PostStatus;
   /** A comma-separated list of tags. */
   tags: Array<Tag>;
   text: Scalars["String"];
@@ -171,6 +172,7 @@ export type PostInput = {
   image?: InputMaybe<Scalars["Upload"]>;
   owner?: InputMaybe<Scalars["ID"]>;
   slug?: InputMaybe<Scalars["String"]>;
+  status?: InputMaybe<PostStatus>;
   tags?: InputMaybe<Scalars["String"]>;
   text: Scalars["String"];
   title: Scalars["String"];
@@ -187,6 +189,12 @@ export type PostLikeInput = {
   post: Scalars["ID"];
   user?: InputMaybe<Scalars["ID"]>;
 };
+
+/** An enumeration. */
+export enum PostStatus {
+  Draft = "DRAFT",
+  Published = "PUBLISHED",
+}
 
 export type RefreshedTokenType = {
   __typename?: "RefreshedTokenType";
@@ -337,6 +345,7 @@ export type RootQuery = {
   me?: Maybe<User>;
   paginatedAuthorRequests: PaginationAuthorRequests;
   paginatedPosts: PaginationPosts;
+  paginatedUserPosts: PaginationPosts;
   postBySlug: Post;
   tags: Array<Tag>;
   usedTags: Array<Tag>;
@@ -350,6 +359,7 @@ export type RootQueryCategoryByIdArgs = {
 
 export type RootQueryPaginatedAuthorRequestsArgs = {
   activePage?: InputMaybe<Scalars["Int"]>;
+  sort?: InputMaybe<Scalars["String"]>;
   status?: InputMaybe<Scalars["String"]>;
 };
 
@@ -357,6 +367,10 @@ export type RootQueryPaginatedPostsArgs = {
   activePage?: InputMaybe<Scalars["Int"]>;
   categorySlug?: InputMaybe<Scalars["String"]>;
   tagSlugs?: InputMaybe<Scalars["String"]>;
+};
+
+export type RootQueryPaginatedUserPostsArgs = {
+  activePage?: InputMaybe<Scalars["Int"]>;
 };
 
 export type RootQueryPostBySlugArgs = {
