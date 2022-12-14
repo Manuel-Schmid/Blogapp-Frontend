@@ -48,7 +48,13 @@ export default {
             <th>{{ this.$t("components.my-posts.table.action") }}</th>
           </tr>
           <tr v-for="post in postsData.posts" :key="post.id" class="table-row">
-            <td class="table-row-value">{{ post.title }}</td>
+            <td class="table-row-value">
+              <router-link
+                :to="{ name: 'postDetail', params: { slug: post.slug } }"
+                class="underline underline-offset-2"
+                >{{ post.title }}</router-link
+              >
+            </td>
             <td>{{ post.category.name }}</td>
             <td>{{ formatDateShort(post.dateCreated) }}</td>
             <td>
