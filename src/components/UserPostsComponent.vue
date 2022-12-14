@@ -40,12 +40,12 @@ export default {
         ></thead>
         <tbody>
           <tr class="table-row">
-            <th>Title</th>
-            <th>Category</th>
-            <th>Date created</th>
-            <th>Image</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th>{{ this.$t("components.my-posts.table.title") }}</th>
+            <th>{{ this.$t("components.my-posts.table.category") }}</th>
+            <th>{{ this.$t("components.my-posts.table.date_created") }}</th>
+            <th>{{ this.$t("components.my-posts.table.image") }}</th>
+            <th>{{ this.$t("components.my-posts.table.status") }}</th>
+            <th>{{ this.$t("components.my-posts.table.action") }}</th>
           </tr>
           <tr v-for="post in postsData.posts" :key="post.id" class="table-row">
             <td class="table-row-value">{{ post.title }}</td>
@@ -53,24 +53,24 @@ export default {
             <td>{{ formatDateShort(post.dateCreated) }}</td>
             <td>
               <img
-                class="m-auto max-w-24 max-h-16 p-2"
+                class="m-auto max-w-[6rem] max-h-16 p-2"
                 :src="getImageURL(post.image.name)"
-                alt="Post Image"
+                :alt="this.$t('components.my-posts.table.image')"
               />
             </td>
             <td>
               <div
-                v-if="post.status === 'DRAFT'"
+                v-if="post.status === PostStatus.Draft"
                 class="h-6 pr-2 text-color-pending"
               >
-                DRAFT
+                {{ this.$t("components.my-posts.table.draft-noun") }}
                 <font-awesome-icon icon="fa-regular fa-clock" class="ml-1" />
               </div>
               <div
-                v-else-if="post.status === 'PUBLISHED'"
+                v-else-if="post.status === PostStatus.Published"
                 class="h-6 pr-2 text-color-success"
               >
-                PUBLISHED
+                {{ this.$t("components.my-posts.table.published") }}
                 <font-awesome-icon
                   icon="fa-regular fa-circle-check"
                   class="ml-1"
@@ -79,18 +79,18 @@ export default {
             </td>
             <td>
               <button
-                v-if="post.status === 'PUBLISHED'"
+                v-if="post.status === PostStatus.Published"
                 @click="updatePostStatus(post.slug, PostStatus.Draft)"
                 class="p-2 mx-1 bg-4"
               >
-                DRAFT
+                {{ this.$t("components.my-posts.table.draft-verb") }}
               </button>
               <button
-                v-else-if="post.status === 'DRAFT'"
+                v-else-if="post.status === PostStatus.Draft"
                 @click="updatePostStatus(post.slug, PostStatus.Published)"
                 class="p-2 mx-1 bg-4"
               >
-                PUBLISH
+                {{ this.$t("components.my-posts.table.publish") }}
               </button>
             </td>
           </tr>
