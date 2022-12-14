@@ -80,7 +80,11 @@ const routes: any = [
     path: "/my-posts",
     name: "userPosts",
     component: UserPostsContainer,
-    beforeEnter: [fetchUserPostsGuard],
+    beforeEnter: [
+      requireLoginGuard,
+      requireAuthorPermissionGuard,
+      fetchUserPostsGuard,
+    ],
   },
   {
     path: "/create-post",

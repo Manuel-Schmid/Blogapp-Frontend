@@ -7,11 +7,7 @@ const requireAuthorPermissionGuard = (
 ) => {
   const user = useAuthStore().user;
   if (user === null) return false;
-  return user["userStatus"]["isAuthor"]
-    ? true
-    : !!from.name
-    ? false
-    : { name: "posts" };
+  return user["userStatus"]["isAuthor"] ? true : { name: "posts" };
 };
 
 export { requireAuthorPermissionGuard };

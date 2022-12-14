@@ -63,7 +63,7 @@ export default {
           {{ this.$t("shared.author-request-title") }}
         </router-link>
         <router-link
-          v-if="user"
+          v-if="user?.userStatus.isAuthor"
           class="nav-item"
           :class="routeName === 'userPosts' ? 'nav-item-active' : ''"
           :to="{ name: 'userPosts' }"
