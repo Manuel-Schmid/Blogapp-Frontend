@@ -1,7 +1,7 @@
 <script lang="ts">
 import PostTileComponent from "./posts-overview/PostTileComponent.vue";
 import PaginationComponent from "./PaginationComponent.vue";
-import { formatDateShort, getImageURL, formatFullname } from "../helper/helper";
+import { formatDateShort, getImageURL } from "../helper/helper";
 import { PostStatus } from "../api/models";
 
 export default {
@@ -19,7 +19,6 @@ export default {
     return {
       PostStatus,
       formatDateShort,
-      formatFullname,
       getImageURL,
       updatePostStatus,
     };
@@ -44,7 +43,6 @@ export default {
             <th>Title</th>
             <th>Category</th>
             <th>Date created</th>
-            <th>User</th>
             <th>Image</th>
             <th>Status</th>
             <th>Action</th>
@@ -54,11 +52,8 @@ export default {
             <td>{{ post.category.name }}</td>
             <td>{{ formatDateShort(post.dateCreated) }}</td>
             <td>
-              {{ formatFullname(post.owner.firstName, post.owner.lastName) }}
-            </td>
-            <td>
               <img
-                class="w-24"
+                class="m-auto max-w-24 max-h-16 p-2"
                 :src="getImageURL(post.image.name)"
                 alt="Post Image"
               />
