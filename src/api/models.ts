@@ -241,6 +241,7 @@ export type RootMutation = {
   updateCategory?: Maybe<Category>;
   updateComment?: Maybe<Comment>;
   updatePost?: Maybe<Post>;
+  updatePostStatus: UpdatePostStatusType;
   verifyAccount: VerifyAccountType;
   verifyToken: PayloadType;
 };
@@ -329,6 +330,10 @@ export type RootMutationUpdatePostArgs = {
   postInput: PostInput;
 };
 
+export type RootMutationUpdatePostStatusArgs = {
+  updatePostStatusInput: UpdatePostStatusInput;
+};
+
 export type RootMutationVerifyAccountArgs = {
   token: Scalars["String"];
 };
@@ -346,7 +351,7 @@ export type RootQuery = {
   paginatedAuthorRequests: PaginationAuthorRequests;
   paginatedPosts: PaginationPosts;
   paginatedUserPosts: PaginationPosts;
-  postBySlug: Post;
+  postBySlug?: Maybe<Post>;
   tags: Array<Tag>;
   usedTags: Array<Tag>;
   user?: Maybe<User>;
@@ -427,6 +432,18 @@ export type UpdateAccountInput = {
 export type UpdateAccountType = {
   __typename?: "UpdateAccountType";
   errors?: Maybe<Scalars["JSON"]>;
+  success: Scalars["Boolean"];
+};
+
+export type UpdatePostStatusInput = {
+  postSlug: Scalars["String"];
+  status: PostStatus;
+};
+
+export type UpdatePostStatusType = {
+  __typename?: "UpdatePostStatusType";
+  errors?: Maybe<Scalars["JSON"]>;
+  post?: Maybe<Post>;
   success: Scalars["Boolean"];
 };
 
