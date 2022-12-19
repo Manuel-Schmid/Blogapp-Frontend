@@ -1,17 +1,17 @@
 <script lang="ts">
 import PostTileComponent from "./posts-overview/PostTileComponent.vue";
-import TagListComponent from "./posts-overview/TagListComponent.vue";
+import FilterComponent from "./posts-overview/FilterComponent.vue";
 import PaginationComponent from "./PaginationComponent.vue";
 
 export default {
   name: "PostsOverviewComponent",
   components: {
     PostTileComponent,
-    TagListComponent,
+    FilterComponent,
     PaginationComponent,
   },
 
-  props: ["postsData", "tagsData", "activePage"],
+  props: ["postsData", "categoriesData", "tagsData", "activePage"],
 
   setup() {
     return {};
@@ -22,7 +22,16 @@ export default {
 <template>
   <div class="site-container p-12 dark:text-white">
     <div class="content-container m-auto w-full">
-      <TagListComponent :tags-data="tagsData"></TagListComponent>
+      <FilterComponent
+        :filter-items="categoriesData"
+        query-key="category"
+        :multiselect="false"
+      ></FilterComponent>
+      <FilterComponent
+        :filter-items="tagsData"
+        query-key="tags"
+        :multiselect="true"
+      ></FilterComponent>
       <p class="page-title mb-8">{{ this.$t("shared.posts-title") }}:</p>
       <div v-if="postsData" class="pl-[50px]">
         <PostTileComponent

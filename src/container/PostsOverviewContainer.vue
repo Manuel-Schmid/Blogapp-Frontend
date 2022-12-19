@@ -8,6 +8,7 @@ import {
 import { usePostStore } from "../store/blog";
 import { fetchPostsGuard } from "../router/guards/fetchPostsGuard";
 import { fetchUsedTagsGuard } from "../router/guards/fetchUsedTagsGuard";
+import { fetchCategoriesGuard } from "../router/guards/fetchCategoriesGuard";
 
 export default {
   name: "PostsOverviewContainer",
@@ -23,6 +24,7 @@ export default {
     onBeforeRouteUpdate(
       async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
         await fetchPostsGuard(to, from);
+        await fetchCategoriesGuard(to, from);
         await fetchUsedTagsGuard(to, from);
       }
     );
@@ -36,6 +38,7 @@ export default {
   <PostsOverviewComponent
     :posts-data="store.paginatedPosts"
     :active-page="activePage"
+    :categories-data="store.categories"
     :tags-data="store.usedTags"
   />
 </template>
