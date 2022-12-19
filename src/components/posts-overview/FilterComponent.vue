@@ -29,7 +29,7 @@ export default {
       >
         <router-link
           v-if="route.query[queryKey]?.split(',').includes(filterItem.slug)"
-          class="tag-link bg-2"
+          class="filter-link bg-2"
           :to="{
             name: route.name,
             query: {
@@ -48,7 +48,7 @@ export default {
         </router-link>
         <router-link
           v-else
-          class="tag-link bg-1 hover:bg-1"
+          class="filter-link bg-1 hover:bg-1"
           :to="
             multiselect
               ? {
@@ -78,7 +78,7 @@ export default {
 </template>
 
 <style scoped>
-.tag-link {
+.filter-link {
   @apply rounded-3xl pt-1 pr-4 pb-1 pl-4 m-1 float-left text-black no-underline dark:text-white cursor-pointer;
 }
 </style>
