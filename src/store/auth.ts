@@ -53,20 +53,14 @@ export const useAuthStore = defineStore("auth", {
       }
     },
     async useRefreshToken() {
-      try {
-        const response = await apolloClient.mutate({
-          mutation: UseRefreshToken,
-          variables: {
-            refreshToken: this.refreshToken,
-          },
-        });
-        if (response.data !== null) {
-          this.refreshToken = response.data.refreshToken.refreshToken;
-          // todo: navigate to original destination
-        }
-      } catch (e) {
-        await this.logoutUser();
-        await router.push({ name: "login" });
+      const response = await apolloClient.mutate({
+        mutation: UseRefreshToken,
+        variables: {
+          refreshToken: this.refreshToken,
+        },
+      });
+      if (response.data !== null) {
+        this.refreshToken = response.data.refreshToken.refreshToken;
       }
     },
     async fetchUser() {
@@ -94,6 +88,7 @@ export const useAuthStore = defineStore("auth", {
       ) {
         await apolloClient.resetStore();
       }
+      await router.push({ name: "login" });
     },
     async registerUser(userRegistrationInput: UserRegistrationInput) {
       const response = await apolloClient.query({

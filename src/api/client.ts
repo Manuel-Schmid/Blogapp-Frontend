@@ -2,6 +2,7 @@ import {
   ApolloClient,
   ApolloLink,
   DefaultOptions,
+  fromPromise,
   InMemoryCache,
 } from "@apollo/client/core";
 import { createUploadLink } from "apollo-upload-client";
@@ -23,26 +24,16 @@ const cache = new InMemoryCache();
 
 const errorLink = onError(({ graphQLErrors, operation, forward }) => {
   if (graphQLErrors)
-    graphQLErrors.forEach(({ extensions }) => {
-      console.log(`[GraphQL error]: ${extensions.code}`);
+    for (const { extensions } of graphQLErrors) {
       switch (extensions.code) {
-        case "PERMISSION_DENIED": {
-          useAuthStore()
-            .useRefreshToken()
-            .then((r) => {
-              // operation.setContext({
-              //   headers: {
-              //     ...oldHeaders,
-              //     authorization: useAuthStore().refreshToken,
-              //   },
-              // });
-              // console.log(operation);
-              // console.log(operation.getContext());
-              return forward(operation);
-            });
-        }
+        case "PERMISSION_DENIED":
+          return fromPromise(useAuthStore().useRefreshToken()).flatMap(() => {
+            return forward(operation);
+          });
+        case "TOKEN_INVALID":
+          void useAuthStore().logoutUser();
       }
-    });
+    }
   return;
 });
 
