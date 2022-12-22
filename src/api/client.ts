@@ -21,14 +21,25 @@ const defaultOptions: DefaultOptions = {
 
 const cache = new InMemoryCache();
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
+const errorLink = onError(({ graphQLErrors, operation, forward }) => {
   if (graphQLErrors)
-    graphQLErrors.forEach(({ message, locations, path, extensions }) => {
-      console.log(`[GraphQL error]: Message: ${message}`);
+    graphQLErrors.forEach(({ extensions }) => {
+      console.log(`[GraphQL error]: ${extensions.code}`);
       switch (extensions.code) {
         case "PERMISSION_DENIED": {
-          useAuthStore().useRefreshToken();
-          break;
+          useAuthStore()
+            .useRefreshToken()
+            .then((r) => {
+              // operation.setContext({
+              //   headers: {
+              //     ...oldHeaders,
+              //     authorization: useAuthStore().refreshToken,
+              //   },
+              // });
+              // console.log(operation);
+              // console.log(operation.getContext());
+              return forward(operation);
+            });
         }
       }
     });
