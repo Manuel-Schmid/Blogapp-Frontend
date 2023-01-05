@@ -1,13 +1,68 @@
-<script>
+<script lang="ts">
 import { useRoute } from "vue-router";
 
 export default {
   name: "FilterComponent",
   props: ["filterItems", "queryKey", "multiselect"],
 
-  setup() {
+  setup(props: { queryKey: string }) {
     const route = useRoute();
-    return { route };
+
+    const isFilterSelected = (filterItemSlug: string) => {
+      return route.query[props.queryKey]
+        ?.toString()
+        .split(",")
+        .includes(filterItemSlug);
+    };
+
+    const filterDeselectLocation = (filterItemSlug: string) => {
+      console.log(filterItemSlug);
+      return {
+        name: route.name,
+        query: {
+          ...route.query,
+          [props.queryKey]: route.query[props.queryKey]?.includes(",")
+            ? route.query[props.queryKey]
+                ?.toString()
+                .replace(filterItemSlug + ",", "")
+                .replace("," + filterItemSlug, "")
+                .replace(filterItemSlug, "")
+            : undefined,
+          page: undefined,
+        },
+      };
+    };
+
+    const filterSelectLocation = (
+      filterItemSlug: string,
+      multiselect: boolean
+    ) => {
+      return multiselect
+        ? {
+            name: route.name,
+            query: {
+              ...route.query,
+              [props.queryKey]: route.query[props.queryKey]
+                ? route.query[props.queryKey] + "," + filterItemSlug
+                : filterItemSlug,
+              page: undefined,
+            },
+          }
+        : {
+            name: route.name,
+            query: {
+              [props.queryKey]: filterItemSlug,
+              page: undefined,
+            },
+          };
+    };
+
+    return {
+      route,
+      isFilterSelected,
+      filterSelectLocation,
+      filterDeselectLocation,
+    };
   },
 };
 </script>
@@ -28,47 +83,16 @@ export default {
         class="float-left"
       >
         <router-link
-          v-if="route.query[queryKey]?.split(',').includes(filterItem.slug)"
+          v-if="isFilterSelected(filterItem.slug)"
           class="filter-link bg-2"
-          :to="{
-            name: route.name,
-            query: {
-              ...route.query,
-              [queryKey]: route.query[queryKey].includes(',')
-                ? route.query[queryKey]
-                    .replace(filterItem.slug + ',', '')
-                    .replace(',' + filterItem.slug, '')
-                    .replace(filterItem.slug, '')
-                : undefined,
-              page: undefined,
-            },
-          }"
+          :to="filterDeselectLocation(filterItem.slug)"
         >
           <p class="m-0">{{ filterItem.name }}</p>
         </router-link>
         <router-link
           v-else
-          class="filter-link bg-1 hover:bg-1"
-          :to="
-            multiselect
-              ? {
-                  name: route.name,
-                  query: {
-                    ...route.query,
-                    [queryKey]: route.query[queryKey]
-                      ? route.query[queryKey] + ',' + filterItem.slug
-                      : filterItem.slug,
-                    page: undefined,
-                  },
-                }
-              : {
-                  name: route.name,
-                  query: {
-                    [queryKey]: filterItem.slug,
-                    page: undefined,
-                  },
-                }
-          "
+          class="filter-link bg-1 hover:bg-2"
+          :to="filterSelectLocation(filterItem.slug, multiselect)"
         >
           <p class="m-0">{{ filterItem.name }}</p>
         </router-link>
