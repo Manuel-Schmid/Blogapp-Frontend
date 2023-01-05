@@ -1,0 +1,6 @@
+mutation UseRefreshToken($refreshToken: String!) {
+  refreshToken(refreshToken: $refreshToken) {
+    refreshToken
+    refreshExpiresIn
+  }
+}

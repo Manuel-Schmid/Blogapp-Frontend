@@ -16,6 +16,7 @@ import ResendActivationEmail from "../graphql/resendActivationEmail.gql";
 import UpdateAccount from "../graphql/updateAccount.gql";
 import AuthorRequestByUser from "../graphql/getAuthorRequestByUser.gql";
 import CreateAuthorRequest from "../graphql/createAuthorRequest.gql";
+import UseRefreshToken from "../graphql/useRefreshToken.gql";
 import {
   EmailChangeInput,
   PasswordChangeInput,
@@ -35,20 +36,31 @@ export const useAuthStore = defineStore("auth", {
   },
   actions: {
     async fetchRefreshToken(username: String, password: String) {
-      const response = await apolloClient.mutate({
-        mutation: FetchRefreshToken,
-        variables: {
-          username: username,
-          password: password,
-        },
-      });
-      if (response.data !== null) {
+      try {
+        const response = await apolloClient.mutate({
+          mutation: FetchRefreshToken,
+          variables: {
+            username: username,
+            password: password,
+          },
+        });
         this.refreshToken = response.data.tokenAuth.refreshToken;
         await this.fetchUser();
         await this.fetchAuthorRequestByUser();
-        await router.push({ name: "posts" });
-      } else {
-        // todo
+        return true;
+      } catch (e: any) {
+        return e.graphQLErrors[0].extensions.code;
+      }
+    },
+    async useRefreshToken() {
+      const response = await apolloClient.mutate({
+        mutation: UseRefreshToken,
+        variables: {
+          refreshToken: this.refreshToken,
+        },
+      });
+      if (response.data !== null) {
+        this.refreshToken = response.data.refreshToken.refreshToken;
       }
     },
     async fetchUser() {
@@ -76,6 +88,7 @@ export const useAuthStore = defineStore("auth", {
       ) {
         await apolloClient.resetStore();
       }
+      await router.push({ name: "login" });
     },
     async registerUser(userRegistrationInput: UserRegistrationInput) {
       const response = await apolloClient.query({
@@ -153,7 +166,6 @@ export const useAuthStore = defineStore("auth", {
       return response.data.passwordChange.success;
     },
     async changeEmail(emailChangeInput: EmailChangeInput) {
-      console.log("store called");
       const response = await apolloClient.query({
         query: EmailChange,
         variables: {

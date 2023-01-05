@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 export default {
   name: "LoginComponent",
-  props: ["verifiedQuery"],
+  props: ["verifiedQuery", "loginError"],
 
   setup(props: { verifiedQuery: string }, { emit }: any) {
     const username = ref("");
@@ -97,6 +97,14 @@ export default {
             <button @click="onSubmit" class="form-button">
               {{ this.$t("shared.sign-in") }}
             </button>
+            <div v-if="loginError" class="text-color-error">
+              <p v-if="loginError === 'INVALID_CREDENTIALS'">
+                {{ this.$t("components.login.errors.invalid-credentials") }}
+              </p>
+              <p v-else-if="loginError === 'UNVERIFIED_USER'">
+                {{ this.$t("components.login.errors.unverified-account") }}
+              </p>
+            </div>
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
               {{ this.$t("components.login.no-account") }}
               <router-link

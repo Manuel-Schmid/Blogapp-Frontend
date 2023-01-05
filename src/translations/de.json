@@ -62,6 +62,10 @@
           "success": "Konto Verifizierung erfolgreich",
           "error": "Konto Verifizierung fehlgeschlagen"
         },
+        "errors": {
+          "invalid-credentials": "Die eingegebenen Anmeldedaten sind falsch",
+          "unverified-account": "Dieser Benutzer ist noch nicht verifiziert"
+        },
         "title": "Mit deinem Konto anmelden",
         "forgot-password": "Passwort vergessen?",
         "no-account": "Du hast noch kein Konto?"
