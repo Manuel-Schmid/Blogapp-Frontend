@@ -16,8 +16,11 @@ export default {
 
     const submitLogin = async (username: string, password: string) => {
       const loginResult = await authStore.fetchRefreshToken(username, password);
-      if (loginResult === true) await router.push({ name: "posts" });
-      else loginError.value = loginResult;
+      if (loginResult === true) {
+        await router.push({ name: "posts" });
+      } else {
+        loginError.value = loginResult;
+      }
     };
     return { route, loginError, submitLogin };
   },
