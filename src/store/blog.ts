@@ -9,6 +9,7 @@ import {
   Post,
   PostInput,
   Tag,
+  UpdatePostStatusInput,
   User,
 } from "../api/models";
 import Posts from "../graphql/getPosts.gql";
@@ -22,6 +23,7 @@ import AuthorRequests from "../graphql/getAuthorRequests.gql";
 import CreateComment from "../graphql/createComment.gql";
 import DeleteComment from "../graphql/deleteComment.gql";
 import CreatePostLike from "../graphql/createPostLike.gql";
+import UpdatePostStatus from "../graphql/updatePostStatus.gql";
 import DeletePostLike from "../graphql/deletePostLike.gql";
 import UpdateAuthorRequest from "../graphql/updateAuthorRequest.gql";
 
@@ -80,6 +82,15 @@ export const usePostStore = defineStore("blog", {
         },
       });
       this.post = response.data.createPost.post;
+    },
+    async updatePostStatus(updatePostStatusInput: UpdatePostStatusInput) {
+      const response = await apolloClient.query({
+        query: UpdatePostStatus,
+        variables: {
+          updatePostStatusInput,
+        },
+      });
+      return response.data.updatePostStatus.success;
     },
     async fetchUserPosts(activePage: number) {
       const response = await apolloClient.query({

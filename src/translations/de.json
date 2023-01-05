@@ -86,6 +86,20 @@
         "form-category-placeholder": "Kategorie auswählen",
         "form-tags-placeholder": "Komma-separierte Liste von Tags (z.B. Sports, News, ...)"
       },
+      "my-posts": {
+        "table": {
+          "title": "Titel",
+          "category": "Kategorie",
+          "date_created": "Erstelldatum",
+          "image": "Bild",
+          "status": "Status",
+          "action": "Aktion",
+          "published": "Veröffentlicht",
+          "publish": "Veröffentlichen",
+          "draft-noun": "Entwurf",
+          "draft-verb": "Als Entwurf markieren"
+        }
+      },
       "author-request-overview": {
         "table": {
           "user": "User",
