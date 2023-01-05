@@ -68,7 +68,7 @@ const routes: any = [
     path: "/posts/:category?:tags?:page?",
     name: "posts",
     component: PostsOverviewContainer,
-    beforeEnter: [fetchPostsGuard, fetchUsedTagsGuard], // when changing this also change onBeforeRouteUpdate() in PostsOverviewContainer.vue
+    beforeEnter: [fetchPostsGuard, fetchCategoriesGuard, fetchUsedTagsGuard], // when changing this also change onBeforeRouteUpdate() in PostsOverviewContainer.vue
   },
   {
     path: "/posts/:slug",
