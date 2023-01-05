@@ -36,20 +36,20 @@ export const useAuthStore = defineStore("auth", {
   },
   actions: {
     async fetchRefreshToken(username: String, password: String) {
-      const response = await apolloClient.mutate({
-        mutation: FetchRefreshToken,
-        variables: {
-          username: username,
-          password: password,
-        },
-      });
-      if (response.data !== null) {
+      try {
+        const response = await apolloClient.mutate({
+          mutation: FetchRefreshToken,
+          variables: {
+            username: username,
+            password: password,
+          },
+        });
         this.refreshToken = response.data.tokenAuth.refreshToken;
         await this.fetchUser();
         await this.fetchAuthorRequestByUser();
-        await router.push({ name: "posts" });
-      } else {
-        // todo
+        return true;
+      } catch (e: any) {
+        return e.graphQLErrors[0].extensions.code;
       }
     },
     async useRefreshToken() {

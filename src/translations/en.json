@@ -62,8 +62,12 @@
           "success": "Account verification successful",
           "error": "Account verification failed"
         },
-        "title": "Sign in to your account",
+        "errors": {
+          "invalid-credentials": "You have entered incorrect credentials",
+          "unverified-account": "This user has not yet been verified"
+        },
         "forgot-password": "Forgot password?",
+        "title": "Sign in to your account",
         "no-account": "Don’t have an account yet?"
       },
       "email-change-form": {
