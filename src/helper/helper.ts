@@ -1,16 +1,22 @@
-const formatDateShort = (date: string) => {
+const formatDateShort = (date: string, format: string | null = null) => {
   let options: any = { year: "numeric", month: "2-digit", day: "2-digit" };
-  return new Date(date).toLocaleDateString(localStorage.lang, options);
+  return new Date(date).toLocaleDateString(
+    format ? format : localStorage.lang,
+    options
+  );
 };
 
-const formatDateLong = (date: string) => {
+const formatDateLong = (date: string, format: string | null = null) => {
   let options: any = {
     weekday: "long",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
   };
-  return new Date(date).toLocaleDateString(localStorage.lang, options);
+  return new Date(date).toLocaleDateString(
+    format ? format : localStorage.lang,
+    options
+  );
 };
 
 const getImageURL = (image: string) => {

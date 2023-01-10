@@ -9,9 +9,18 @@ import {
 describe("Helper functions", () => {
   it("should return date in format 'dd/mm/yyyy'", () => {
     const formattedDateShort = formatDateShort(
-      "2022-11-20T09:28:51.116911+00:00"
+      "2022-11-20T09:28:51.116911+00:00",
+      "de"
     );
-    expect(formattedDateShort).toMatch("20/11/2022");
+    expect(formattedDateShort).toMatch("20.11.2022");
+  });
+
+  it("should return date in format 'mm/dd/yyyy'", () => {
+    const formattedDateShort = formatDateShort(
+      "2022-11-20T09:28:51.116911+00:00",
+      "en"
+    );
+    expect(formattedDateShort).toMatch("11/20/2022");
   });
 
   it("should return an invalid date", () => {
@@ -21,18 +30,27 @@ describe("Helper functions", () => {
     expect(formattedDateShort).toMatch("Invalid Date");
   });
 
-  it("should return date in format 'DD, dd/mm/yyyy'", () => {
+  it("should return date in format 'DD, mm/dd/yyyy'", () => {
     const formattedDateLong = formatDateLong(
-      "2022-11-20T09:28:51.116911+00:00"
+      "2022-11-20T09:28:51.116911+00:00",
+      "en"
     );
-    expect(formattedDateLong).toMatch("Sunday, 20/11/2022");
+    expect(formattedDateLong).toMatch("Sunday, 11/20/2022");
+  });
+
+  it("should return date in format 'DD, dd.mm.yyyy'", () => {
+    const formattedDateLong = formatDateLong(
+      "2022-11-20T09:28:51.116911+00:00",
+      "de"
+    );
+    expect(formattedDateLong).toMatch("Sonntag, 20.11.2022");
   });
 
   it("should return date in format 'DD, dd/mm/yyyy'", () => {
     const formattedDateLong = formatDateLong(
       "2022-11-23T09:28:51.116911+00:00"
     );
-    expect(formattedDateLong).toMatch("Wednesday, 23/11/2022");
+    expect(formattedDateLong).toMatch("Wednesday, 11/23/2022");
   });
 
   it("should return an invalid date", () => {
