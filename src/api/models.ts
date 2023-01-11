@@ -160,7 +160,6 @@ export type Post = {
   likeCount: Scalars["Int"];
   owner: User;
   slug: Scalars["String"];
-  status: PostStatus;
   /** A comma-separated list of tags. */
   tags: Array<Tag>;
   text: Scalars["String"];
@@ -172,7 +171,6 @@ export type PostInput = {
   image?: InputMaybe<Scalars["Upload"]>;
   owner?: InputMaybe<Scalars["ID"]>;
   slug?: InputMaybe<Scalars["String"]>;
-  status?: InputMaybe<PostStatus>;
   tags?: InputMaybe<Scalars["String"]>;
   text: Scalars["String"];
   title: Scalars["String"];
@@ -189,12 +187,6 @@ export type PostLikeInput = {
   post: Scalars["ID"];
   user?: InputMaybe<Scalars["ID"]>;
 };
-
-/** An enumeration. */
-export enum PostStatus {
-  Draft = "DRAFT",
-  Published = "PUBLISHED",
-}
 
 export type RefreshedTokenType = {
   __typename?: "RefreshedTokenType";
@@ -241,7 +233,6 @@ export type RootMutation = {
   updateCategory?: Maybe<Category>;
   updateComment?: Maybe<Comment>;
   updatePost?: Maybe<Post>;
-  updatePostStatus: UpdatePostStatusType;
   verifyAccount: VerifyAccountType;
   verifyToken: PayloadType;
 };
@@ -330,10 +321,6 @@ export type RootMutationUpdatePostArgs = {
   postInput: PostInput;
 };
 
-export type RootMutationUpdatePostStatusArgs = {
-  updatePostStatusInput: UpdatePostStatusInput;
-};
-
 export type RootMutationVerifyAccountArgs = {
   token: Scalars["String"];
 };
@@ -351,7 +338,7 @@ export type RootQuery = {
   paginatedAuthorRequests: PaginationAuthorRequests;
   paginatedPosts: PaginationPosts;
   paginatedUserPosts: PaginationPosts;
-  postBySlug?: Maybe<Post>;
+  postBySlug: Post;
   tags: Array<Tag>;
   usedTags: Array<Tag>;
   user?: Maybe<User>;
@@ -432,18 +419,6 @@ export type UpdateAccountInput = {
 export type UpdateAccountType = {
   __typename?: "UpdateAccountType";
   errors?: Maybe<Scalars["JSON"]>;
-  success: Scalars["Boolean"];
-};
-
-export type UpdatePostStatusInput = {
-  postSlug: Scalars["String"];
-  status: PostStatus;
-};
-
-export type UpdatePostStatusType = {
-  __typename?: "UpdatePostStatusType";
-  errors?: Maybe<Scalars["JSON"]>;
-  post?: Maybe<Post>;
   success: Scalars["Boolean"];
 };
 
