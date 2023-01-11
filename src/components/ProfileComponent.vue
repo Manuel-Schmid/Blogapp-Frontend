@@ -2,7 +2,6 @@
 import PasswordChangeFormContainer from "../container/PasswordChangeFormContainer.vue";
 import { ref } from "vue";
 import { formatDateShort } from "../helper/helper";
-import { setI18nLanguage } from "../main";
 
 export default {
   name: "profileComponent",
