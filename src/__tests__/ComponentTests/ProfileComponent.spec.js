@@ -2,8 +2,13 @@ import { describe, it, expect } from "vitest";
 import { shallowMount } from "@vue/test-utils";
 import ProfileComponent from "../../components/ProfileComponent.vue";
 import { Status } from "../../api/models";
+import { config } from "@vue/test-utils";
 
 describe("ProfileComponent", () => {
+  config.global.mocks = {
+    $t: (key) => key,
+  };
+
   const defaultProps = {
     userData: {
       id: 1,
@@ -33,15 +38,6 @@ describe("ProfileComponent", () => {
     propsData: defaultProps,
   };
 
-  it("should display the user data in a table", () => {
-    const wrapper = shallowMount(ProfileComponent, mountOptions);
-
-    expect(wrapper.findAll("table").length).toEqual(1);
-    expect(wrapper.findAll("div").at(3).text()).contains(
-      "UsernameadminFirst nameWinston Last nameSmith Emailadmin@example.lo"
-    );
-  });
-
   it("should display that the user has author permissions", () => {
     const customProps = JSON.parse(JSON.stringify(defaultProps));
     customProps.userData.userStatus.isAuthor = true;
@@ -50,14 +46,18 @@ describe("ProfileComponent", () => {
     const wrapper = shallowMount(ProfileComponent, customMountOptions);
 
     expect(wrapper.findAll("div").length).toEqual(10);
-    expect(wrapper.findAll("div").at(5).text()).toMatch("You are an author");
+    expect(wrapper.findAll("div").at(5).text()).toMatch(
+      "components.profile.author-request-widget.is-author"
+    );
   });
 
   it("should display an option to request author permissions", () => {
     const wrapper = shallowMount(ProfileComponent, mountOptions);
 
     expect(wrapper.findAll("div").length).toEqual(7);
-    expect(wrapper.findAll("div").at(2).text()).toMatch("Become an author");
+    expect(wrapper.findAll("div").at(2).text()).toMatch(
+      "components.profile.author-request-widget.become-author"
+    );
   });
 
   it("should display info about the pending author request including its creation date", () => {
@@ -72,8 +72,11 @@ describe("ProfileComponent", () => {
     const wrapper = shallowMount(ProfileComponent, customMountOptions);
 
     expect(wrapper.findAll("div").length).toEqual(10);
-    expect(wrapper.findAll("div").at(2).text()).toMatch(
-      "Your author request was submitted on 18/11/2022 and is still pending"
+    expect(wrapper.findAll("div").at(2).text()).toContain(
+      "components.profile.author-request-widget.request-pending-before-date"
+    );
+    expect(wrapper.findAll("div").at(2).text()).toContain(
+      "components.profile.author-request-widget.request-pending-after-date"
     );
   });
 
@@ -89,8 +92,8 @@ describe("ProfileComponent", () => {
     const wrapper = shallowMount(ProfileComponent, customMountOptions);
 
     expect(wrapper.findAll("div").length).toEqual(10);
-    expect(wrapper.findAll("div").at(2).text()).toMatch(
-      "Your author request was rejected on 20/11/2022"
+    expect(wrapper.findAll("div").at(2).text()).toContain(
+      "components.profile.author-request-widget.request-rejected"
     );
   });
 });

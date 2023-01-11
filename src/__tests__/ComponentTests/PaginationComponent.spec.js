@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { shallowMount, RouterLinkStub } from "@vue/test-utils";
-import PaginationComponent from "../../components/posts-overview/PaginationComponent.vue";
+import PaginationComponent from "../../components/PaginationComponent.vue";
 
 describe("PaginationComponent", () => {
   vi.mock("vue-router/dist/vue-router.mjs", () => ({
@@ -21,7 +21,7 @@ describe("PaginationComponent", () => {
     const wrapper = shallowMount(PaginationComponent, {
       global: globalOptions,
       propsData: {
-        numPostPages: 3,
+        numPages: 3,
         activePage: 1,
       },
     });
@@ -38,7 +38,7 @@ describe("PaginationComponent", () => {
     const wrapper = shallowMount(PaginationComponent, {
       global: globalOptions,
       propsData: {
-        numPostPages: 100,
+        numPages: 100,
         activePage: 35,
       },
     });

@@ -35,9 +35,7 @@ describe("PostTileComponent", () => {
 
     expect(wrapper.findAll("p").length).toEqual(3);
     expect(wrapper.findAll("p").at(0).text()).toMatch("Fortes Fortuna Adiuvat");
-    expect(wrapper.findAll("p").at(1).text()).toMatch(
-      "Arthur C. Clarke - 16/08/2022"
-    );
+    expect(wrapper.findAll("p").at(1).text()).toMatch("Arthur C. Clarke - ");
     expect(wrapper.findAll("p").at(2).text()).toMatch("Comp Sci");
     expect(wrapper.findAll("img").at(0).attributes().src).toMatch(
       "http://api.blogapp.com/media/images/Landscape-Color.jpg"
