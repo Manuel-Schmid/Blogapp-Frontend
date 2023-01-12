@@ -84,7 +84,8 @@
         "form-text": "Text",
         "form-image": "Bild",
         "form-category-placeholder": "Kategorie auswählen",
-        "form-tags-placeholder": "Komma-separierte Liste von Tags (z.B. Sports, News, ...)"
+        "form-tags-placeholder": "Komma-separierte Liste von Tags (z.B. Sports, News, ...)",
+        "form-related-posts-placeholder": "Verwandte Posts auswählen"
       },
       "my-posts": {
         "table": {
