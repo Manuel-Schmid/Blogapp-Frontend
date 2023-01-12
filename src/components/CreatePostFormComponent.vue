@@ -1,9 +1,11 @@
 <script lang="ts">
 import { ref } from "vue";
+import Multiselect from "@vueform/multiselect";
 
 export default {
   name: "CreatePostFormComponent",
-  props: ["categories"],
+  components: { Multiselect },
+  props: ["categories", "postNames"],
 
   setup() {
     const title = ref("");
@@ -11,6 +13,7 @@ export default {
     const tags = ref("");
     const categorySelection = ref("");
     const imageFile = ref(undefined);
+    let relatedPostsSelection = ref(null);
 
     const onFileChange = (e: { target: { files: any[] } }) => {
       if (e.target.files.length > 0) {
@@ -18,14 +21,22 @@ export default {
       }
     };
 
-    return { title, text, imageFile, tags, categorySelection, onFileChange };
+    return {
+      title,
+      text,
+      imageFile,
+      tags,
+      categorySelection,
+      relatedPostsSelection,
+      onFileChange,
+    };
   },
 };
 </script>
 
 <template>
   <div class="site-container">
-    <div class="flex-container-centered">
+    <div class="flex-container-centered h-auto py-10">
       <div class="form-wrapper">
         <div class="form-layout">
           <h1 class="form-title md:text-xl text-left">
@@ -110,6 +121,24 @@ export default {
                 required=""
               />
             </div>
+            <div>
+              <label for="related-posts" class="form-label">{{
+                this.$t("shared.related-posts")
+              }}</label>
+              <Multiselect
+                v-model="relatedPostsSelection"
+                mode="tags"
+                :close-on-select="false"
+                :searchable="true"
+                :placeholder="
+                  this.$t(
+                    'components.create-post.form-related-posts-placeholder'
+                  )
+                "
+                :options="postNames"
+                class="multiselect dark:multiselect-dark"
+              />
+            </div>
             <button
               @click="
                 $emit(
@@ -132,4 +161,4 @@ export default {
   </div>
 </template>
 
-<style scoped></style>
+<style src="@vueform/multiselect/themes/default.css"></style>

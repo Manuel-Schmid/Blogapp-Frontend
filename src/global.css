@@ -23,6 +23,35 @@
 }
 
 @layer components {
+  .multiselect {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg;
+    --ms-option-font-size: 0.875rem;
+    --ms-option-line-height: 1.25rem;
+    --ms-ring-color: transparent;
+    --ms-tag-bg: #dbeafe;
+    --ms-tag-color: #2563eb;
+  }
+
+  .multiselect-dark {
+    @apply bg-gray-700 border-gray-600 placeholder-gray-400 text-white;
+    --ms-dropdown-bg: #152133;
+    --ms-option-bg-pointed: #374151;
+    --ms-option-color-pointed: white;
+    --ms-empty-color: white;
+    --ms-dropdown-border-color: transparent;
+    --ms-tag-bg: #222a3f;
+    --ms-tag-color: white;
+
+  }
+
+  .multiselect input {
+    background-color: #f9fafb;
+  }
+
+  .multiselect-dark input {
+    background-color: #374151;
+  }
+
   .site-container {
     @apply mt-[9vh] h-[91vh]
   }

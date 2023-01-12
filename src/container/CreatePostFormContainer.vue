@@ -33,7 +33,9 @@ export default {
       }
     };
 
-    return { postStore, createPost };
+    const postNames = postStore.paginatedPosts?.posts.map((p) => p.title);
+
+    return { postStore, postNames, createPost };
   },
 };
 </script>
@@ -41,6 +43,7 @@ export default {
 <template>
   <CreatePostFormComponent
     :categories="postStore.categories"
+    :post-names="postNames"
     @create-post="createPost"
   ></CreatePostFormComponent>
 </template>
