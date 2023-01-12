@@ -5,7 +5,7 @@ import Multiselect from "@vueform/multiselect";
 export default {
   name: "CreatePostFormComponent",
   components: { Multiselect },
-  props: ["categories", "postNames"],
+  props: ["categories", "postTitles"],
 
   setup() {
     const title = ref("");
@@ -121,7 +121,7 @@ export default {
                 required=""
               />
             </div>
-            <div>
+            <div v-if="postTitles">
               <label for="related-posts" class="form-label">{{
                 this.$t("shared.related-posts")
               }}</label>
@@ -135,7 +135,7 @@ export default {
                     'components.create-post.form-related-posts-placeholder'
                   )
                 "
-                :options="postNames"
+                :options="postTitles"
                 class="multiselect dark:multiselect-dark"
               />
             </div>
