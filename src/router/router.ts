@@ -74,7 +74,7 @@ const routes: any = [
     path: "/posts/:slug",
     name: "postDetail",
     component: PostDetailContainer,
-    beforeEnter: [fetchPostGuard],
+    beforeEnter: [fetchPostGuard], // when changing this also change onBeforeRouteUpdate() in PostDetailContainer.vue
   },
   {
     path: "/my-posts",
