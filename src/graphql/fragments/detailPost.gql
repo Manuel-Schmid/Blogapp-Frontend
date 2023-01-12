@@ -1,6 +1,7 @@
 #import "./post.gql"
 #import "./comment.gql"
 #import "./tag.gql"
+#import "./overviewPost.gql"
 
 fragment DetailPost on Post {
   id
@@ -12,5 +13,8 @@ fragment DetailPost on Post {
   }
   tags {
     ...Tag
+  }
+  relatedSubPosts {
+    ...OverviewPost
   }
 }
