@@ -115,6 +115,9 @@ export default {
             </router-link>
           </div>
           <div class="w-full mt-8">
+            <p class="font-bold text-xl mb-5">
+              <span>{{ this.$t("components.comment-section.title") }}:</span>
+            </p>
             <CommentSectionContainer
               :post-id="postData.id"
               :comments="postData.comments"

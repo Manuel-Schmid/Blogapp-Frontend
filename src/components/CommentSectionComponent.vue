@@ -23,9 +23,6 @@ export default {
 </script>
 
 <template>
-  <p class="font-bold text-xl mb-5">
-    <span>{{ this.$t("components.comment-section.title") }}:</span>
-  </p>
   <button
     v-if="loggedIn"
     @click="commentFormActive = !commentFormActive"
