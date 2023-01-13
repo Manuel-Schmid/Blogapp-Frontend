@@ -128,6 +128,16 @@ export default {
               <span class="pr-2"
                 >{{ this.$t("components.comment-section.title") }}:</span
               >
+              <font-awesome-icon
+                v-if="commentSectionCollapsed"
+                icon="fa-solid fa-angle-down"
+                class="sort-icon"
+              />
+              <font-awesome-icon
+                v-else
+                icon="fa-solid fa-angle-up"
+                class="sort-icon"
+              />
             </p>
             <CommentSectionContainer
               v-if="!commentSectionCollapsed"
@@ -142,6 +152,16 @@ export default {
               class="font-bold text-xl mt-6 mb-5"
             >
               <span class="pr-2">{{ this.$t("shared.related-posts") }}:</span>
+              <font-awesome-icon
+                v-if="relatedPostsCollapsed"
+                icon="fa-solid fa-angle-down"
+                class="sort-icon"
+              />
+              <font-awesome-icon
+                v-else
+                icon="fa-solid fa-angle-up"
+                class="sort-icon"
+              />
             </p>
             <div v-if="!relatedPostsCollapsed" class="pl-[50px]">
               <PostTileComponent
