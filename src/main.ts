@@ -24,6 +24,8 @@ import {
   faSort,
   faSortUp,
   faSortDown,
+  faAngleUp,
+  faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faCircleXmark,
@@ -52,7 +54,9 @@ library.add(
   faCircleCheck,
   faSort,
   faSortUp,
-  faSortDown
+  faSortDown,
+  faAngleUp,
+  faAngleDown
 );
 
 const messages = {
