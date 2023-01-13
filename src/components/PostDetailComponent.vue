@@ -2,6 +2,7 @@
 import { formatDateLong, getImageURL, formatFullname } from "../helper/helper";
 import CommentSectionContainer from "../container/CommentSectionContainer.vue";
 import PostTileComponent from "./posts-overview/PostTileComponent.vue";
+import { ref } from "vue";
 
 export default {
   name: "PostDetailComponent",
@@ -12,6 +13,9 @@ export default {
   },
 
   setup(props: {}, { emit }: any) {
+    const commentSectionCollapsed = ref(false);
+    const relatedPostsCollapsed = ref(false);
+
     const toggleLike = () => {
       emit("togglePostLike");
     };
@@ -20,6 +24,8 @@ export default {
       formatDateLong,
       getImageURL,
       formatFullname,
+      commentSectionCollapsed,
+      relatedPostsCollapsed,
       toggleLike,
     };
   },
@@ -115,20 +121,29 @@ export default {
             </router-link>
           </div>
           <div class="w-full mt-8">
-            <p class="font-bold text-xl mb-5">
-              <span>{{ this.$t("components.comment-section.title") }}:</span>
+            <p
+              @click="commentSectionCollapsed = !commentSectionCollapsed"
+              class="font-bold text-xl mb-5"
+            >
+              <span class="pr-2"
+                >{{ this.$t("components.comment-section.title") }}:</span
+              >
             </p>
             <CommentSectionContainer
+              v-if="!commentSectionCollapsed"
               :post-id="postData.id"
               :comments="postData.comments"
               :logged-in="loggedIn"
             ></CommentSectionContainer>
           </div>
           <div v-if="postData.relatedSubPosts.length" class="flow-root">
-            <p class="font-bold text-xl mt-6 mb-5">
-              <span>{{ this.$t("shared.related-posts") }}:</span>
+            <p
+              @click="relatedPostsCollapsed = !relatedPostsCollapsed"
+              class="font-bold text-xl mt-6 mb-5"
+            >
+              <span class="pr-2">{{ this.$t("shared.related-posts") }}:</span>
             </p>
-            <div class="pl-[50px]">
+            <div v-if="!relatedPostsCollapsed" class="pl-[50px]">
               <PostTileComponent
                 v-for="post in postData.relatedSubPosts"
                 :key="post.id"
