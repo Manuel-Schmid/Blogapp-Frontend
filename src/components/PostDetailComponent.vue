@@ -123,20 +123,15 @@ export default {
           <div class="w-full mt-8">
             <p
               @click="commentSectionCollapsed = !commentSectionCollapsed"
-              class="font-bold text-xl mb-5"
+              class="section-title no-select"
             >
               <span class="pr-2"
                 >{{ this.$t("components.comment-section.title") }}:</span
               >
               <font-awesome-icon
-                v-if="commentSectionCollapsed"
                 icon="fa-solid fa-angle-down"
                 class="sort-icon"
-              />
-              <font-awesome-icon
-                v-else
-                icon="fa-solid fa-angle-up"
-                class="sort-icon"
+                :class="[commentSectionCollapsed ? 'icon-up' : 'icon-down']"
               />
             </p>
             <CommentSectionContainer
@@ -149,18 +144,13 @@ export default {
           <div v-if="postData.relatedSubPosts.length" class="flow-root">
             <p
               @click="relatedPostsCollapsed = !relatedPostsCollapsed"
-              class="font-bold text-xl mt-6 mb-5"
+              class="section-title no-select mt-6"
             >
               <span class="pr-2">{{ this.$t("shared.related-posts") }}:</span>
               <font-awesome-icon
-                v-if="relatedPostsCollapsed"
                 icon="fa-solid fa-angle-down"
                 class="sort-icon"
-              />
-              <font-awesome-icon
-                v-else
-                icon="fa-solid fa-angle-up"
-                class="sort-icon"
+                :class="[relatedPostsCollapsed ? 'icon-up' : 'icon-down']"
               />
             </p>
             <div v-if="!relatedPostsCollapsed" class="pl-[50px]">
@@ -188,5 +178,16 @@ export default {
 .post-title {
   letter-spacing: 1px;
   font-size: 2em;
+}
+.section-title {
+  @apply font-bold text-xl mb-5 cursor-pointer;
+}
+.icon-up {
+  rotate: 0deg;
+  transition: rotate 300ms;
+}
+.icon-down {
+  rotate: 180deg;
+  transition: rotate 300ms;
 }
 </style>
