@@ -180,7 +180,7 @@ export default {
   font-size: 2em;
 }
 .section-title {
-  @apply font-bold text-xl mb-5 cursor-pointer;
+  @apply font-bold text-xl mb-5 cursor-pointer mx-auto w-max;
 }
 .icon-up {
   rotate: 0deg;
