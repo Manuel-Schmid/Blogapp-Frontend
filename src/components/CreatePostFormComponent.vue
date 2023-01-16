@@ -147,7 +147,8 @@ export default {
                   text,
                   imageFile,
                   categorySelection,
-                  tags
+                  tags,
+                  relatedPostsSelection
                 )
               "
               class="form-button"

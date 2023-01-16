@@ -15,7 +15,8 @@ export default {
       text: string,
       image: any,
       category: string,
-      tags: string
+      tags: string,
+      relatedPosts: string[]
     ) => {
       if (title && text && category) {
         await postStore.createPost({
@@ -24,6 +25,7 @@ export default {
           image,
           category,
           tags,
+          relatedPosts,
         });
         const postSlug = await postStore.post?.slug;
         await router.push({
