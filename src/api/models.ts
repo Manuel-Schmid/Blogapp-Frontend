@@ -173,6 +173,7 @@ export type PostInput = {
   category: Scalars["ID"];
   image?: InputMaybe<Scalars["Upload"]>;
   owner?: InputMaybe<Scalars["ID"]>;
+  relatedPosts?: InputMaybe<Array<Scalars["String"]>>;
   slug?: InputMaybe<Scalars["String"]>;
   status?: InputMaybe<PostStatus>;
   tags?: InputMaybe<Scalars["String"]>;
@@ -208,6 +209,12 @@ export enum PostStatus {
   Draft = "DRAFT",
   Published = "PUBLISHED",
 }
+
+export type PostTitleTuple = {
+  __typename?: "PostTitleTuple";
+  id: Scalars["ID"];
+  title: Scalars["String"];
+};
 
 export type RefreshedTokenType = {
   __typename?: "RefreshedTokenType";
@@ -370,6 +377,7 @@ export type RootQuery = {
   paginatedPosts: PaginationPosts;
   paginatedUserPosts: PaginationPosts;
   postBySlug?: Maybe<Post>;
+  postTitles: Array<PostTitleTuple>;
   tags: Array<Tag>;
   usedTags: Array<Tag>;
   user?: Maybe<User>;
