@@ -148,7 +148,7 @@ export default {
                   imageFile,
                   categorySelection,
                   tags,
-                  relatedPostsSelection
+                  relatedPostsSelection.map((i) => parseInt(i))
                 )
               "
               class="form-button"

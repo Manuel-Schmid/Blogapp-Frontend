@@ -16,7 +16,7 @@ export default {
       image: any,
       category: string,
       tags: string,
-      relatedPosts: string[]
+      relatedPosts: number[]
     ) => {
       if (title && text && category) {
         await postStore.createPost({

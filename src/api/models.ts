@@ -173,7 +173,7 @@ export type PostInput = {
   category: Scalars["ID"];
   image?: InputMaybe<Scalars["Upload"]>;
   owner?: InputMaybe<Scalars["ID"]>;
-  relatedPosts?: InputMaybe<Array<Scalars["String"]>>;
+  relatedPosts?: InputMaybe<Array<Scalars["Int"]>>;
   slug?: InputMaybe<Scalars["String"]>;
   status?: InputMaybe<PostStatus>;
   tags?: InputMaybe<Scalars["String"]>;
@@ -191,17 +191,6 @@ export type PostLike = {
 export type PostLikeInput = {
   post: Scalars["ID"];
   user?: InputMaybe<Scalars["ID"]>;
-};
-
-export type PostRelationInput = {
-  mainPost: Scalars["ID"];
-  subPost: Scalars["ID"];
-};
-
-export type PostRelationType = {
-  __typename?: "PostRelationType";
-  mainPost: Scalars["ID"];
-  subPost: Scalars["ID"];
 };
 
 /** An enumeration. */
@@ -243,7 +232,6 @@ export type RootMutation = {
   createComment?: Maybe<Comment>;
   createPost: CreatePostType;
   createPostLike?: Maybe<PostLike>;
-  createPostRelation: Array<PostRelationType>;
   deleteComment: Scalars["Boolean"];
   deletePostLike: Scalars["Boolean"];
   deleteRefreshTokenCookie: DeleteType;
@@ -281,10 +269,6 @@ export type RootMutationCreatePostArgs = {
 
 export type RootMutationCreatePostLikeArgs = {
   postLikeInput: PostLikeInput;
-};
-
-export type RootMutationCreatePostRelationArgs = {
-  postRelationInput: PostRelationInput;
 };
 
 export type RootMutationDeleteCommentArgs = {
