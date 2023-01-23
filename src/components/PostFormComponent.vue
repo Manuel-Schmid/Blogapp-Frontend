@@ -5,15 +5,34 @@ import Multiselect from "@vueform/multiselect";
 export default {
   name: "CreatePostFormComponent",
   components: { Multiselect },
-  props: ["categories", "postTitles"],
+  props: [
+    "formTitle",
+    "categories",
+    "postTitles",
+    "formButtonText",
+    "title",
+    "text",
+    "tags",
+    "categorySelection",
+    "relatedPostsSelection",
+  ],
 
-  setup() {
-    const title = ref("");
-    const text = ref("");
-    const tags = ref("");
-    const categorySelection = ref("");
+  setup(
+    props: {
+      title: string;
+      text: string;
+      tags: string;
+      categorySelection: string;
+      relatedPostsSelection: string;
+    },
+    { emit }: any
+  ) {
+    const title = ref(props.title);
+    const text = ref(props.text);
+    const tags = ref(props.tags);
+    const categorySelection = ref(props.categorySelection);
     const imageFile = ref(undefined);
-    let relatedPostsSelection = ref(null);
+    let relatedPostsSelection = ref(props.relatedPostsSelection);
 
     const onFileChange = (e: { target: { files: any[] } }) => {
       if (e.target.files.length > 0) {
@@ -40,12 +59,12 @@ export default {
       <div class="form-wrapper">
         <div class="form-layout">
           <h1 class="form-title md:text-xl text-left">
-            {{ this.$t("components.create-post.title") }}
+            {{ formTitle }}
           </h1>
           <form ref="signupForm" class="form-inner-spacing" @submit.prevent="">
             <div>
               <label for="title" class="form-label">{{
-                this.$t("components.create-post.form-title")
+                this.$t("components.post-form.form-title")
               }}</label>
               <input
                 type="text"
@@ -59,7 +78,7 @@ export default {
             </div>
             <div>
               <label for="text" class="form-label">{{
-                this.$t("components.create-post.form-text")
+                this.$t("components.post-form.form-text")
               }}</label>
               <input
                 type="text"
@@ -73,7 +92,7 @@ export default {
             </div>
             <div>
               <label for="image" class="form-label">{{
-                this.$t("components.create-post.form-image")
+                this.$t("components.post-form.form-image")
               }}</label>
               <input
                 type="file"
@@ -97,7 +116,7 @@ export default {
               >
                 <option value="" disabled selected>
                   {{
-                    this.$t("components.create-post.form-category-placeholder")
+                    this.$t("components.post-form.form-category-placeholder")
                   }}
                 </option>
                 <option v-for="category in categories" :value="category.id">
@@ -116,7 +135,7 @@ export default {
                 id="tags"
                 class="form-input"
                 :placeholder="
-                  this.$t('components.create-post.form-tags-placeholder')
+                  this.$t('components.post-form.form-tags-placeholder')
                 "
                 required=""
               />
@@ -131,9 +150,7 @@ export default {
                 :close-on-select="false"
                 :searchable="true"
                 :placeholder="
-                  this.$t(
-                    'components.create-post.form-related-posts-placeholder'
-                  )
+                  this.$t('components.post-form.form-related-posts-placeholder')
                 "
                 :options="postTitles"
                 class="multiselect dark:multiselect-dark"
@@ -142,7 +159,7 @@ export default {
             <button
               @click="
                 $emit(
-                  'createPost',
+                  'savePost',
                   title,
                   text,
                   imageFile,
@@ -153,7 +170,7 @@ export default {
               "
               class="form-button"
             >
-              Create post
+              {{ formButtonText }}
             </button>
           </form>
         </div>

@@ -35,14 +35,6 @@ export default {
       }
     };
 
-    /*
-    *"title",
-    "text",
-    "tags",
-    "categorySelection",
-    "relatedPostsSelection",
-    * */
-
     return { postStore, createPost };
   },
 };
@@ -50,15 +42,16 @@ export default {
 
 <template>
   <PostFormComponent
-    :form-title="this.$t('components.post-form.create-post-title')"
-    :form-button-text="this.$t('components.post-form.create-post-button')"
+    v-if="postStore.post"
+    :form-title="this.$t('components.post-form.update-post-title')"
+    :form-button-text="this.$t('shared.save')"
     :categories="postStore.categories"
     :post-titles="postStore.fetchPostTitles"
-    title=""
-    text=""
-    tags=""
-    category-selection=""
-    :related-posts-selection="[]"
+    :title="postStore.post.title"
+    :text="postStore.post.text"
+    :tags="postStore.post.tags.map((tag) => tag.name).join(', ')"
+    :category-selection="postStore.post.category.id"
+    :related-posts-selection="['2', '4']"
     @save-post="createPost"
   ></PostFormComponent>
 </template>
