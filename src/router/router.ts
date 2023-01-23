@@ -10,6 +10,7 @@ import EmailChangeFormContainer from "../container/EmailChangeFormContainer.vue"
 import ActivationContainer from "../container/ActivationContainer.vue";
 import RegistrationConfirmationContainer from "../container/RegistrationConfirmationContainer.vue";
 import CreatePostFormContainer from "../container/CreatePostFormContainer.vue";
+import UpdatePostFormContainer from "../container/UpdatePostFormContainer.vue";
 import { requireLoginGuard } from "./guards/requireLoginGuard";
 import { requireAuthorPermissionGuard } from "./guards/requireAuthorPermissionGuard";
 import { fetchUserGuard } from "./guards/fetchUserGuard";
@@ -94,6 +95,17 @@ const routes: any = [
       requireLoginGuard,
       requireAuthorPermissionGuard,
       fetchCategoriesGuard,
+    ],
+  },
+  {
+    path: "/update-post/:slug",
+    name: "updatePost",
+    component: UpdatePostFormContainer,
+    beforeEnter: [
+      requireLoginGuard,
+      requireAuthorPermissionGuard,
+      fetchCategoriesGuard,
+      fetchPostGuard,
     ],
   },
   {
