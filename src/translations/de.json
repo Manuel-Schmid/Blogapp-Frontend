@@ -78,8 +78,10 @@
         "change-success": "Email-Änderung erfolgreich.",
         "change-fail": "Email-Änderung fehlgeschlagen."
       },
-      "create-post": {
-        "title": "Erstelle deinen Post",
+      "post-form": {
+        "create-post-title": "Erstelle deinen Post",
+        "create-post-button": "Post erstellen",
+        "update-post-title": "Bearbeite deinen Post",
         "form-title": "Titel",
         "form-text": "Text",
         "form-image": "Bild",
