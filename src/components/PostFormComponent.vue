@@ -1,6 +1,7 @@
 <script lang="ts">
 import { ref } from "vue";
 import Multiselect from "@vueform/multiselect";
+import { getImageURL } from "../helper/helper";
 
 export default {
   name: "CreatePostFormComponent",
@@ -13,6 +14,7 @@ export default {
     "title",
     "text",
     "tags",
+    "image",
     "categorySelection",
     "relatedPostsSelection",
   ],
@@ -47,6 +49,7 @@ export default {
       tags,
       categorySelection,
       relatedPostsSelection,
+      getImageURL,
       onFileChange,
     };
   },
@@ -101,6 +104,12 @@ export default {
                 @change="onFileChange"
                 class="form-input"
                 required=""
+              />
+              <img
+                v-if="image"
+                :src="getImageURL(image.name)"
+                class="mt-4"
+                alt="Post Image"
               />
             </div>
             <div>

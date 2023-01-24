@@ -1,6 +1,7 @@
 <script lang="ts">
 import PostFormComponent from "../components/PostFormComponent.vue";
 import { usePostStore } from "../store/blog";
+import { useRoute } from "vue-router";
 import router from "../router/router";
 
 export default {
@@ -9,8 +10,9 @@ export default {
 
   setup() {
     const postStore = usePostStore();
+    const route = useRoute();
 
-    const createPost = async (
+    const updatePost = async (
       title: string,
       text: string,
       image: any,
@@ -19,7 +21,9 @@ export default {
       relatedPosts: number[]
     ) => {
       if (title && text && category) {
-        await postStore.createPost({
+        const postSlug = route.params.slug as string;
+        const success = await postStore.updatePost({
+          slug: postSlug,
           title,
           text,
           image,
@@ -27,15 +31,16 @@ export default {
           tags,
           relatedPosts,
         });
-        const postSlug = await postStore.post?.slug;
-        await router.push({
-          name: "postDetail",
-          params: { slug: postSlug },
-        });
+        if (success) {
+          await router.push({
+            name: "postDetail",
+            params: { slug: postSlug },
+          });
+        }
       }
     };
 
-    return { postStore, createPost };
+    return { postStore, updatePost };
   },
 };
 </script>
@@ -49,9 +54,12 @@ export default {
     :post-titles="postStore.fetchPostTitles"
     :title="postStore.post.title"
     :text="postStore.post.text"
+    :image="postStore.post.image"
     :tags="postStore.post.tags.map((tag) => tag.name).join(', ')"
     :category-selection="postStore.post.category.id"
-    :related-posts-selection="['2', '4']"
-    @save-post="createPost"
+    :related-posts-selection="
+      postStore.post.relatedSubPosts.map((subPost) => subPost.id)
+    "
+    @save-post="updatePost"
   ></PostFormComponent>
 </template>
