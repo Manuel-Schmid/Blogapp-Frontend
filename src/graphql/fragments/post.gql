@@ -2,6 +2,7 @@
 #import "./category.gql"
 
 fragment Post on Post {
+  id
   slug
   title
   image {

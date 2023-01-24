@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { apolloClient } from "../api/client";
 import {
-  AuthorRequest,
   AuthorRequestInput,
   Category,
   PaginationAuthorRequests,
@@ -10,12 +9,12 @@ import {
   PostInput,
   Tag,
   UpdatePostStatusInput,
-  User,
 } from "../api/models";
 import Posts from "../graphql/getPosts.gql";
 import UserPosts from "../graphql/getUserPosts.gql";
 import PostBySlug from "../graphql/getPost.gql";
 import CreatePost from "../graphql/createPost.gql";
+import UpdatePost from "../graphql/updatePost.gql";
 import PostTitles from "../graphql/getPostTitles.gql";
 import Tags from "../graphql/getTags.gql";
 import Categories from "../graphql/categories.gql";
@@ -84,6 +83,15 @@ export const usePostStore = defineStore("blog", {
       });
       this.post = response.data.createPost.post;
     },
+    async updatePost(postInput: PostInput) {
+      const response = await apolloClient.mutate({
+        mutation: UpdatePost,
+        variables: {
+          postInput,
+        },
+      });
+      return response.data.updatePost.success;
+    },
     async updatePostStatus(updatePostStatusInput: UpdatePostStatusInput) {
       const response = await apolloClient.query({
         query: UpdatePostStatus,
@@ -106,7 +114,7 @@ export const usePostStore = defineStore("blog", {
       const response = await apolloClient.query({
         query: PostTitles,
       });
-      return await response.data.postTitles.map((obj: any) => ({
+      return response.data.postTitles.map((obj: any) => ({
         value: obj.id,
         label: obj.title,
       }));
