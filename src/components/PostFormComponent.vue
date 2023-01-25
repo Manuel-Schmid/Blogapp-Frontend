@@ -2,39 +2,28 @@
 import { ref } from "vue";
 import Multiselect from "@vueform/multiselect";
 import { getImageURL } from "../helper/helper";
+import { Post } from "../api/models";
 
 export default {
   name: "CreatePostFormComponent",
   components: { Multiselect },
-  props: [
-    "formTitle",
-    "categories",
-    "postTitles",
-    "formButtonText",
-    "title",
-    "text",
-    "tags",
-    "image",
-    "categorySelection",
-    "relatedPostsSelection",
-  ],
+  props: ["post", "formTitle", "categories", "postTitles", "formButtonText"],
 
   setup(
     props: {
-      title: string;
-      text: string;
-      tags: string;
-      categorySelection: string;
+      post: Post | null;
       relatedPostsSelection: string;
     },
     { emit }: any
   ) {
-    const title = ref(props.title);
-    const text = ref(props.text);
-    const tags = ref(props.tags);
-    const categorySelection = ref(props.categorySelection);
+    const title = ref(props.post?.title);
+    const text = ref(props.post?.text);
+    const tags = ref(props.post?.tags.map((tag) => tag.name).join(", "));
+    const categorySelection = ref(props.post?.category.id);
+    let relatedPostsSelection = ref(
+      props.post?.relatedSubPosts.map((subPost) => subPost.id)
+    );
     const imageFile = ref(undefined);
-    let relatedPostsSelection = ref(props.relatedPostsSelection);
 
     const onFileChange = (e: { target: { files: any[] } }) => {
       if (e.target.files.length > 0) {
@@ -106,8 +95,8 @@ export default {
                 required=""
               />
               <img
-                v-if="image"
-                :src="getImageURL(image.name)"
+                v-if="post?.image"
+                :src="getImageURL(post.image.name)"
                 class="mt-4"
                 alt="Post Image"
               />

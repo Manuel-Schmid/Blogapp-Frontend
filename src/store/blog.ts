@@ -118,6 +118,7 @@ export const usePostStore = defineStore("blog", {
         value: obj.id,
         label: obj.title,
       }));
+      // .filter((item: any) => item.value !== "");
     },
     async fetchCategories() {
       if (this.categories.length === 0) {
