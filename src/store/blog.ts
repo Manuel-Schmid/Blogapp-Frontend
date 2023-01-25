@@ -85,6 +85,7 @@ export const usePostStore = defineStore("blog", {
         },
       });
       this.post = response.data.createPost.post;
+      return response.data.createPost.success;
     },
     async updatePost(postInput: PostInput) {
       const response = await apolloClient.mutate({

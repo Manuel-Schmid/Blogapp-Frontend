@@ -19,7 +19,7 @@ export default {
       relatedPosts: number[]
     ) => {
       if (title && text && category) {
-        await postStore.createPost({
+        const success = await postStore.createPost({
           title,
           text,
           image,
@@ -27,11 +27,13 @@ export default {
           tags,
           relatedPosts,
         });
-        const postSlug = await postStore.post?.slug;
-        await router.push({
-          name: "postDetail",
-          params: { slug: postSlug },
-        });
+        if (success) {
+          const postSlug = await postStore.post?.slug;
+          await router.push({
+            name: "postDetail",
+            params: { slug: postSlug },
+          });
+        }
       }
     };
 

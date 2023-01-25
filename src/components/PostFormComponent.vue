@@ -65,7 +65,7 @@ export default {
                 id="title"
                 class="form-input"
                 placeholder="Lorem ipsum dolor sit amet"
-                required=""
+                required
               />
             </div>
             <div>
@@ -79,7 +79,7 @@ export default {
                 id="text"
                 class="form-input"
                 placeholder="Aenean placerat finibus cursus"
-                required=""
+                required
               />
             </div>
             <div>
@@ -92,7 +92,7 @@ export default {
                 id="image"
                 @change="onFileChange"
                 class="form-input"
-                required=""
+                :required="!post"
               />
               <img
                 v-if="post?.image"
@@ -110,7 +110,7 @@ export default {
                 name="category"
                 v-model="categorySelection"
                 class="form-input"
-                required=""
+                required
               >
                 <option value="" disabled selected>
                   {{
@@ -135,7 +135,6 @@ export default {
                 :placeholder="
                   this.$t('components.post-form.form-tags-placeholder')
                 "
-                required=""
               />
             </div>
             <div v-if="postTitles">
@@ -163,7 +162,9 @@ export default {
                   imageFile,
                   categorySelection,
                   tags,
-                  relatedPostsSelection.map((i) => parseInt(i))
+                  relatedPostsSelection
+                    ? relatedPostsSelection.map((i) => parseInt(i))
+                    : []
                 )
               "
               class="form-button"
