@@ -43,10 +43,10 @@ export default {
 <template>
   <PostFormComponent
     :post="null"
-    :form-title="this.$t('components.post-form.create-post-title')"
-    :form-button-text="this.$t('components.post-form.create-post-button')"
     :categories="postStore.categories"
     :post-titles="postStore.postTitles"
+    :form-title="this.$t('components.post-form.create-post-title')"
+    :form-button-text="this.$t('components.post-form.create-post-button')"
     @save-post="createPost"
   ></PostFormComponent>
 </template>

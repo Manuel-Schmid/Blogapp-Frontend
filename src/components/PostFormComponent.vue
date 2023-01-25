@@ -19,7 +19,7 @@ export default {
     const title = ref(props.post?.title);
     const text = ref(props.post?.text);
     const tags = ref(props.post?.tags.map((tag) => tag.name).join(", "));
-    const categorySelection = ref(props.post?.category.id);
+    const categorySelection = ref(props.post ? props.post?.category.id : "");
     let relatedPostsSelection = ref(
       props.post?.relatedSubPosts.map((subPost) => subPost.id)
     );
