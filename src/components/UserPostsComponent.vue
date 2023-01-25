@@ -45,7 +45,7 @@ export default {
             <th>{{ this.$t("components.my-posts.table.date_created") }}</th>
             <th>{{ this.$t("components.my-posts.table.image") }}</th>
             <th>{{ this.$t("components.my-posts.table.status") }}</th>
-            <th>{{ this.$t("components.my-posts.table.action") }}</th>
+            <th>{{ this.$t("components.my-posts.table.actions") }}</th>
           </tr>
           <tr v-for="post in postsData.posts" :key="post.id" class="table-row">
             <td class="table-row-value">
@@ -84,6 +84,11 @@ export default {
               </div>
             </td>
             <td>
+              <router-link
+                :to="{ name: 'updatePost', params: { slug: post.slug } }"
+                class="p-2 mx-1 bg-4"
+                >{{ this.$t("components.my-posts.table.edit") }}</router-link
+              >
               <button
                 v-if="post.status === PostStatus.Published"
                 @click="updatePostStatus(post.slug, PostStatus.Draft)"

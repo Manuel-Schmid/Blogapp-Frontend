@@ -7,7 +7,7 @@ import { Post } from "../api/models";
 export default {
   name: "CreatePostFormComponent",
   components: { Multiselect },
-  props: ["post", "formTitle", "categories", "postTitles", "formButtonText"],
+  props: ["post", "categories", "postTitles", "formTitle", "formButtonText"],
 
   setup(
     props: {

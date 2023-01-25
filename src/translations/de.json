@@ -96,11 +96,12 @@
           "date_created": "Erstelldatum",
           "image": "Bild",
           "status": "Status",
-          "action": "Aktion",
+          "actions": "Aktionen",
           "published": "Veröffentlicht",
           "publish": "Veröffentlichen",
           "draft-noun": "Entwurf",
-          "draft-verb": "Als Entwurf markieren"
+          "draft-verb": "Als Entwurf markieren",
+          "edit": "Bearbeiten"
         }
       },
       "author-request-overview": {

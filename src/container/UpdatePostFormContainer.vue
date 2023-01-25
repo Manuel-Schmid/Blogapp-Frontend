@@ -3,6 +3,7 @@ import PostFormComponent from "../components/PostFormComponent.vue";
 import { usePostStore } from "../store/blog";
 import { useRoute } from "vue-router";
 import router from "../router/router";
+import { useAuthStore } from "../store/auth";
 
 export default {
   name: "CreatePostFormContainer",
@@ -10,6 +11,7 @@ export default {
 
   setup() {
     const postStore = usePostStore();
+    const authStore = useAuthStore();
     const route = useRoute();
 
     const updatePost = async (
@@ -40,21 +42,21 @@ export default {
       }
     };
 
-    return { postStore, updatePost };
+    return { postStore, authStore, updatePost };
   },
 };
 </script>
 
 <template>
   <PostFormComponent
-    v-if="postStore.post"
+    v-if="postStore.post?.owner.id === authStore.user.id"
     :post="postStore.post"
-    :form-title="this.$t('components.post-form.update-post-title')"
-    :form-button-text="this.$t('shared.save')"
     :categories="postStore.categories"
     :post-titles="
       postStore.postTitles.filter((item) => item.value !== postStore.post?.id)
     "
+    :form-title="this.$t('components.post-form.update-post-title')"
+    :form-button-text="this.$t('shared.save')"
     @save-post="updatePost"
   ></PostFormComponent>
 </template>

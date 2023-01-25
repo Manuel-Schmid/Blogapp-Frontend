@@ -96,11 +96,12 @@
           "date_created": "Date created",
           "image": "Image",
           "status": "Status",
-          "action": "Action",
+          "actions": "Actions",
           "published": "Published",
           "publish": "Publish",
           "draft-noun": "Draft",
-          "draft-verb": "Mark as draft"
+          "draft-verb": "Mark as draft",
+          "edit": "Edit"
         }
       },
       "author-request-overview": {

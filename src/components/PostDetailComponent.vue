@@ -6,7 +6,7 @@ import { ref } from "vue";
 
 export default {
   name: "PostDetailComponent",
-  props: ["postData", "postLiked", "loggedIn"],
+  props: ["postData", "postLiked", "user"],
   components: {
     CommentSectionContainer,
     PostTileComponent,
@@ -35,6 +35,12 @@ export default {
 <template>
   <div class="site-container p-12 dark:text-white">
     <div class="detail-post content-container m-auto">
+      <router-link
+        v-if="user.id === postData.owner.id"
+        :to="{ name: 'updatePost', params: { slug: postData.slug } }"
+        class="py-2 px-3 absolute right-12 mr-10 z-10 cursor-pointer button-bg-light-2 dark:button-bg-dark"
+        >{{ this.$t("components.my-posts.table.edit") }}</router-link
+      >
       <div class="w-full relative">
         <div
           class="post-title leading-5 text-black dark:text-white font-bold mb-3"
@@ -72,7 +78,7 @@ export default {
           <div class="mt-2 mr-8">
             <div class="text-center float-right w-max flex flex-col">
               <font-awesome-icon
-                v-if="loggedIn"
+                v-if="user"
                 icon="fa-thumbs-up"
                 class="text-3xl mb-0.5 cursor-pointer w-full"
                 :class="[
@@ -138,7 +144,7 @@ export default {
               v-if="!commentSectionCollapsed"
               :post-id="postData.id"
               :comments="postData.comments"
-              :logged-in="loggedIn"
+              :logged-in="!!user"
             ></CommentSectionContainer>
           </div>
           <div v-if="postData.relatedSubPosts.length" class="flow-root">

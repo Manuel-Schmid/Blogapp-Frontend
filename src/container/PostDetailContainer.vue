@@ -42,7 +42,7 @@ export default {
     v-if="postStore.post"
     :post-data="postStore.post"
     :post-liked="postLiked"
-    :logged-in="!!authStore.user"
+    :user="authStore.user"
     @toggle-post-like="togglePostLike"
   />
 </template>
