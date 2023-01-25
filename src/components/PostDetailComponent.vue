@@ -66,12 +66,14 @@ export default {
           }}
         </p>
       </div>
-      <div v-if="postData.image" class="px-8 py-2 mt-6">
+      <div class="px-8 py-2 mt-6">
         <img
+          v-if="postData.image.name"
           class="w-full"
           :src="getImageURL(postData.image.name)"
           alt="Post Image"
         />
+        <p v-else class="italic">{{ this.$t("shared.no-image") }}</p>
       </div>
       <div class="mt-4 w-full pb-8">
         <div class="w-full">
