@@ -199,8 +199,8 @@ export enum PostStatus {
   Published = "PUBLISHED",
 }
 
-export type PostTitleTuple = {
-  __typename?: "PostTitleTuple";
+export type PostTitleType = {
+  __typename?: "PostTitleType";
   id: Scalars["ID"];
   title: Scalars["String"];
 };
@@ -249,7 +249,7 @@ export type RootMutation = {
   updateAuthorRequest: AuthorRequestWrapperType;
   updateCategory?: Maybe<Category>;
   updateComment?: Maybe<Comment>;
-  updatePost?: Maybe<Post>;
+  updatePost?: Maybe<UpdatePostType>;
   updatePostStatus: UpdatePostStatusType;
   verifyAccount: VerifyAccountType;
   verifyToken: PayloadType;
@@ -361,7 +361,7 @@ export type RootQuery = {
   paginatedPosts: PaginationPosts;
   paginatedUserPosts: PaginationPosts;
   postBySlug?: Maybe<Post>;
-  postTitles: Array<PostTitleTuple>;
+  postTitles: Array<PostTitleType>;
   tags: Array<Tag>;
   usedTags: Array<Tag>;
   user?: Maybe<User>;
@@ -452,6 +452,13 @@ export type UpdatePostStatusInput = {
 
 export type UpdatePostStatusType = {
   __typename?: "UpdatePostStatusType";
+  errors?: Maybe<Scalars["JSON"]>;
+  post?: Maybe<Post>;
+  success: Scalars["Boolean"];
+};
+
+export type UpdatePostType = {
+  __typename?: "UpdatePostType";
   errors?: Maybe<Scalars["JSON"]>;
   post?: Maybe<Post>;
   success: Scalars["Boolean"];

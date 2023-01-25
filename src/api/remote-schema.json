@@ -1696,7 +1696,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "PostTitleTuple",
+        "name": "PostTitleType",
         "description": null,
         "fields": [
           {
@@ -2621,7 +2621,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "Post",
+              "name": "UpdatePostType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -2997,7 +2997,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "OBJECT",
-                    "name": "PostTitleTuple",
+                    "name": "PostTitleType",
                     "ofType": null
                   }
                 }
@@ -3499,6 +3499,57 @@
       {
         "kind": "OBJECT",
         "name": "UpdatePostStatusType",
+        "description": null,
+        "fields": [
+          {
+            "name": "errors",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "JSON",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "post",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Post",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "success",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "UpdatePostType",
         "description": null,
         "fields": [
           {
