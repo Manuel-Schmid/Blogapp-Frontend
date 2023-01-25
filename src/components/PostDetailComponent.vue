@@ -36,7 +36,7 @@ export default {
   <div class="site-container p-12 dark:text-white">
     <div class="detail-post content-container m-auto">
       <router-link
-        v-if="user.id === postData.owner.id"
+        v-if="user?.id === postData.owner.id"
         :to="{ name: 'updatePost', params: { slug: postData.slug } }"
         class="py-2 px-3 absolute right-12 mr-10 z-10 cursor-pointer button-bg-light-2 dark:button-bg-dark"
         >{{ this.$t("components.my-posts.table.edit") }}</router-link
