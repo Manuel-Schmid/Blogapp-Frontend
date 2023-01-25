@@ -59,22 +59,24 @@ export default {
             <td>{{ formatDateShort(post.dateCreated) }}</td>
             <td>
               <img
+                v-if="post.image.name"
                 class="m-auto max-w-[6rem] max-h-16 p-2"
                 :src="getImageURL(post.image.name)"
                 :alt="this.$t('components.my-posts.table.image')"
               />
+              <p v-else>{{ this.$t("shared.no-image") }}</p>
             </td>
             <td>
               <div
                 v-if="post.status === PostStatus.Draft"
-                class="h-6 pr-2 text-color-pending"
+                class="py-2 text-color-pending"
               >
                 {{ this.$t("components.my-posts.table.draft-noun") }}
                 <font-awesome-icon icon="fa-regular fa-clock" class="ml-1" />
               </div>
               <div
                 v-else-if="post.status === PostStatus.Published"
-                class="h-6 pr-2 text-color-success"
+                class="py-2 text-color-success"
               >
                 {{ this.$t("components.my-posts.table.published") }}
                 <font-awesome-icon

@@ -35,13 +35,14 @@ export default {
         {{ formatDateShort(post.dateCreated) }}
       </p>
     </div>
-    <div v-if="post.image" class="pt-3 pb-1 px-2 h-44 flex">
+    <div v-if="post.image.name" class="pt-3 pb-1 px-2 h-44 flex">
       <img
         class="w-full max-h-full"
         :src="getImageURL(post.image.name)"
         alt="Post Image"
       />
     </div>
+    <p v-else class="italic">{{ this.$t("shared.no-image") }}</p>
     <div class="w-1/2 float-left text-left">
       <div class="m-2 icons-container">
         <span class="ml-2 w-1/2">
