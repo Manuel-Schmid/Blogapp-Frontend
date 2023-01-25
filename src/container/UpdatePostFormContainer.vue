@@ -52,7 +52,9 @@ export default {
     :form-title="this.$t('components.post-form.update-post-title')"
     :form-button-text="this.$t('shared.save')"
     :categories="postStore.categories"
-    :post-titles="postStore.fetchPostTitles"
+    :post-titles="
+      postStore.postTitles.filter((item) => item.value !== postStore.post?.id)
+    "
     @save-post="updatePost"
   ></PostFormComponent>
 </template>

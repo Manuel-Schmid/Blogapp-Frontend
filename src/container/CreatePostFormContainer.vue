@@ -46,7 +46,7 @@ export default {
     :form-title="this.$t('components.post-form.create-post-title')"
     :form-button-text="this.$t('components.post-form.create-post-button')"
     :categories="postStore.categories"
-    :post-titles="postStore.fetchPostTitles"
+    :post-titles="postStore.postTitles"
     @save-post="createPost"
   ></PostFormComponent>
 </template>

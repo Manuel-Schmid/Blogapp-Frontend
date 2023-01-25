@@ -22,6 +22,7 @@ import AuthorRequestOverviewContainer from "../container/AuthorRequestOverviewCo
 import { fetchAuthorRequestsGuard } from "./guards/fetchAuthorRequestsGuard";
 import { fetchUserPostsGuard } from "./guards/fetchUserPostsGuard";
 import UserPostsContainer from "../container/UserPostsContainer.vue";
+import { fetchPostTitlesGuard } from "./guards/fetchPostTitlesGuard";
 
 const routes: any = [
   {
@@ -95,6 +96,7 @@ const routes: any = [
       requireLoginGuard,
       requireAuthorPermissionGuard,
       fetchCategoriesGuard,
+      fetchPostTitlesGuard,
     ],
   },
   {
@@ -105,6 +107,7 @@ const routes: any = [
       requireLoginGuard,
       requireAuthorPermissionGuard,
       fetchCategoriesGuard,
+      fetchPostTitlesGuard,
       fetchPostGuard,
     ],
   },

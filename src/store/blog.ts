@@ -7,6 +7,7 @@ import {
   PaginationPosts,
   Post,
   PostInput,
+  PostTitleType,
   Tag,
   UpdatePostStatusInput,
 } from "../api/models";
@@ -31,6 +32,7 @@ export type PostState = {
   paginatedPosts: PaginationPosts | null;
   paginatedUserPosts: PaginationPosts | null;
   post: Post | null;
+  postTitles: PostTitleType[];
   tags: Tag[];
   categories: Category[];
   usedTags: Tag[];
@@ -43,6 +45,7 @@ export const usePostStore = defineStore("blog", {
       paginatedPosts: null,
       paginatedUserPosts: null,
       post: null,
+      postTitles: [],
       tags: [],
       categories: [],
       usedTags: [],
@@ -114,11 +117,10 @@ export const usePostStore = defineStore("blog", {
       const response = await apolloClient.query({
         query: PostTitles,
       });
-      return response.data.postTitles.map((obj: any) => ({
+      this.postTitles = response.data.postTitles.map((obj: any) => ({
         value: obj.id,
         label: obj.title,
       }));
-      // .filter((item: any) => item.value !== "");
     },
     async fetchCategories() {
       if (this.categories.length === 0) {
