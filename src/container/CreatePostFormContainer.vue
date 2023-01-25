@@ -35,14 +35,6 @@ export default {
       }
     };
 
-    /*
-    *"title",
-    "text",
-    "tags",
-    "categorySelection",
-    "relatedPostsSelection",
-    * */
-
     return { postStore, createPost };
   },
 };
@@ -50,15 +42,11 @@ export default {
 
 <template>
   <PostFormComponent
+    :post="null"
     :form-title="this.$t('components.post-form.create-post-title')"
     :form-button-text="this.$t('components.post-form.create-post-button')"
     :categories="postStore.categories"
     :post-titles="postStore.fetchPostTitles"
-    title=""
-    text=""
-    tags=""
-    category-selection=""
-    :related-posts-selection="[]"
     @save-post="createPost"
   ></PostFormComponent>
 </template>

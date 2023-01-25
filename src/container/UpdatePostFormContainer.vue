@@ -48,18 +48,11 @@ export default {
 <template>
   <PostFormComponent
     v-if="postStore.post"
+    :post="postStore.post"
     :form-title="this.$t('components.post-form.update-post-title')"
     :form-button-text="this.$t('shared.save')"
     :categories="postStore.categories"
     :post-titles="postStore.fetchPostTitles"
-    :title="postStore.post.title"
-    :text="postStore.post.text"
-    :image="postStore.post.image"
-    :tags="postStore.post.tags.map((tag) => tag.name).join(', ')"
-    :category-selection="postStore.post.category.id"
-    :related-posts-selection="
-      postStore.post.relatedSubPosts.map((subPost) => subPost.id)
-    "
     @save-post="updatePost"
   ></PostFormComponent>
 </template>
