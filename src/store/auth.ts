@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { apolloClient } from "../api/client";
 import router from "../router/router";
 import FetchRefreshToken from "../graphql/fetchRefreshToken.gql";
-import User from "../graphql/getUser.gql";
+import GetUser from "../graphql/getUser.gql";
 import DeleteTokenCookie from "../graphql/deleteTokenCookie.gql";
 import DeleteRefreshTokenCookie from "../graphql/deleteRefreshTokenCookie.gql";
 import SendPasswordResetEmail from "../graphql/sendPasswordResetEmail.gql";
@@ -17,20 +17,32 @@ import UpdateAccount from "../graphql/updateAccount.gql";
 import AuthorRequestByUser from "../graphql/getAuthorRequestByUser.gql";
 import CreateAuthorRequest from "../graphql/createAuthorRequest.gql";
 import UseRefreshToken from "../graphql/useRefreshToken.gql";
+import UpdateUserProfile from "../graphql/updateUserProfile.gql";
 import {
+  AuthorRequest,
   EmailChangeInput,
   PasswordChangeInput,
   PasswordResetInput,
   UpdateAccountInput,
+  User,
+  UserProfileInput,
   UserRegistrationInput,
 } from "../api/models";
+import { updateTheme } from "../helper/layout";
+
+export type AuthState = {
+  refreshToken: string | null;
+  user: User | null;
+  authorRequest: AuthorRequest | null;
+};
 
 export const useAuthStore = defineStore("auth", {
-  state: () => ({
-    refreshToken: null,
-    user: null,
-    authorRequest: null,
-  }),
+  state: () =>
+    ({
+      refreshToken: null,
+      user: null,
+      authorRequest: null,
+    } as AuthState),
   persist: {
     enabled: true,
   },
@@ -65,10 +77,11 @@ export const useAuthStore = defineStore("auth", {
     },
     async fetchUser() {
       const response = await apolloClient.query({
-        query: User,
+        query: GetUser,
       });
       if (response.data !== null) {
         this.user = response.data.user;
+        updateTheme();
       } else {
         // todo
       }
@@ -88,6 +101,7 @@ export const useAuthStore = defineStore("auth", {
       ) {
         await apolloClient.resetStore();
       }
+      updateTheme();
       await router.push({ name: "login" });
     },
     async registerUser(userRegistrationInput: UserRegistrationInput) {
@@ -197,6 +211,20 @@ export const useAuthStore = defineStore("auth", {
       });
       if (response.data.createAuthorRequest?.success) {
         this.authorRequest = response.data.createAuthorRequest.authorRequest;
+      }
+    },
+    async updateUserProfile(userProfileInput: UserProfileInput) {
+      if (this.user) {
+        const response = await apolloClient.mutate({
+          mutation: UpdateUserProfile,
+          variables: {
+            userProfileInput,
+          },
+        });
+        if (response.data.updateUserProfile.success) {
+          this.user.profile = response.data.updateUserProfile.profile;
+        }
+        return response.data.updateUserProfile.success;
       }
     },
   },

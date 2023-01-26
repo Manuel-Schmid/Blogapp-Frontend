@@ -16,6 +16,7 @@ export default {
   >
     <nav class="navbar h-full flex flex-row items-center">
       <label
+        v-if="user"
         for="default-toggle"
         class="inline-flex relative items-center cursor-pointer ml-5"
       >
