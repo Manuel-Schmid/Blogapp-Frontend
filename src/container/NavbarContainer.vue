@@ -23,6 +23,10 @@ export default {
     };
     return { route, authStore, toggleDarkMode };
   },
+
+  mounted() {
+    updateTheme();
+  },
 };
 </script>
 
