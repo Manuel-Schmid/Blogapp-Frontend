@@ -109,8 +109,8 @@ export type EmailChangeType = {
 
 /** An enumeration. */
 export enum Language {
-  English = "ENGLISH",
-  German = "GERMAN",
+  De = "DE",
+  En = "EN",
 }
 
 export type PaginationAuthorRequests = {
@@ -257,7 +257,7 @@ export type RootMutation = {
   updateComment?: Maybe<Comment>;
   updatePost?: Maybe<UpdatePostType>;
   updatePostStatus: UpdatePostStatusType;
-  updateUserProfile?: Maybe<UserProfile>;
+  updateUserProfile: UpdateUserProfileType;
   verifyAccount: VerifyAccountType;
   verifyToken: PayloadType;
 };
@@ -472,6 +472,13 @@ export type UpdatePostType = {
   __typename?: "UpdatePostType";
   errors?: Maybe<Scalars["JSON"]>;
   post?: Maybe<Post>;
+  success: Scalars["Boolean"];
+};
+
+export type UpdateUserProfileType = {
+  __typename?: "UpdateUserProfileType";
+  errors?: Maybe<Scalars["JSON"]>;
+  profile?: Maybe<UserProfile>;
   success: Scalars["Boolean"];
 };
 

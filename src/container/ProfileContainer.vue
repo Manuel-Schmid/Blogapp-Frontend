@@ -3,7 +3,9 @@ import ProfileComponent from "../components/ProfileComponent.vue";
 import { useAuthStore } from "../store/auth";
 import router from "../router/router";
 import { ref } from "vue";
-import { Locale, setI18nLanguage } from "../main";
+import { setI18nLanguage } from "../main";
+import { Language } from "../api/models";
+import { updateLanguage, updateTheme } from "../helper/layout";
 
 export default {
   name: "profileContainer",
@@ -44,9 +46,15 @@ export default {
       }
     };
 
-    const setLanguage = (lang: Locale) => {
-      localStorage.lang = lang;
-      setI18nLanguage(lang);
+    const setLanguage = async (lang: Language) => {
+      if (authStore.user) {
+        const userProfileInput = authStore.user.profile;
+        delete userProfileInput.__typename;
+        userProfileInput.language = lang;
+        await authStore.updateUserProfile(userProfileInput);
+
+        updateLanguage();
+      }
     };
 
     return {

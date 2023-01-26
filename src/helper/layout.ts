@@ -1,4 +1,5 @@
 import { useAuthStore } from "../store/auth";
+import { setI18nLanguage } from "../main";
 
 const updateTheme = () => {
   if (!useAuthStore().user) {
@@ -10,4 +11,8 @@ const updateTheme = () => {
   }
 };
 
-export { updateTheme };
+const updateLanguage = () => {
+  setI18nLanguage(useAuthStore().user?.profile.language.toLowerCase());
+};
+
+export { updateTheme, updateLanguage };
