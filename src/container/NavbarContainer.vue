@@ -12,12 +12,20 @@ export default {
     const authStore = useAuthStore();
     const route = useRoute();
 
+    const setTheme = (darkThemeActive: boolean) => {
+      if (darkThemeActive) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    };
+
     const toggleDarkMode = async () => {
       if (authStore.user) {
         const userProfileInput = authStore.user.profile;
         userProfileInput.darkThemeActive = !userProfileInput.darkThemeActive;
+        setTheme(userProfileInput.darkThemeActive);
         await authStore.updateUserProfile(userProfileInput);
-        updateTheme();
       }
     };
     return { route, authStore, toggleDarkMode };
