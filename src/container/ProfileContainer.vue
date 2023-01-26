@@ -49,7 +49,6 @@ export default {
     const setLanguage = async (lang: Language) => {
       if (authStore.user) {
         const userProfileInput = authStore.user.profile;
-        delete userProfileInput.__typename;
         userProfileInput.language = lang;
         await authStore.updateUserProfile(userProfileInput);
 

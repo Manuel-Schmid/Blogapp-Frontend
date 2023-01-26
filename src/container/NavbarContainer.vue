@@ -15,7 +15,6 @@ export default {
     const toggleDarkMode = async () => {
       if (authStore.user) {
         const userProfileInput = authStore.user.profile;
-        delete userProfileInput.__typename;
         userProfileInput.darkThemeActive = !userProfileInput.darkThemeActive;
         await authStore.updateUserProfile(userProfileInput);
         updateTheme();

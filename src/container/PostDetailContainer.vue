@@ -43,7 +43,6 @@ export default {
       commentSectionCollapsed.value = !commentSectionCollapsed.value;
       if (authStore.user) {
         const userProfileInput = authStore.user.profile;
-        delete userProfileInput.__typename;
         userProfileInput.commentSectionCollapsed =
           !userProfileInput.commentSectionCollapsed;
         await authStore.updateUserProfile(userProfileInput);
@@ -54,7 +53,6 @@ export default {
       relatedPostsCollapsed.value = !relatedPostsCollapsed.value;
       if (authStore.user) {
         const userProfileInput = authStore.user.profile;
-        delete userProfileInput.__typename;
         userProfileInput.relatedPostsCollapsed =
           !userProfileInput.relatedPostsCollapsed;
         await authStore.updateUserProfile(userProfileInput);
