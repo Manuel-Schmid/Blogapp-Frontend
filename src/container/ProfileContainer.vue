@@ -3,9 +3,8 @@ import ProfileComponent from "../components/ProfileComponent.vue";
 import { useAuthStore } from "../store/auth";
 import router from "../router/router";
 import { ref } from "vue";
-import { setI18nLanguage } from "../main";
 import { Language } from "../api/models";
-import { updateLanguage, updateTheme } from "../helper/layout";
+import { updateLanguage } from "../helper/layout";
 
 export default {
   name: "profileContainer",

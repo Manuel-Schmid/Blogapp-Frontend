@@ -5,7 +5,6 @@ import { useAuthStore } from "../store/auth";
 import { ref } from "vue";
 import { onBeforeRouteUpdate, RouteLocationNormalized } from "vue-router";
 import { fetchPostGuard } from "../router/guards/fetchPostGuard";
-import { updateTheme } from "../helper/layout";
 
 export default {
   name: "PostDetailView",
