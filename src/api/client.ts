@@ -20,7 +20,7 @@ const defaultOptions: DefaultOptions = {
   },
 };
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({ addTypename: false });
 
 const errorLink = onError(({ graphQLErrors, operation, forward }) => {
   if (graphQLErrors)

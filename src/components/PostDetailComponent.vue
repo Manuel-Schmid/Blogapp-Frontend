@@ -2,31 +2,41 @@
 import { formatDateLong, getImageURL, formatFullname } from "../helper/helper";
 import CommentSectionContainer from "../container/CommentSectionContainer.vue";
 import PostTileComponent from "./posts-overview/PostTileComponent.vue";
-import { ref } from "vue";
 
 export default {
   name: "PostDetailComponent",
-  props: ["postData", "postLiked", "user"],
+  props: [
+    "postData",
+    "postLiked",
+    "user",
+    "commentSectionCollapsed",
+    "relatedPostsCollapsed",
+  ],
   components: {
     CommentSectionContainer,
     PostTileComponent,
   },
 
   setup(props: {}, { emit }: any) {
-    const commentSectionCollapsed = ref(false);
-    const relatedPostsCollapsed = ref(false);
-
     const toggleLike = () => {
       emit("togglePostLike");
+    };
+
+    const toggleCommentSectionCollapsed = () => {
+      emit("toggleCommentSectionCollapsed");
+    };
+
+    const toggleRelatedPostsCollapsed = () => {
+      emit("toggleRelatedPostsCollapsed");
     };
 
     return {
       formatDateLong,
       getImageURL,
       formatFullname,
-      commentSectionCollapsed,
-      relatedPostsCollapsed,
       toggleLike,
+      toggleCommentSectionCollapsed,
+      toggleRelatedPostsCollapsed,
     };
   },
 };
@@ -130,7 +140,7 @@ export default {
           </div>
           <div class="w-full mt-8">
             <p
-              @click="commentSectionCollapsed = !commentSectionCollapsed"
+              @click="toggleCommentSectionCollapsed"
               class="section-title no-select"
             >
               <span class="pr-2"
@@ -151,7 +161,7 @@ export default {
           </div>
           <div v-if="postData.relatedSubPosts.length" class="flow-root">
             <p
-              @click="relatedPostsCollapsed = !relatedPostsCollapsed"
+              @click="toggleRelatedPostsCollapsed"
               class="section-title no-select mt-6"
             >
               <span class="pr-2">{{ this.$t("shared.related-posts") }}:</span>
