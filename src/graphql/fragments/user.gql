@@ -1,4 +1,5 @@
 #import "./userStatus.gql"
+#import "./userProfile.gql"
 
 fragment User on User {
   id
@@ -11,5 +12,8 @@ fragment User on User {
   isActive
   userStatus {
     ...UserStatus
+  }
+  profile {
+    ...UserProfile
   }
 }

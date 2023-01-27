@@ -35,6 +35,8 @@ import {
   faCircleCheck,
 } from "@fortawesome/free-regular-svg-icons";
 import { createI18n } from "vue-i18n";
+import { useAuthStore } from "./store/auth";
+import { updateLanguage } from "./helper/layout";
 
 library.add(
   faPlus,
@@ -64,21 +66,17 @@ const messages = {
   ...de,
 };
 
-export type Locale = "de" | "en";
-
 const i18n = createI18n({
   locale: "en",
   fallbackLocale: "en",
   messages,
 });
 
-export function setI18nLanguage(locale: Locale) {
+export function setI18nLanguage(locale: any) {
   i18n.global.locale = locale;
   const html = document.querySelector("html");
   html?.setAttribute("lang", locale);
 }
-
-setI18nLanguage(localStorage.lang);
 
 const app = createApp({
   setup() {
@@ -92,6 +90,8 @@ pinia.use(piniaPersist);
 
 app.use(router);
 app.use(pinia);
+
+updateLanguage();
 
 app.use(i18n);
 app.mount("#app");

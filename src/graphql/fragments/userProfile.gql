@@ -1,0 +1,6 @@
+fragment UserProfile on UserProfile {
+  darkThemeActive
+  commentSectionCollapsed
+  relatedPostsCollapsed
+  language
+}
