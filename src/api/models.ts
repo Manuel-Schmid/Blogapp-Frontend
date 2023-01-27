@@ -107,6 +107,12 @@ export type EmailChangeType = {
   user?: Maybe<User>;
 };
 
+/** An enumeration. */
+export enum Language {
+  De = "DE",
+  En = "EN",
+}
+
 export type PaginationAuthorRequests = {
   __typename?: "PaginationAuthorRequests";
   authorRequests: Array<AuthorRequest>;
@@ -159,7 +165,10 @@ export type Post = {
   isLiked: Scalars["Boolean"];
   likeCount: Scalars["Int"];
   owner: User;
+  relatedMainPosts: Array<Post>;
+  relatedSubPosts: Array<Post>;
   slug: Scalars["String"];
+  status: PostStatus;
   /** A comma-separated list of tags. */
   tags: Array<Tag>;
   text: Scalars["String"];
@@ -170,7 +179,9 @@ export type PostInput = {
   category: Scalars["ID"];
   image?: InputMaybe<Scalars["Upload"]>;
   owner?: InputMaybe<Scalars["ID"]>;
+  relatedPosts?: InputMaybe<Array<Scalars["Int"]>>;
   slug?: InputMaybe<Scalars["String"]>;
+  status?: InputMaybe<PostStatus>;
   tags?: InputMaybe<Scalars["String"]>;
   text: Scalars["String"];
   title: Scalars["String"];
@@ -186,6 +197,18 @@ export type PostLike = {
 export type PostLikeInput = {
   post: Scalars["ID"];
   user?: InputMaybe<Scalars["ID"]>;
+};
+
+/** An enumeration. */
+export enum PostStatus {
+  Draft = "DRAFT",
+  Published = "PUBLISHED",
+}
+
+export type PostTitleType = {
+  __typename?: "PostTitleType";
+  id: Scalars["ID"];
+  title: Scalars["String"];
 };
 
 export type RefreshedTokenType = {
@@ -232,7 +255,9 @@ export type RootMutation = {
   updateAuthorRequest: AuthorRequestWrapperType;
   updateCategory?: Maybe<Category>;
   updateComment?: Maybe<Comment>;
-  updatePost?: Maybe<Post>;
+  updatePost?: Maybe<UpdatePostType>;
+  updatePostStatus: UpdatePostStatusType;
+  updateUserProfile: UpdateUserProfileType;
   verifyAccount: VerifyAccountType;
   verifyToken: PayloadType;
 };
@@ -321,6 +346,14 @@ export type RootMutationUpdatePostArgs = {
   postInput: PostInput;
 };
 
+export type RootMutationUpdatePostStatusArgs = {
+  updatePostStatusInput: UpdatePostStatusInput;
+};
+
+export type RootMutationUpdateUserProfileArgs = {
+  userProfileInput: UserProfileInput;
+};
+
 export type RootMutationVerifyAccountArgs = {
   token: Scalars["String"];
 };
@@ -338,7 +371,8 @@ export type RootQuery = {
   paginatedAuthorRequests: PaginationAuthorRequests;
   paginatedPosts: PaginationPosts;
   paginatedUserPosts: PaginationPosts;
-  postBySlug: Post;
+  postBySlug?: Maybe<Post>;
+  postTitles: Array<PostTitleType>;
   tags: Array<Tag>;
   usedTags: Array<Tag>;
   user?: Maybe<User>;
@@ -422,6 +456,32 @@ export type UpdateAccountType = {
   success: Scalars["Boolean"];
 };
 
+export type UpdatePostStatusInput = {
+  postSlug: Scalars["String"];
+  status: PostStatus;
+};
+
+export type UpdatePostStatusType = {
+  __typename?: "UpdatePostStatusType";
+  errors?: Maybe<Scalars["JSON"]>;
+  post?: Maybe<Post>;
+  success: Scalars["Boolean"];
+};
+
+export type UpdatePostType = {
+  __typename?: "UpdatePostType";
+  errors?: Maybe<Scalars["JSON"]>;
+  post?: Maybe<Post>;
+  success: Scalars["Boolean"];
+};
+
+export type UpdateUserProfileType = {
+  __typename?: "UpdateUserProfileType";
+  errors?: Maybe<Scalars["JSON"]>;
+  profile?: Maybe<UserProfile>;
+  success: Scalars["Boolean"];
+};
+
 export type User = {
   __typename?: "User";
   email: Scalars["String"];
@@ -436,9 +496,27 @@ export type User = {
   lastName: Scalars["String"];
   password: Scalars["String"];
   posts: Array<Post>;
+  profile: UserProfile;
   userStatus: UserStatus;
   /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
   username: Scalars["String"];
+};
+
+export type UserProfile = {
+  __typename?: "UserProfile";
+  commentSectionCollapsed: Scalars["Boolean"];
+  darkThemeActive: Scalars["Boolean"];
+  id: Scalars["ID"];
+  language: Language;
+  relatedPostsCollapsed: Scalars["Boolean"];
+  user: User;
+};
+
+export type UserProfileInput = {
+  commentSectionCollapsed: Scalars["Boolean"];
+  darkThemeActive: Scalars["Boolean"];
+  language: Language;
+  relatedPostsCollapsed: Scalars["Boolean"];
 };
 
 export type UserRegistrationInput = {

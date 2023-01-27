@@ -1,0 +1,11 @@
+#import "./fragments/userProfile.gql"
+
+mutation UpdateUserProfile($userProfileInput: UserProfileInput!) {
+  updateUserProfile(userProfileInput: $userProfileInput) {
+    success
+    errors
+    profile {
+      ...UserProfile
+    }
+  }
+}

@@ -78,13 +78,16 @@
         "change-success": "Email-Änderung erfolgreich.",
         "change-fail": "Email-Änderung fehlgeschlagen."
       },
-      "create-post": {
-        "title": "Erstelle deinen Post",
+      "post-form": {
+        "create-post-title": "Erstelle deinen Post",
+        "create-post-button": "Post erstellen",
+        "update-post-title": "Bearbeite deinen Post",
         "form-title": "Titel",
         "form-text": "Text",
         "form-image": "Bild",
         "form-category-placeholder": "Kategorie auswählen",
-        "form-tags-placeholder": "Komma-separierte Liste von Tags (z.B. Sports, News, ...)"
+        "form-tags-placeholder": "Komma-separierte Liste von Tags (z.B. Sports, News, ...)",
+        "form-related-posts-placeholder": "Verwandte Posts auswählen"
       },
       "my-posts": {
         "table": {
@@ -93,11 +96,12 @@
           "date_created": "Erstelldatum",
           "image": "Bild",
           "status": "Status",
-          "action": "Aktion",
+          "actions": "Aktionen",
           "published": "Veröffentlicht",
           "publish": "Veröffentlichen",
           "draft-noun": "Entwurf",
-          "draft-verb": "Als Entwurf markieren"
+          "draft-verb": "Als Entwurf markieren",
+          "edit": "Bearbeiten"
         }
       },
       "author-request-overview": {
@@ -133,6 +137,8 @@
       "password": "Passwort",
       "password-confirm": "Passwort bestätigen",
       "my-posts": "Meine Posts",
+      "related-posts": "Verwandte Posts",
+      "no-image": "Kein Bild",
       "sign-in": "Anmelden",
       "sign-up": "Registrieren",
       "tags": "Tags",

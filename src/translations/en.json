@@ -78,13 +78,16 @@
         "change-success": "Email change successful.",
         "change-fail": "Email change failed."
       },
-      "create-post": {
-        "title": "Create your post",
+      "post-form": {
+        "create-post-title": "Create your post",
+        "create-post-button": "Create post",
+        "update-post-title": "Update your post",
         "form-title": "Title",
         "form-text": "Text",
         "form-image": "Image",
         "form-category-placeholder": "Select a category",
-        "form-tags-placeholder": "Comma-separated list of tags (e.g. Sports, News, ...)"
+        "form-tags-placeholder": "Comma-separated list of tags (e.g. Sports, News, ...)",
+        "form-related-posts-placeholder": "Select related posts"
       },
       "my-posts": {
         "table": {
@@ -93,11 +96,12 @@
           "date_created": "Date created",
           "image": "Image",
           "status": "Status",
-          "action": "Action",
+          "actions": "Actions",
           "published": "Published",
           "publish": "Publish",
           "draft-noun": "Draft",
-          "draft-verb": "Mark as draft"
+          "draft-verb": "Mark as draft",
+          "edit": "Edit"
         }
       },
       "author-request-overview": {
@@ -133,6 +137,8 @@
       "password": "Password",
       "password-confirm": "Confirm Password",
       "my-posts": "My Posts",
+      "related-posts": "Related Posts",
+      "no-image": "No Image",
       "sign-in": "Sign in",
       "sign-up": "Sign up",
       "tags": "Tags",

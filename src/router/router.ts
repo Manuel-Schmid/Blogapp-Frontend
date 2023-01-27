@@ -10,6 +10,7 @@ import EmailChangeFormContainer from "../container/EmailChangeFormContainer.vue"
 import ActivationContainer from "../container/ActivationContainer.vue";
 import RegistrationConfirmationContainer from "../container/RegistrationConfirmationContainer.vue";
 import CreatePostFormContainer from "../container/CreatePostFormContainer.vue";
+import UpdatePostFormContainer from "../container/UpdatePostFormContainer.vue";
 import { requireLoginGuard } from "./guards/requireLoginGuard";
 import { requireAuthorPermissionGuard } from "./guards/requireAuthorPermissionGuard";
 import { fetchUserGuard } from "./guards/fetchUserGuard";
@@ -21,6 +22,7 @@ import AuthorRequestOverviewContainer from "../container/AuthorRequestOverviewCo
 import { fetchAuthorRequestsGuard } from "./guards/fetchAuthorRequestsGuard";
 import { fetchUserPostsGuard } from "./guards/fetchUserPostsGuard";
 import UserPostsContainer from "../container/UserPostsContainer.vue";
+import { fetchPostTitlesGuard } from "./guards/fetchPostTitlesGuard";
 
 const routes: any = [
   {
@@ -74,7 +76,7 @@ const routes: any = [
     path: "/posts/:slug",
     name: "postDetail",
     component: PostDetailContainer,
-    beforeEnter: [fetchPostGuard],
+    beforeEnter: [fetchPostGuard], // when changing this also change onBeforeRouteUpdate() in PostDetailContainer.vue
   },
   {
     path: "/my-posts",
@@ -94,6 +96,19 @@ const routes: any = [
       requireLoginGuard,
       requireAuthorPermissionGuard,
       fetchCategoriesGuard,
+      fetchPostTitlesGuard,
+    ],
+  },
+  {
+    path: "/update-post/:slug",
+    name: "updatePost",
+    component: UpdatePostFormContainer,
+    beforeEnter: [
+      requireLoginGuard,
+      requireAuthorPermissionGuard,
+      fetchCategoriesGuard,
+      fetchPostTitlesGuard,
+      fetchPostGuard,
     ],
   },
   {

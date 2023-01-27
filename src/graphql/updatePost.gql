@@ -1,0 +1,6 @@
+mutation UpdatePost($postInput: PostInput!) {
+  updatePost(postInput: $postInput) {
+    success
+    errors
+  }
+}
