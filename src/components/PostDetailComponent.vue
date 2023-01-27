@@ -5,7 +5,13 @@ import PostTileComponent from "./posts-overview/PostTileComponent.vue";
 
 export default {
   name: "PostDetailComponent",
-  props: ["postData", "postLiked", "loggedIn"],
+  props: [
+    "postData",
+    "postLiked",
+    "user",
+    "commentSectionCollapsed",
+    "relatedPostsCollapsed",
+  ],
   components: {
     CommentSectionContainer,
     PostTileComponent,
@@ -16,11 +22,21 @@ export default {
       emit("togglePostLike");
     };
 
+    const toggleCommentSectionCollapsed = () => {
+      emit("toggleCommentSectionCollapsed");
+    };
+
+    const toggleRelatedPostsCollapsed = () => {
+      emit("toggleRelatedPostsCollapsed");
+    };
+
     return {
       formatDateLong,
       getImageURL,
       formatFullname,
       toggleLike,
+      toggleCommentSectionCollapsed,
+      toggleRelatedPostsCollapsed,
     };
   },
 };
@@ -29,6 +45,12 @@ export default {
 <template>
   <div class="site-container p-12 dark:text-white">
     <div class="detail-post content-container m-auto">
+      <router-link
+        v-if="user?.id === postData.owner.id"
+        :to="{ name: 'updatePost', params: { slug: postData.slug } }"
+        class="py-2 px-3 absolute right-12 mr-10 z-10 cursor-pointer button-bg-light-2 dark:button-bg-dark"
+        >{{ this.$t("components.my-posts.table.edit") }}</router-link
+      >
       <div class="w-full relative">
         <div
           class="post-title leading-5 text-black dark:text-white font-bold mb-3"
@@ -54,19 +76,21 @@ export default {
           }}
         </p>
       </div>
-      <div v-if="postData.image" class="px-8 py-2 mt-6">
+      <div class="px-8 py-2 mt-6">
         <img
+          v-if="postData.image.name"
           class="w-full"
           :src="getImageURL(postData.image.name)"
           alt="Post Image"
         />
+        <p v-else class="italic">{{ this.$t("shared.no-image") }}</p>
       </div>
       <div class="mt-4 w-full pb-8">
         <div class="w-full">
           <div class="mt-2 mr-8">
             <div class="text-center float-right w-max flex flex-col">
               <font-awesome-icon
-                v-if="loggedIn"
+                v-if="user"
                 icon="fa-thumbs-up"
                 class="text-3xl mb-0.5 cursor-pointer w-full"
                 :class="[
@@ -115,17 +139,39 @@ export default {
             </router-link>
           </div>
           <div class="w-full mt-8">
+            <p
+              @click="toggleCommentSectionCollapsed"
+              class="section-title no-select"
+            >
+              <span class="pr-2"
+                >{{ this.$t("components.comment-section.title") }}:</span
+              >
+              <font-awesome-icon
+                icon="fa-solid fa-angle-down"
+                class="sort-icon"
+                :class="[commentSectionCollapsed ? 'icon-up' : 'icon-down']"
+              />
+            </p>
             <CommentSectionContainer
+              v-if="!commentSectionCollapsed"
               :post-id="postData.id"
               :comments="postData.comments"
-              :logged-in="loggedIn"
+              :logged-in="!!user"
             ></CommentSectionContainer>
           </div>
           <div v-if="postData.relatedSubPosts.length" class="flow-root">
-            <p class="font-bold text-xl mt-6 mb-5">
-              <span>{{ this.$t("shared.related-posts") }}:</span>
+            <p
+              @click="toggleRelatedPostsCollapsed"
+              class="section-title no-select mt-6"
+            >
+              <span class="pr-2">{{ this.$t("shared.related-posts") }}:</span>
+              <font-awesome-icon
+                icon="fa-solid fa-angle-down"
+                class="sort-icon"
+                :class="[relatedPostsCollapsed ? 'icon-up' : 'icon-down']"
+              />
             </p>
-            <div class="pl-[50px]">
+            <div v-if="!relatedPostsCollapsed" class="pl-[50px]">
               <PostTileComponent
                 v-for="post in postData.relatedSubPosts"
                 :key="post.id"
@@ -150,5 +196,16 @@ export default {
 .post-title {
   letter-spacing: 1px;
   font-size: 2em;
+}
+.section-title {
+  @apply font-bold text-xl mb-5 cursor-pointer mx-auto w-max;
+}
+.icon-up {
+  rotate: 0deg;
+  transition: rotate 300ms;
+}
+.icon-down {
+  rotate: 180deg;
+  transition: rotate 300ms;
 }
 </style>

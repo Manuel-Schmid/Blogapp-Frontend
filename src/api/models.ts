@@ -107,6 +107,12 @@ export type EmailChangeType = {
   user?: Maybe<User>;
 };
 
+/** An enumeration. */
+export enum Language {
+  De = "DE",
+  En = "EN",
+}
+
 export type PaginationAuthorRequests = {
   __typename?: "PaginationAuthorRequests";
   authorRequests: Array<AuthorRequest>;
@@ -251,6 +257,7 @@ export type RootMutation = {
   updateComment?: Maybe<Comment>;
   updatePost?: Maybe<UpdatePostType>;
   updatePostStatus: UpdatePostStatusType;
+  updateUserProfile: UpdateUserProfileType;
   verifyAccount: VerifyAccountType;
   verifyToken: PayloadType;
 };
@@ -341,6 +348,10 @@ export type RootMutationUpdatePostArgs = {
 
 export type RootMutationUpdatePostStatusArgs = {
   updatePostStatusInput: UpdatePostStatusInput;
+};
+
+export type RootMutationUpdateUserProfileArgs = {
+  userProfileInput: UserProfileInput;
 };
 
 export type RootMutationVerifyAccountArgs = {
@@ -464,6 +475,13 @@ export type UpdatePostType = {
   success: Scalars["Boolean"];
 };
 
+export type UpdateUserProfileType = {
+  __typename?: "UpdateUserProfileType";
+  errors?: Maybe<Scalars["JSON"]>;
+  profile?: Maybe<UserProfile>;
+  success: Scalars["Boolean"];
+};
+
 export type User = {
   __typename?: "User";
   email: Scalars["String"];
@@ -478,9 +496,27 @@ export type User = {
   lastName: Scalars["String"];
   password: Scalars["String"];
   posts: Array<Post>;
+  profile: UserProfile;
   userStatus: UserStatus;
   /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
   username: Scalars["String"];
+};
+
+export type UserProfile = {
+  __typename?: "UserProfile";
+  commentSectionCollapsed: Scalars["Boolean"];
+  darkThemeActive: Scalars["Boolean"];
+  id: Scalars["ID"];
+  language: Language;
+  relatedPostsCollapsed: Scalars["Boolean"];
+  user: User;
+};
+
+export type UserProfileInput = {
+  commentSectionCollapsed: Scalars["Boolean"];
+  darkThemeActive: Scalars["Boolean"];
+  language: Language;
+  relatedPostsCollapsed: Scalars["Boolean"];
 };
 
 export type UserRegistrationInput = {

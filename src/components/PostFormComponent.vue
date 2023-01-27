@@ -1,19 +1,29 @@
 <script lang="ts">
 import { ref } from "vue";
 import Multiselect from "@vueform/multiselect";
+import { getImageURL } from "../helper/helper";
+import { Post } from "../api/models";
 
 export default {
   name: "CreatePostFormComponent",
   components: { Multiselect },
-  props: ["categories", "postTitles"],
+  props: ["post", "categories", "postTitles", "formTitle", "formButtonText"],
 
-  setup() {
-    const title = ref("");
-    const text = ref("");
-    const tags = ref("");
-    const categorySelection = ref("");
+  setup(
+    props: {
+      post: Post | null;
+      relatedPostsSelection: string;
+    },
+    { emit }: any
+  ) {
+    const title = ref(props.post?.title);
+    const text = ref(props.post?.text);
+    const tags = ref(props.post?.tags.map((tag) => tag.name).join(", "));
+    const categorySelection = ref(props.post ? props.post?.category.id : "");
+    let relatedPostsSelection = ref(
+      props.post?.relatedSubPosts.map((subPost) => subPost.id)
+    );
     const imageFile = ref(undefined);
-    let relatedPostsSelection = ref(null);
 
     const onFileChange = (e: { target: { files: any[] } }) => {
       if (e.target.files.length > 0) {
@@ -28,6 +38,7 @@ export default {
       tags,
       categorySelection,
       relatedPostsSelection,
+      getImageURL,
       onFileChange,
     };
   },
@@ -40,12 +51,12 @@ export default {
       <div class="form-wrapper">
         <div class="form-layout">
           <h1 class="form-title md:text-xl text-left">
-            {{ this.$t("components.create-post.title") }}
+            {{ formTitle }}
           </h1>
           <form ref="signupForm" class="form-inner-spacing" @submit.prevent="">
             <div>
               <label for="title" class="form-label">{{
-                this.$t("components.create-post.form-title")
+                this.$t("components.post-form.form-title")
               }}</label>
               <input
                 type="text"
@@ -54,12 +65,12 @@ export default {
                 id="title"
                 class="form-input"
                 placeholder="Lorem ipsum dolor sit amet"
-                required=""
+                required
               />
             </div>
             <div>
               <label for="text" class="form-label">{{
-                this.$t("components.create-post.form-text")
+                this.$t("components.post-form.form-text")
               }}</label>
               <input
                 type="text"
@@ -68,12 +79,12 @@ export default {
                 id="text"
                 class="form-input"
                 placeholder="Aenean placerat finibus cursus"
-                required=""
+                required
               />
             </div>
             <div>
               <label for="image" class="form-label">{{
-                this.$t("components.create-post.form-image")
+                this.$t("components.post-form.form-image")
               }}</label>
               <input
                 type="file"
@@ -81,7 +92,13 @@ export default {
                 id="image"
                 @change="onFileChange"
                 class="form-input"
-                required=""
+                :required="!post"
+              />
+              <img
+                v-if="post?.image"
+                :src="getImageURL(post.image.name)"
+                class="mt-4"
+                alt="Post Image"
               />
             </div>
             <div>
@@ -93,11 +110,11 @@ export default {
                 name="category"
                 v-model="categorySelection"
                 class="form-input"
-                required=""
+                required
               >
                 <option value="" disabled selected>
                   {{
-                    this.$t("components.create-post.form-category-placeholder")
+                    this.$t("components.post-form.form-category-placeholder")
                   }}
                 </option>
                 <option v-for="category in categories" :value="category.id">
@@ -116,9 +133,8 @@ export default {
                 id="tags"
                 class="form-input"
                 :placeholder="
-                  this.$t('components.create-post.form-tags-placeholder')
+                  this.$t('components.post-form.form-tags-placeholder')
                 "
-                required=""
               />
             </div>
             <div v-if="postTitles">
@@ -131,9 +147,7 @@ export default {
                 :close-on-select="false"
                 :searchable="true"
                 :placeholder="
-                  this.$t(
-                    'components.create-post.form-related-posts-placeholder'
-                  )
+                  this.$t('components.post-form.form-related-posts-placeholder')
                 "
                 :options="postTitles"
                 class="multiselect dark:multiselect-dark"
@@ -142,18 +156,20 @@ export default {
             <button
               @click="
                 $emit(
-                  'createPost',
+                  'savePost',
                   title,
                   text,
                   imageFile,
                   categorySelection,
                   tags,
-                  relatedPostsSelection.map((i) => parseInt(i))
+                  relatedPostsSelection
+                    ? relatedPostsSelection.map((i) => parseInt(i))
+                    : []
                 )
               "
               class="form-button"
             >
-              Create post
+              {{ formButtonText }}
             </button>
           </form>
         </div>

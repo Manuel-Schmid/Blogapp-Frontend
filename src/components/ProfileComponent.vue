@@ -2,7 +2,7 @@
 import PasswordChangeFormContainer from "../container/PasswordChangeFormContainer.vue";
 import { ref } from "vue";
 import { formatDateShort } from "../helper/helper";
-import { setI18nLanguage } from "../main";
+import { Language } from "../api/models";
 
 export default {
   name: "profileComponent",
@@ -40,7 +40,7 @@ export default {
       newFirstName,
       newLastName,
       passwordChangeFormActive,
-      localStorage,
+      Language,
       onUpdateAccount,
       onEmailChange,
       onLogout,
@@ -246,10 +246,16 @@ export default {
                   @change="setLanguage($event)"
                   class="dark:bg-gray-800 text-center"
                 >
-                  <option :selected="localStorage.lang === 'en'" value="en">
+                  <option
+                    :selected="userData.profile.language === Language.En"
+                    value="EN"
+                  >
                     {{ this.$t("languages.en") }}
                   </option>
-                  <option :selected="localStorage.lang === 'de'" value="de">
+                  <option
+                    :selected="userData.profile.language === Language.De"
+                    value="DE"
+                  >
                     {{ this.$t("languages.de") }}
                   </option>
                 </select>

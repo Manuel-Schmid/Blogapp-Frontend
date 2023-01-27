@@ -1,6 +1,6 @@
 #import "./fragments/user.gql"
 
-query User {
+query GetUser {
   user {
     ...User
   }

@@ -1,7 +1,9 @@
 <script lang="ts">
 import PostFormComponent from "../components/PostFormComponent.vue";
 import { usePostStore } from "../store/blog";
+import { useRoute } from "vue-router";
 import router from "../router/router";
+import { useAuthStore } from "../store/auth";
 
 export default {
   name: "CreatePostFormContainer",
@@ -9,8 +11,10 @@ export default {
 
   setup() {
     const postStore = usePostStore();
+    const authStore = useAuthStore();
+    const route = useRoute();
 
-    const createPost = async (
+    const updatePost = async (
       title: string,
       text: string,
       image: any,
@@ -19,7 +23,9 @@ export default {
       relatedPosts: number[]
     ) => {
       if (title && text && category) {
-        const success = await postStore.createPost({
+        const postSlug = route.params.slug as string;
+        const success = await postStore.updatePost({
+          slug: postSlug,
           title,
           text,
           image,
@@ -28,7 +34,6 @@ export default {
           relatedPosts,
         });
         if (success) {
-          const postSlug = await postStore.post?.slug;
           await router.push({
             name: "postDetail",
             params: { slug: postSlug },
@@ -37,18 +42,21 @@ export default {
       }
     };
 
-    return { postStore, createPost };
+    return { postStore, authStore, updatePost };
   },
 };
 </script>
 
 <template>
   <PostFormComponent
-    :post="null"
+    v-if="postStore.post?.owner.id === authStore.user.id"
+    :post="postStore.post"
     :categories="postStore.categories"
-    :post-titles="postStore.postTitles"
-    :form-title="this.$t('components.post-form.create-post-title')"
-    :form-button-text="this.$t('components.post-form.create-post-button')"
-    @save-post="createPost"
+    :post-titles="
+      postStore.postTitles.filter((item) => item.value !== postStore.post?.id)
+    "
+    :form-title="this.$t('components.post-form.update-post-title')"
+    :form-button-text="this.$t('shared.save')"
+    @save-post="updatePost"
   ></PostFormComponent>
 </template>
