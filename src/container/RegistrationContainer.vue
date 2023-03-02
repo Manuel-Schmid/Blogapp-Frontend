@@ -16,13 +16,16 @@ export default {
       email: string,
       username: string,
       password1: string,
-      password2: string
+      password2: string,
+      avatar: any
     ) => {
+      console.log(avatar);
       const userRegistrationInput = {
         email,
         username,
         password1,
         password2,
+        avatar,
       };
 
       signupSuccess.value = await authStore.registerUser(userRegistrationInput);
