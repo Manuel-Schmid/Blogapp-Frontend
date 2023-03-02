@@ -484,6 +484,7 @@ export type UpdateUserProfileType = {
 
 export type User = {
   __typename?: "User";
+  avatar?: Maybe<DjangoImageType>;
   email: Scalars["String"];
   firstName: Scalars["String"];
   id: Scalars["ID"];
@@ -520,6 +521,7 @@ export type UserProfileInput = {
 };
 
 export type UserRegistrationInput = {
+  avatar?: InputMaybe<Scalars["Upload"]>;
   email: Scalars["String"];
   password1: Scalars["String"];
   password2: Scalars["String"];
