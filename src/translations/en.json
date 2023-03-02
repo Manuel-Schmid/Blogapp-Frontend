@@ -49,6 +49,7 @@
       },
       "registration": {
         "title": "Create a new account",
+        "avatar": "Profile picture",
         "existing-account": "Already have an account?"
       },
       "registration-confirmation": {

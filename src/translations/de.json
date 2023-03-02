@@ -49,6 +49,7 @@
       },
       "registration": {
         "title": "Neues Konto erstellen",
+        "avatar": "Profilbild",
         "existing-account": "Du hast bereits ein Konto?"
       },
       "registration-confirmation": {
