@@ -10,9 +10,11 @@ import {
   PostTitleType,
   Tag,
   UpdatePostStatusInput,
+  User,
 } from "../api/models";
 import Posts from "../graphql/getPosts.gql";
 import UserPosts from "../graphql/getUserPosts.gql";
+import UserDetail from "../graphql/getUserByUsername.gql";
 import PostBySlug from "../graphql/getPost.gql";
 import CreatePost from "../graphql/createPost.gql";
 import UpdatePost from "../graphql/updatePost.gql";
@@ -32,6 +34,7 @@ export type PostState = {
   paginatedPosts: PaginationPosts | null;
   paginatedUserPosts: PaginationPosts | null;
   post: Post | null;
+  userDetail: User | null;
   postTitles: PostTitleType[];
   tags: Tag[];
   categories: Category[];
@@ -45,6 +48,7 @@ export const usePostStore = defineStore("blog", {
       paginatedPosts: null,
       paginatedUserPosts: null,
       post: null,
+      userDetail: null,
       postTitles: [],
       tags: [],
       categories: [],
@@ -113,6 +117,15 @@ export const usePostStore = defineStore("blog", {
         },
       });
       this.paginatedUserPosts = response.data.paginatedUserPosts;
+    },
+    async fetchUserDetail(username: string) {
+      const response = await apolloClient.query({
+        query: UserDetail,
+        variables: {
+          username,
+        },
+      });
+      this.userDetail = response.data.userByUsername;
     },
     async fetchPostTitles() {
       const response = await apolloClient.query({
