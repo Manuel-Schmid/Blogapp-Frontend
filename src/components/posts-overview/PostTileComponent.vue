@@ -29,8 +29,17 @@ export default {
     </div>
     <div class="post-creation-info">
       <p>
-        <span class="post-owner"
-          >{{ formatFullname(post.owner.firstName, post.owner.lastName) }} -
+        <span class="post-owner">
+          <router-link
+            :to="{
+              name: 'userDetail',
+              params: { username: post.owner.username },
+            }"
+            class="hover:underline"
+          >
+            {{ formatFullname(post.owner.firstName, post.owner.lastName) }}
+          </router-link>
+          -
         </span>
         {{ formatDateShort(post.dateCreated) }}
       </p>
