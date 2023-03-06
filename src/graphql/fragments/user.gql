@@ -10,6 +10,9 @@ fragment User on User {
   isSuperuser
   isStaff
   isActive
+  avatar {
+    name
+  }
   userStatus {
     ...UserStatus
   }
