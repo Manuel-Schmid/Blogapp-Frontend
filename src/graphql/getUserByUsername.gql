@@ -1,7 +1,11 @@
 #import "./fragments/baseUser.gql"
+#import "./fragments/overviewPost.gql"
 
 query UserByUsername($username: String!) {
   userByUsername(username: $username) {
     ...BaseUser
+    posts {
+      ...OverviewPost
+    }
   }
 }
