@@ -7,7 +7,7 @@ import {
 
 export default {
   name: "PostTileComponent",
-  props: ["post"],
+  props: ["post", "displayAuthor"],
 
   setup() {
     return { formatFullname, formatDateShort, getImageURL };
@@ -27,9 +27,9 @@ export default {
     >
       <p class="mb-4">{{ post.title }}</p>
     </div>
-    <div class="post-creation-info">
+    <div class="leading-4">
       <p>
-        <span class="post-owner">
+        <span v-if="displayAuthor" class="post-owner">
           <router-link
             :to="{
               name: 'userDetail',
