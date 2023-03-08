@@ -1,9 +1,15 @@
 <script lang="ts">
 import { formatFullname, getImageURL } from "../helper/helper";
+import PostTileComponent from "./posts-overview/PostTileComponent.vue";
+import PaginationComponent from "./PaginationComponent.vue";
 
 export default {
   name: "UserDetailComponent",
   props: ["userData"],
+  components: {
+    PostTileComponent,
+    PaginationComponent,
+  },
 
   setup() {
     return { formatFullname, getImageURL };
@@ -12,9 +18,11 @@ export default {
 </script>
 
 <template>
-  <div class="site-container">
+  <div class="site-container px-12">
     <div class="content-container-sm m-auto w-full">
-      <div class="leading-5 text-black dark:text-white p-20 flex flex-row">
+      <div
+        class="leading-5 text-black dark:text-white px-20 pt-20 pb-10 flex flex-row"
+      >
         <div class="">
           <img
             v-if="userData.avatar.name"
@@ -39,6 +47,19 @@ export default {
           </table>
         </div>
       </div>
+    </div>
+    <div class="content-container m-auto w-full">
+      <p class="page-title mb-8">{{ this.$t("shared.posts-title") }}:</p>
+      <div v-if="userData.posts" class="pl-[50px]">
+        <PostTileComponent
+          v-for="post in userData.posts"
+          :key="post.id"
+          :post="post"
+          :display-author="false"
+        >
+        </PostTileComponent>
+      </div>
+      <div class="float-left w-full pb-10"></div>
     </div>
   </div>
 </template>
