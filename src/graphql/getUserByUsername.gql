@@ -1,11 +1,7 @@
-#import "./fragments/userStatus.gql"
 #import "./fragments/baseUser.gql"
 
 query UserByUsername($username: String!) {
   userByUsername(username: $username) {
     ...BaseUser
-    userStatus {
-      ...UserStatus
-    }
   }
 }
