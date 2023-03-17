@@ -79,9 +79,24 @@ export type CreatePostType = {
   success: Scalars["Boolean"];
 };
 
+export type CreateSubscriptionType = {
+  __typename?: "CreateSubscriptionType";
+  errors?: Maybe<Scalars["JSON"]>;
+  subscription?: Maybe<Subscription>;
+  success: Scalars["Boolean"];
+};
+
 export type DeleteType = {
   __typename?: "DeleteType";
   deleted: Scalars["Boolean"];
+};
+
+export type DetailPost = {
+  __typename?: "DetailPost";
+  errors?: Maybe<Scalars["JSON"]>;
+  notificationRemoved: Scalars["Boolean"];
+  post?: Maybe<Post>;
+  success: Scalars["Boolean"];
 };
 
 export type DjangoImageType = {
@@ -238,9 +253,11 @@ export type RootMutation = {
   createComment?: Maybe<Comment>;
   createPost: CreatePostType;
   createPostLike?: Maybe<PostLike>;
+  createSubscription: CreateSubscriptionType;
   deleteComment: Scalars["Boolean"];
   deletePostLike: Scalars["Boolean"];
   deleteRefreshTokenCookie: DeleteType;
+  deleteSubscription: Scalars["Boolean"];
   deleteTokenCookie: DeleteType;
   emailChange: EmailChangeType;
   passwordChange: PasswordChangeType;
@@ -278,12 +295,20 @@ export type RootMutationCreatePostLikeArgs = {
   postLikeInput: PostLikeInput;
 };
 
+export type RootMutationCreateSubscriptionArgs = {
+  subscriptionInput: SubscriptionInput;
+};
+
 export type RootMutationDeleteCommentArgs = {
   commentId: Scalars["ID"];
 };
 
 export type RootMutationDeletePostLikeArgs = {
   postLikeInput: PostLikeInput;
+};
+
+export type RootMutationDeleteSubscriptionArgs = {
+  subscriptionInput: SubscriptionInput;
 };
 
 export type RootMutationEmailChangeArgs = {
@@ -369,13 +394,15 @@ export type RootQuery = {
   categoryById: Category;
   me?: Maybe<User>;
   paginatedAuthorRequests: PaginationAuthorRequests;
+  paginatedNotificationPosts: PaginationPosts;
   paginatedPosts: PaginationPosts;
   paginatedUserPosts: PaginationPosts;
-  postBySlug?: Maybe<Post>;
+  postBySlug?: Maybe<DetailPost>;
   postTitles: Array<PostTitleType>;
   tags: Array<Tag>;
   usedTags: Array<Tag>;
   user?: Maybe<User>;
+  userSubscriptions: Array<Subscription>;
   users: Array<User>;
 };
 
@@ -387,6 +414,10 @@ export type RootQueryPaginatedAuthorRequestsArgs = {
   activePage?: InputMaybe<Scalars["Int"]>;
   sort?: InputMaybe<Scalars["String"]>;
   status?: InputMaybe<Scalars["String"]>;
+};
+
+export type RootQueryPaginatedNotificationPostsArgs = {
+  activePage?: InputMaybe<Scalars["Int"]>;
 };
 
 export type RootQueryPaginatedPostsArgs = {
@@ -423,6 +454,19 @@ export enum Status {
   Pending = "PENDING",
   Rejected = "REJECTED",
 }
+
+export type Subscription = {
+  __typename?: "Subscription";
+  author: User;
+  dateCreated: Scalars["DateTime"];
+  id: Scalars["ID"];
+  subscriber: User;
+};
+
+export type SubscriptionInput = {
+  author: Scalars["ID"];
+  subscriber: Scalars["ID"];
+};
 
 export type Tag = {
   __typename?: "Tag";
@@ -494,6 +538,7 @@ export type User = {
   /** Designates that this user has all permissions without explicitly assigning them. */
   isSuperuser: Scalars["Boolean"];
   lastName: Scalars["String"];
+  notificationCount: Scalars["Int"];
   password: Scalars["String"];
   posts: Array<Post>;
   profile: UserProfile;
