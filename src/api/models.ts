@@ -178,6 +178,7 @@ export type Post = {
   id: Scalars["ID"];
   image?: Maybe<DjangoImageType>;
   isLiked: Scalars["Boolean"];
+  isSubscribed: Scalars["Boolean"];
   likeCount: Scalars["Int"];
   owner: User;
   relatedMainPosts: Array<Post>;
