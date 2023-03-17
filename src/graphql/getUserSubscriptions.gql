@@ -1,0 +1,7 @@
+#import "./fragments/subscription.gql"
+
+query UserSubscriptions {
+  userSubscriptions {
+    ...Subscription
+  }
+}

@@ -13,6 +13,8 @@ import {
 } from "../api/models";
 import Posts from "../graphql/getPosts.gql";
 import UserPosts from "../graphql/getUserPosts.gql";
+import NotificationPosts from "../graphql/getNotificationPosts.gql";
+import UserSubscriptions from "../graphql/getUserSubscriptions.gql";
 import PostBySlug from "../graphql/getPost.gql";
 import CreatePost from "../graphql/createPost.gql";
 import UpdatePost from "../graphql/updatePost.gql";
@@ -21,6 +23,8 @@ import Tags from "../graphql/getTags.gql";
 import Categories from "../graphql/categories.gql";
 import UsedTags from "../graphql/getUsedTags.gql";
 import AuthorRequests from "../graphql/getAuthorRequests.gql";
+import CreateSubscription from "../graphql/createSubscription.gql";
+import DeleteSubscription from "../graphql/deleteSubscription.gql";
 import CreateComment from "../graphql/createComment.gql";
 import DeleteComment from "../graphql/deleteComment.gql";
 import CreatePostLike from "../graphql/createPostLike.gql";
@@ -75,7 +79,7 @@ export const usePostStore = defineStore("blog", {
           slug: postSlug,
         },
       });
-      this.post = response.data.postBySlug;
+      this.post = response.data.postBySlug.post;
     },
     async createPost(postInput: PostInput) {
       const response = await apolloClient.mutate({
