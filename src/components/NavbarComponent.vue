@@ -53,9 +53,7 @@ export default {
           :class="routeName === 'posts' ? 'nav-item-active' : ''"
           :to="{ name: 'posts' }"
         >
-          {{
-            "(" + user?.notificationCount + ") " + this.$t("shared.posts-title")
-          }}
+          {{ this.$t("shared.posts-title") }}
         </router-link>
         <router-link
           v-if="user?.isSuperuser"
