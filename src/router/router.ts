@@ -1,4 +1,8 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHistory,
+  RouteLocationNormalized,
+} from "vue-router";
 import PostsOverviewContainer from "../container/PostsOverviewContainer.vue";
 import PostDetailContainer from "../container/PostDetailContainer.vue";
 import ProfileContainer from "../container/ProfileContainer.vue";
@@ -23,6 +27,7 @@ import { fetchAuthorRequestsGuard } from "./guards/fetchAuthorRequestsGuard";
 import { fetchUserPostsGuard } from "./guards/fetchUserPostsGuard";
 import UserPostsContainer from "../container/UserPostsContainer.vue";
 import { fetchPostTitlesGuard } from "./guards/fetchPostTitlesGuard";
+import { useAuthStore } from "../store/auth";
 
 const routes: any = [
   {
@@ -123,5 +128,14 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
+
+router.beforeEach(
+  async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
+    if (!from.name) {
+      // whenever page reloads
+      await useAuthStore().fetchUser();
+    }
+  }
+);
 
 export default router;

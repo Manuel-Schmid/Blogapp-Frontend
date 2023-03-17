@@ -31,6 +31,7 @@ import CreatePostLike from "../graphql/createPostLike.gql";
 import UpdatePostStatus from "../graphql/updatePostStatus.gql";
 import DeletePostLike from "../graphql/deletePostLike.gql";
 import UpdateAuthorRequest from "../graphql/updateAuthorRequest.gql";
+import { useAuthStore } from "./auth";
 
 export type PostState = {
   paginatedPosts: PaginationPosts | null;
@@ -80,6 +81,9 @@ export const usePostStore = defineStore("blog", {
         },
       });
       this.post = response.data.postBySlug.post;
+      if (response.data.postBySlug.notificationRemoved) {
+        await useAuthStore().fetchUser();
+      }
     },
     async createPost(postInput: PostInput) {
       const response = await apolloClient.mutate({
