@@ -15,7 +15,8 @@ export default {
   setup() {
     const postStore = usePostStore();
     const authStore = useAuthStore();
-    let postLiked = ref(!!postStore.post?.isLiked);
+    const postLiked = ref(!!postStore.post?.isLiked);
+    const subscribed = ref(!!postStore.post?.isSubscribed);
     const commentSectionCollapsed = ref(
       authStore.user ? !!authStore.user.profile.commentSectionCollapsed : false
     );
@@ -36,6 +37,20 @@ export default {
         await postStore.createPostLike();
       }
       postLiked.value = !postLiked.value;
+    };
+
+    const toggleSubscription = async () => {
+      if (authStore.user && postStore.post) {
+        const subscriber = authStore.user.id;
+        const author = postStore.post.owner.id;
+        subscribed.value = !subscribed.value;
+
+        if (subscribed.value) {
+          await postStore.deleteSubscription({ subscriber, author });
+        } else {
+          await postStore.createSubscription({ subscriber, author });
+        }
+      }
     };
 
     const toggleCommentSectionCollapsed = async () => {
@@ -62,9 +77,11 @@ export default {
       postStore,
       authStore,
       postLiked,
+      subscribed,
       commentSectionCollapsed,
       relatedPostsCollapsed,
       togglePostLike,
+      toggleSubscription,
       toggleCommentSectionCollapsed,
       toggleRelatedPostsCollapsed,
     };
@@ -77,10 +94,12 @@ export default {
     v-if="postStore.post"
     :post-data="postStore.post"
     :post-liked="postLiked"
+    :subscribed="subscribed"
     :user="authStore.user"
     :comment-section-collapsed="commentSectionCollapsed"
     :related-posts-collapsed="relatedPostsCollapsed"
     @toggle-post-like="togglePostLike"
+    @toggle-subscription="toggleSubscription"
     @toggle-comment-section-collapsed="toggleCommentSectionCollapsed"
     @toggle-related-posts-collapsed="toggleRelatedPostsCollapsed"
   />
