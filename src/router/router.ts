@@ -28,6 +28,8 @@ import { fetchUserPostsGuard } from "./guards/fetchUserPostsGuard";
 import UserPostsContainer from "../container/UserPostsContainer.vue";
 import { fetchPostTitlesGuard } from "./guards/fetchPostTitlesGuard";
 import { useAuthStore } from "../store/auth";
+import { fetchUserSubscriptionsGuard } from "./guards/fetchUserSubscriptionsGuard";
+import UserSubscriptionsContainer from "../container/UserSubscriptionsContainer.vue";
 
 const routes: any = [
   {
@@ -115,6 +117,12 @@ const routes: any = [
       fetchPostTitlesGuard,
       fetchPostGuard,
     ],
+  },
+  {
+    path: "/subscriptions",
+    name: "userSubscriptions",
+    component: UserSubscriptionsContainer,
+    beforeEnter: [requireLoginGuard, fetchUserSubscriptionsGuard],
   },
   {
     path: "/author-requests",
