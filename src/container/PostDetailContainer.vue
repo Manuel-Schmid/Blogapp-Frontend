@@ -45,8 +45,9 @@ export default {
         const author = postStore.post.owner.id;
         subscribed.value = !subscribed.value;
 
-        if (subscribed.value) {
+        if (!subscribed.value) {
           await postStore.deleteSubscription({ subscriber, author });
+          await postStore.fetchPost(postStore.post.slug, false);
         } else {
           await postStore.createSubscription({ subscriber, author });
         }
