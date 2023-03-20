@@ -42,10 +42,10 @@ export default {
           <tr class="table-row">
             <th>{{ this.$t("components.my-posts.table.title") }}</th>
             <th>{{ this.$t("components.my-posts.table.category") }}</th>
-            <th>{{ this.$t("components.my-posts.table.date_created") }}</th>
+            <th>{{ this.$t("shared.date_created") }}</th>
             <th>{{ this.$t("components.my-posts.table.image") }}</th>
             <th>{{ this.$t("components.my-posts.table.status") }}</th>
-            <th>{{ this.$t("components.my-posts.table.actions") }}</th>
+            <th>{{ this.$t("shared.actions") }}</th>
           </tr>
           <tr v-for="post in postsData.posts" :key="post.id" class="table-row">
             <td class="table-row-value">

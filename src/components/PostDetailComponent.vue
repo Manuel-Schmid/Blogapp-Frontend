@@ -130,8 +130,8 @@ export default {
               >
                 {{
                   subscribed
-                    ? this.$t("shared.subscribed")
-                    : this.$t("shared.subscribe")
+                    ? this.$t("components.subscriptions.subscribed")
+                    : this.$t("components.subscriptions.subscribe")
                 }}
               </button>
             </div>

@@ -123,7 +123,7 @@ export default {
               </select>
             </th>
             <th>
-              {{ this.$t("components.author-request-overview.table.actions") }}
+              {{ this.$t("shared.actions") }}
             </th>
           </tr>
           <tr
