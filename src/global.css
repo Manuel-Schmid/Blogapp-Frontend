@@ -104,6 +104,14 @@
     @apply border dark:border-slate-600 dark:bg-slate-600
   }
 
+  .table-list {
+    @apply table-auto m-auto text-sm text-left text-gray-700 dark:text-gray-300 w-max text-center
+  }
+
+  .table-list-head {
+    @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-50
+  }
+
   .table-row {
     @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700;
   }
