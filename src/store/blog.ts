@@ -34,6 +34,7 @@ import UpdatePostStatus from "../graphql/updatePostStatus.gql";
 import DeletePostLike from "../graphql/deletePostLike.gql";
 import UpdateAuthorRequest from "../graphql/updateAuthorRequest.gql";
 import { useAuthStore } from "./auth";
+import { fetchUserSubscriptionsGuard } from "../router/guards/fetchUserSubscriptionsGuard";
 
 export type PostState = {
   paginatedPosts: PaginationPosts | null;
@@ -147,9 +148,12 @@ export const usePostStore = defineStore("blog", {
         label: obj.title,
       }));
     },
-    async fetchUserSubscriptions() {
+    async fetchUserSubscriptions(sort: string | undefined) {
       const response = await apolloClient.query({
         query: UserSubscriptions,
+        variables: {
+          sort,
+        },
       });
       this.userSubscriptions = response.data.userSubscriptions;
     },
@@ -264,15 +268,12 @@ export const usePostStore = defineStore("blog", {
       }
     },
     async deleteSubscription(subscriptionInput: SubscriptionInput) {
-      if (this.post) {
-        await apolloClient.mutate({
-          mutation: DeleteSubscription,
-          variables: {
-            subscriptionInput,
-          },
-        });
-        await this.fetchPost(this.post.slug, false);
-      }
+      await apolloClient.mutate({
+        mutation: DeleteSubscription,
+        variables: {
+          subscriptionInput,
+        },
+      });
     },
   },
 });
