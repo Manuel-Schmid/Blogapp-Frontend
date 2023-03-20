@@ -1,5 +1,3 @@
-#import "./fragments/subscription.gql"
-
 mutation CreateSubscription($subscriptionInput: SubscriptionInput!) {
   createSubscription(subscriptionInput: $subscriptionInput) {
     success
