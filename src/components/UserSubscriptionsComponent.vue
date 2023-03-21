@@ -1,12 +1,10 @@
 <script lang="ts">
-import PaginationComponent from "./PaginationComponent.vue";
 import SortableTableHeaderContainer from "../container/SortableTableHeaderContainer.vue";
 import { formatDatePrecise, formatFullname } from "../helper/helper";
 
 export default {
   name: "UserSubscriptionsComponent",
   components: {
-    PaginationComponent,
     SortableTableHeaderContainer,
   },
   props: ["subscriptions"],
