@@ -21,11 +21,11 @@
         "language": "Sprache",
         "logout": "Abmelden",
         "author-request-widget": {
-          "is-author": "Du bist ein Author",
-          "become-author": "Zum Author werden",
-          "request-pending-before-date": "Deine Author Anfrage wurde am",
+          "is-author": "Du bist ein Autor",
+          "become-author": "Zum Autor werden",
+          "request-pending-before-date": "Deine Autor Anfrage wurde am",
           "request-pending-after-date": "eröffnet und ist noch ausstehend",
-          "request-rejected": "Deine Author Anfrage wurde abgelehnt am "
+          "request-rejected": "Deine Autor Anfrage wurde abgelehnt am "
         },
         "table": {
           "username": "Benutzername",
@@ -106,7 +106,7 @@
         "subscribe": "Abonnieren",
         "subscribed": "Abonniert",
         "table": {
-          "author": "Author"
+          "author": "Autor"
         }
       },
       "author-request-overview": {
@@ -130,7 +130,7 @@
       "de": "Deutsch"
     },
     "shared": {
-      "author-request-title": "Author Anfragen",
+      "author-request-title": "Autor Anfragen",
       "posts-title": "Posts",
       "new-password": "Neues Passwort",
       "new-password-confirm": "Neues Passwort bestätigen",
