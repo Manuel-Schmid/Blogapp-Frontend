@@ -33,9 +33,9 @@ import {
   faSquarePlus,
   faClock,
   faCircleCheck,
+  faBell,
 } from "@fortawesome/free-regular-svg-icons";
 import { createI18n } from "vue-i18n";
-import { useAuthStore } from "./store/auth";
 import { updateLanguage } from "./helper/layout";
 
 library.add(
@@ -58,7 +58,8 @@ library.add(
   faSortUp,
   faSortDown,
   faAngleUp,
-  faAngleDown
+  faAngleDown,
+  faBell
 );
 
 const messages = {
