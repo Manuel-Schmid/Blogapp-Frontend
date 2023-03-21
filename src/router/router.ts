@@ -30,6 +30,8 @@ import { fetchPostTitlesGuard } from "./guards/fetchPostTitlesGuard";
 import { useAuthStore } from "../store/auth";
 import { fetchUserSubscriptionsGuard } from "./guards/fetchUserSubscriptionsGuard";
 import UserSubscriptionsContainer from "../container/UserSubscriptionsContainer.vue";
+import NotificationPostsContainer from "../container/NotificationPostsContainer.vue";
+import { fetchNotificationPostsGuard } from "./guards/fetchNotificationPostsGuard";
 
 const routes: any = [
   {
@@ -94,6 +96,12 @@ const routes: any = [
       requireAuthorPermissionGuard,
       fetchUserPostsGuard,
     ],
+  },
+  {
+    path: "/posts/notifications:page?",
+    name: "notificationPosts",
+    component: NotificationPostsContainer,
+    beforeEnter: [requireLoginGuard, fetchNotificationPostsGuard],
   },
   {
     path: "/create-post",

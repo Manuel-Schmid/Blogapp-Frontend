@@ -34,7 +34,6 @@ import UpdatePostStatus from "../graphql/updatePostStatus.gql";
 import DeletePostLike from "../graphql/deletePostLike.gql";
 import UpdateAuthorRequest from "../graphql/updateAuthorRequest.gql";
 import { useAuthStore } from "./auth";
-import { fetchUserSubscriptionsGuard } from "../router/guards/fetchUserSubscriptionsGuard";
 
 export type PostState = {
   paginatedPosts: PaginationPosts | null;
