@@ -65,7 +65,7 @@
   }
 
   .page-title {
-    @apply text-3xl tracking-wide leading-5 text-black font-bold mt-4 mt-9 dark:text-white
+    @apply text-3xl tracking-wide leading-5 text-black font-bold mt-4 dark:text-white
   }
 
   .form-wrapper {

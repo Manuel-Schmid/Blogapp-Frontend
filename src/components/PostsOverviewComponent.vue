@@ -32,7 +32,7 @@ export default {
         query-key="tags"
         :multiselect="true"
       ></FilterComponent>
-      <p class="page-title mb-8">{{ this.$t("shared.posts-title") }}:</p>
+      <p class="page-title mb-8 mt-9">{{ this.$t("shared.posts-title") }}:</p>
       <div v-if="postsData" class="pl-[50px]">
         <PostTileComponent
           v-for="post in postsData.posts"
