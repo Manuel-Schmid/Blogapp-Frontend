@@ -1,6 +1,7 @@
 <script lang="ts">
 import SortableTableHeaderContainer from "../container/SortableTableHeaderContainer.vue";
 import { formatDatePrecise, formatFullname } from "../helper/helper";
+import { i18n } from "../main";
 
 export default {
   name: "UserSubscriptionsComponent",
@@ -11,7 +12,13 @@ export default {
 
   setup(props: {}, { emit }: any) {
     const deleteSubscription = (author: number) => {
-      emit("deleteSubscription", author);
+      if (
+        window.confirm(
+          i18n.global.t("components.subscriptions.confirmation-dialogue")
+        )
+      ) {
+        emit("deleteSubscription", author);
+      }
     };
     return {
       formatDatePrecise,

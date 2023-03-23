@@ -73,6 +73,8 @@ const i18n = createI18n({
   messages,
 });
 
+export { i18n };
+
 export function setI18nLanguage(locale: any) {
   i18n.global.locale = locale;
   const html = document.querySelector("html");

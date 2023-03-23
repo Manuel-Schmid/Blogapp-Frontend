@@ -105,6 +105,7 @@
       "subscriptions": {
         "subscribe": "Abonnieren",
         "subscribed": "Abonniert",
+        "confirmation-dialogue": "Sind Sie sicher, dass Sie dieses Abonnement löschen möchten?",
         "table": {
           "author": "Autor"
         }
