@@ -60,6 +60,10 @@
     max-width: 970px;
   }
 
+  .content-container-sm {
+    max-width: 780px;
+  }
+
   .flex-container-centered {
     @apply w-full h-full flex justify-center items-center text-left
   }

@@ -23,6 +23,8 @@ import { fetchAuthorRequestsGuard } from "./guards/fetchAuthorRequestsGuard";
 import { fetchUserPostsGuard } from "./guards/fetchUserPostsGuard";
 import UserPostsContainer from "../container/UserPostsContainer.vue";
 import { fetchPostTitlesGuard } from "./guards/fetchPostTitlesGuard";
+import { fetchUserDetailGuard } from "./guards/fetchUserDetailGuard";
+import UserDetailContainer from "../container/UserDetailContainer.vue";
 
 const routes: any = [
   {
@@ -65,6 +67,12 @@ const routes: any = [
     name: "profile",
     component: ProfileContainer,
     beforeEnter: [requireLoginGuard, fetchUserGuard],
+  },
+  {
+    path: "/user/:username",
+    name: "userDetail",
+    component: UserDetailContainer,
+    beforeEnter: [fetchUserDetailGuard],
   },
   {
     path: "/posts/:category?:tags?:page?",
