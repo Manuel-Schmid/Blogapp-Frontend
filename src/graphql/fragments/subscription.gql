@@ -1,0 +1,8 @@
+#import "./user.gql"
+
+fragment Subscription on Subscription {
+  author {
+    ...User
+  }
+  dateCreated
+}

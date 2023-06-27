@@ -32,20 +32,16 @@ export default {
       <p class="page-title mb-10">
         {{ this.$t("shared.my-posts") }}
       </p>
-      <table
-        class="table-auto m-auto text-sm text-left text-gray-700 dark:text-gray-300 w-max text-center"
-      >
-        <thead
-          class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-50"
-        ></thead>
+      <table class="table-list m-auto">
+        <thead class="table-list-head"></thead>
         <tbody>
           <tr class="table-row">
             <th>{{ this.$t("components.my-posts.table.title") }}</th>
             <th>{{ this.$t("components.my-posts.table.category") }}</th>
-            <th>{{ this.$t("components.my-posts.table.date_created") }}</th>
+            <th>{{ this.$t("shared.date_created") }}</th>
             <th>{{ this.$t("components.my-posts.table.image") }}</th>
             <th>{{ this.$t("components.my-posts.table.status") }}</th>
-            <th>{{ this.$t("components.my-posts.table.actions") }}</th>
+            <th>{{ this.$t("shared.actions") }}</th>
           </tr>
           <tr v-for="post in postsData.posts" :key="post.id" class="table-row">
             <td class="table-row-value">

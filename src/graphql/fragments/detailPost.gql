@@ -7,6 +7,7 @@ fragment DetailPost on Post {
   id
   text
   isLiked
+  isSubscribed
   ...Post
   comments {
     ...Comment

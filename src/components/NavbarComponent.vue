@@ -49,11 +49,35 @@ export default {
           <font-awesome-icon icon="fa-regular fa-square-plus" />
         </router-link>
         <router-link
+          v-if="user?.notificationCount > 0"
+          class="nav-item"
+          :class="routeName === 'notificationPosts' ? 'nav-item-active' : ''"
+          :to="{ name: 'notificationPosts' }"
+        >
+          <div class="notification-icon">
+            <span
+              class="notification-badge"
+              :class="user.notificationCount > 9 && 'border-radius-sm'"
+            >
+              {{ user.notificationCount > 9 ? "9+" : user.notificationCount }}
+            </span>
+            <font-awesome-icon icon="fa-regular fa-bell" />
+          </div>
+        </router-link>
+        <router-link
           class="nav-item"
           :class="routeName === 'posts' ? 'nav-item-active' : ''"
           :to="{ name: 'posts' }"
         >
           {{ this.$t("shared.posts-title") }}
+        </router-link>
+        <router-link
+          v-if="user"
+          class="nav-item"
+          :class="routeName === 'userSubscriptions' ? 'nav-item-active' : ''"
+          :to="{ name: 'userSubscriptions' }"
+        >
+          {{ this.$t("shared.subscriptions-title") }}
         </router-link>
         <router-link
           v-if="user?.isSuperuser"
@@ -99,7 +123,7 @@ export default {
 }
 .nav-item {
   transition: background-color 100ms;
-  @apply pt-2 pr-5 pb-2 pl-5 mt-0 mr-1 mb-0 ml-1 leading-5 font-bold text-center hover:cursor-pointer hover:bg-zinc-200 dark:hover:bg-gray-700 dark:border-white;
+  @apply pt-2 px-3 pb-2 mt-0 mr-1 mb-0 ml-1 leading-5 font-bold text-center hover:cursor-pointer hover:bg-zinc-200 dark:hover:bg-gray-700 dark:border-white;
 }
 .nav-item:hover {
   border-bottom: 1px solid;
@@ -108,5 +132,28 @@ export default {
 .nav-item-active {
   border-bottom: 1px solid;
   padding-bottom: calc(0.5rem - 1px);
+}
+.notification-icon {
+  position: relative;
+  display: inline-block;
+}
+.notification-badge {
+  position: absolute;
+  top: -9px;
+  left: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  min-width: 20px;
+  padding: 0 6px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #f00;
+  border-radius: 50%;
+}
+.border-radius-sm {
+  border-radius: 42%;
 }
 </style>

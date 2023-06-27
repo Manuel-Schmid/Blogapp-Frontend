@@ -1,0 +1,10 @@
+#import "./fragments/overviewPost.gql"
+
+query NotificationPosts($activePage: Int!) {
+  paginatedNotificationPosts(activePage: $activePage) {
+    posts {
+      ...OverviewPost
+    }
+    numPostPages
+  }
+}

@@ -21,11 +21,11 @@
         "language": "Sprache",
         "logout": "Abmelden",
         "author-request-widget": {
-          "is-author": "Du bist ein Author",
-          "become-author": "Zum Author werden",
-          "request-pending-before-date": "Deine Author Anfrage wurde am",
+          "is-author": "Du bist ein Autor",
+          "become-author": "Zum Autor werden",
+          "request-pending-before-date": "Deine Autor Anfrage wurde am",
           "request-pending-after-date": "eröffnet und ist noch ausstehend",
-          "request-rejected": "Deine Author Anfrage wurde abgelehnt am "
+          "request-rejected": "Deine Autor Anfrage wurde abgelehnt am "
         },
         "table": {
           "username": "Benutzername",
@@ -94,10 +94,8 @@
         "table": {
           "title": "Titel",
           "category": "Kategorie",
-          "date_created": "Erstelldatum",
           "image": "Bild",
           "status": "Status",
-          "actions": "Aktionen",
           "published": "Veröffentlicht",
           "publish": "Veröffentlichen",
           "draft-noun": "Entwurf",
@@ -105,12 +103,19 @@
           "edit": "Bearbeiten"
         }
       },
+      "subscriptions": {
+        "subscribe": "Abonnieren",
+        "subscribed": "Abonniert",
+        "confirmation-dialogue": "Sind Sie sicher, dass Sie dieses Abonnement löschen möchten?",
+        "table": {
+          "author": "Autor"
+        }
+      },
       "author-request-overview": {
         "table": {
           "user": "User",
           "date_opened": "Eröffnungsdatum",
           "date_closed": "Schliessdatum",
-          "actions": "Aktionen",
           "accept": "Akzeptieren",
           "reject": "Ablehnen"
         },
@@ -127,7 +132,7 @@
       "de": "Deutsch"
     },
     "shared": {
-      "author-request-title": "Author Anfragen",
+      "author-request-title": "Autor Anfragen",
       "posts-title": "Posts",
       "new-password": "Neues Passwort",
       "new-password-confirm": "Neues Passwort bestätigen",
@@ -137,11 +142,16 @@
       "your-email": "Deine Email",
       "password": "Passwort",
       "password-confirm": "Passwort bestätigen",
+      "subscriptions-title": "Abonnements",
       "my-posts": "Meine Posts",
+      "latest-posts": "Neue Posts",
       "related-posts": "Verwandte Posts",
+      "actions": "Aktionen",
+      "date_created": "Erstelldatum",
       "no-image": "Kein Bild",
       "sign-in": "Anmelden",
       "sign-up": "Registrieren",
+      "unsubscribe": "Deabonnieren",
       "tags": "Tags",
       "email": "Email",
       "save": "Speichern"

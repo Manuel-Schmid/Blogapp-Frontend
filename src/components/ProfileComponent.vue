@@ -126,12 +126,8 @@ export default {
         }}
       </p>
       <div class="w-min">
-        <table
-          class="table-auto text-sm text-left text-gray-700 dark:text-gray-300 w-max text-center"
-        >
-          <thead
-            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-50"
-          ></thead>
+        <table class="table-list">
+          <thead class="table-list-head"></thead>
           <tbody>
             <tr class="table-row">
               <th scope="row">

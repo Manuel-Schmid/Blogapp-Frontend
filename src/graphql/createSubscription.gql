@@ -1,0 +1,6 @@
+mutation CreateSubscription($subscriptionInput: SubscriptionInput!) {
+  createSubscription(subscriptionInput: $subscriptionInput) {
+    success
+    errors
+  }
+}

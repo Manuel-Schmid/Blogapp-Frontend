@@ -1,4 +1,8 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHistory,
+  RouteLocationNormalized,
+} from "vue-router";
 import PostsOverviewContainer from "../container/PostsOverviewContainer.vue";
 import PostDetailContainer from "../container/PostDetailContainer.vue";
 import ProfileContainer from "../container/ProfileContainer.vue";
@@ -25,6 +29,11 @@ import UserPostsContainer from "../container/UserPostsContainer.vue";
 import { fetchPostTitlesGuard } from "./guards/fetchPostTitlesGuard";
 import { fetchUserDetailGuard } from "./guards/fetchUserDetailGuard";
 import UserDetailContainer from "../container/UserDetailContainer.vue";
+import { useAuthStore } from "../store/auth";
+import { fetchUserSubscriptionsGuard } from "./guards/fetchUserSubscriptionsGuard";
+import UserSubscriptionsContainer from "../container/UserSubscriptionsContainer.vue";
+import NotificationPostsContainer from "../container/NotificationPostsContainer.vue";
+import { fetchNotificationPostsGuard } from "./guards/fetchNotificationPostsGuard";
 
 const routes: any = [
   {
@@ -97,6 +106,12 @@ const routes: any = [
     ],
   },
   {
+    path: "/posts/notifications:page?",
+    name: "notificationPosts",
+    component: NotificationPostsContainer,
+    beforeEnter: [requireLoginGuard, fetchNotificationPostsGuard],
+  },
+  {
     path: "/create-post",
     name: "createPost",
     component: CreatePostFormContainer,
@@ -120,6 +135,12 @@ const routes: any = [
     ],
   },
   {
+    path: "/subscriptions",
+    name: "userSubscriptions",
+    component: UserSubscriptionsContainer,
+    beforeEnter: [requireLoginGuard, fetchUserSubscriptionsGuard],
+  },
+  {
     path: "/author-requests",
     name: "authorRequests",
     component: AuthorRequestOverviewContainer,
@@ -131,5 +152,14 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
+
+router.beforeEach(
+  async (to: RouteLocationNormalized, from: RouteLocationNormalized) => {
+    if (!from.name) {
+      // whenever page reloads
+      await useAuthStore().fetchUser();
+    }
+  }
+);
 
 export default router;

@@ -1,0 +1,7 @@
+#import "./fragments/subscription.gql"
+
+query UserSubscriptions($sort: String) {
+  userSubscriptions(sort: $sort) {
+    ...Subscription
+  }
+}
