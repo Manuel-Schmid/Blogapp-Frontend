@@ -19,7 +19,6 @@ export default {
       password2: string,
       avatar: any
     ) => {
-      console.log(avatar);
       const userRegistrationInput = {
         email,
         username,
