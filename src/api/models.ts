@@ -403,7 +403,7 @@ export type RootQuery = {
   tags: Array<Tag>;
   usedTags: Array<Tag>;
   user?: Maybe<User>;
-  userByUsername?: Maybe<UserDetail>;
+  userByUsername?: Maybe<User>;
   userSubscriptions: Array<Subscription>;
   users: Array<User>;
 };
@@ -538,28 +538,6 @@ export type UpdateUserProfileType = {
 
 export type User = {
   __typename?: "User";
-  avatar?: Maybe<DjangoImageType>;
-  email: Scalars["String"];
-  firstName: Scalars["String"];
-  id: Scalars["ID"];
-  /** Designates whether this user should be treated as active. Unselect this instead of deleting accounts. */
-  isActive: Scalars["Boolean"];
-  /** Designates whether the user can log into this admin site. */
-  isStaff: Scalars["Boolean"];
-  /** Designates that this user has all permissions without explicitly assigning them. */
-  isSuperuser: Scalars["Boolean"];
-  lastName: Scalars["String"];
-  notificationCount: Scalars["Int"];
-  password: Scalars["String"];
-  posts: Array<Post>;
-  profile: UserProfile;
-  userStatus: UserStatus;
-  /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
-  username: Scalars["String"];
-};
-
-export type UserDetail = {
-  __typename?: "UserDetail";
   avatar?: Maybe<DjangoImageType>;
   email: Scalars["String"];
   firstName: Scalars["String"];
