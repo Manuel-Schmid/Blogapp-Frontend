@@ -93,10 +93,8 @@
         "table": {
           "title": "Title",
           "category": "Category",
-          "date_created": "Date created",
           "image": "Image",
           "status": "Status",
-          "actions": "Actions",
           "published": "Published",
           "publish": "Publish",
           "draft-noun": "Draft",
@@ -104,12 +102,19 @@
           "edit": "Edit"
         }
       },
+      "subscriptions": {
+        "subscribe": "Subscribe",
+        "subscribed": "Subscribed",
+        "confirmation-dialogue": "Are you certain you want to delete this subscription?",
+        "table": {
+          "author": "Author"
+        }
+      },
       "author-request-overview": {
         "table": {
           "user": "User",
           "date_opened": "Date opened",
           "date_closed": "Date closed",
-          "actions": "Actions",
           "accept": "Accept",
           "reject": "Reject"
         },
@@ -136,11 +141,16 @@
       "your-email": "Your Email",
       "password": "Password",
       "password-confirm": "Confirm Password",
+      "subscriptions-title": "Subscriptions",
       "my-posts": "My Posts",
+      "latest-posts": "Latest Posts",
       "related-posts": "Related Posts",
+      "actions": "Actions",
+      "date_created": "Date created",
       "no-image": "No Image",
       "sign-in": "Sign in",
       "sign-up": "Sign up",
+      "unsubscribe": "Unsubscribe",
       "tags": "Tags",
       "email": "Email",
       "save": "Save"

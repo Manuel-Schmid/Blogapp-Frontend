@@ -8,6 +8,7 @@ export default {
   props: [
     "postData",
     "postLiked",
+    "subscribed",
     "user",
     "commentSectionCollapsed",
     "relatedPostsCollapsed",
@@ -20,6 +21,10 @@ export default {
   setup(props: {}, { emit }: any) {
     const toggleLike = () => {
       emit("togglePostLike");
+    };
+
+    const toggleSubscription = () => {
+      emit("toggleSubscription");
     };
 
     const toggleCommentSectionCollapsed = () => {
@@ -35,6 +40,7 @@ export default {
       getImageURL,
       formatFullname,
       toggleLike,
+      toggleSubscription,
       toggleCommentSectionCollapsed,
       toggleRelatedPostsCollapsed,
     };
@@ -109,9 +115,29 @@ export default {
                 postData.likeCount
               }}</span>
             </div>
+            <div
+              v-if="user && user.id !== postData.owner.id"
+              class="text-center float-right w-max flex flex-col mr-5 mt-1"
+            >
+              <button
+                class="shadow-lg font-bold text-sm rounded px-3 py-2"
+                :class="[
+                  subscribed
+                    ? 'button-bg-light-2 dark:button-bg-dark'
+                    : 'bg-blue-600 text-white',
+                ]"
+                @click="toggleSubscription"
+              >
+                {{
+                  subscribed
+                    ? this.$t("components.subscriptions.subscribed")
+                    : this.$t("components.subscriptions.subscribe")
+                }}
+              </button>
+            </div>
           </div>
           <div class="flex mb-1 ml-8 m-0">
-            <p class="font-bold mr-1">{{ this.$t("shared.category") }}:</p>
+            <p class="font-bold mr-1">{{ this.$t("shared.category") }}</p>
             <router-link
               :to="{
                 name: 'posts',

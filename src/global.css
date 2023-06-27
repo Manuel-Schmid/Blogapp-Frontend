@@ -65,7 +65,7 @@
   }
 
   .page-title {
-    @apply text-3xl tracking-wide leading-5 text-black font-bold mt-4 mt-9 dark:text-white
+    @apply text-3xl tracking-wide leading-5 text-black font-bold mt-4 dark:text-white
   }
 
   .form-wrapper {
@@ -102,6 +102,14 @@
 
   .input-bordered {
     @apply border dark:border-slate-600 dark:bg-slate-600
+  }
+
+  .table-list {
+    @apply table-auto m-auto text-sm text-left text-gray-700 dark:text-gray-300 w-max text-center
+  }
+
+  .table-list-head {
+    @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-50
   }
 
   .table-row {
