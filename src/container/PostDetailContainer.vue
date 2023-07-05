@@ -47,10 +47,10 @@ export default {
 
         if (!subscribed.value) {
           await postStore.deleteSubscription({ subscriber, author });
-          await postStore.fetchPost(postStore.post.slug, false);
         } else {
           await postStore.createSubscription({ subscriber, author });
         }
+        await postStore.fetchPost(postStore.post.slug, false);
       }
     };
 

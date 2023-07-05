@@ -267,17 +267,12 @@ export const usePostStore = defineStore("blog", {
       }
     },
     async createSubscription(subscriptionInput: SubscriptionInput) {
-      if (this.post) {
-        const response = await apolloClient.mutate({
-          mutation: CreateSubscription,
-          variables: {
-            subscriptionInput,
-          },
-        });
-        if (response.data.createSubscription.success) {
-          await this.fetchPost(this.post.slug, false);
-        }
-      }
+      await apolloClient.mutate({
+        mutation: CreateSubscription,
+        variables: {
+          subscriptionInput,
+        },
+      });
     },
     async deleteSubscription(subscriptionInput: SubscriptionInput) {
       const response = await apolloClient.mutate({
