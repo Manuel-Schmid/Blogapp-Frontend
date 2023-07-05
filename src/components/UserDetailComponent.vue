@@ -5,14 +5,18 @@ import PaginationComponent from "./PaginationComponent.vue";
 
 export default {
   name: "UserDetailComponent",
-  props: ["userData"],
+  props: ["userData", "authUserId", "subscribed"],
   components: {
     PostTileComponent,
     PaginationComponent,
   },
 
-  setup() {
-    return { formatFullname, getImageURL };
+  setup(props: {}, { emit }: any) {
+    const toggleSubscription = () => {
+      emit("toggleSubscription");
+    };
+
+    return { formatFullname, getImageURL, toggleSubscription };
   },
 };
 </script>
@@ -45,6 +49,25 @@ export default {
               </td>
             </tr>
           </table>
+          <div class="mt-5">
+            <div v-if="userData.id !== authUserId">
+              <button
+                class="shadow-lg font-bold text-sm rounded px-3 py-2"
+                :class="[
+                  subscribed
+                    ? 'button-bg-light-2 dark:button-bg-dark'
+                    : 'bg-blue-600 text-white',
+                ]"
+                @click="toggleSubscription"
+              >
+                {{
+                  subscribed
+                    ? this.$t("components.subscriptions.subscribed")
+                    : this.$t("components.subscriptions.subscribe")
+                }}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
