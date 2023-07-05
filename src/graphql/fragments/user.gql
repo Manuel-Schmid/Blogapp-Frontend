@@ -1,15 +1,9 @@
 #import "./userStatus.gql"
 #import "./userProfile.gql"
+#import "./baseUser.gql"
 
 fragment User on User {
-  id
-  username
-  email
-  firstName
-  lastName
-  isSuperuser
-  isStaff
-  isActive
+  ...BaseUser
   userStatus {
     ...UserStatus
   }

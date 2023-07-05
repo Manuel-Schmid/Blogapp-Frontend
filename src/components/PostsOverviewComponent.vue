@@ -38,6 +38,7 @@ export default {
           v-for="post in postsData.posts"
           :key="post.id"
           :post="post"
+          :display-author="true"
         >
         </PostTileComponent>
         <PaginationComponent

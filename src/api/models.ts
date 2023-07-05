@@ -403,6 +403,7 @@ export type RootQuery = {
   tags: Array<Tag>;
   usedTags: Array<Tag>;
   user?: Maybe<User>;
+  userByUsername?: Maybe<User>;
   userSubscriptions: Array<Subscription>;
   users: Array<User>;
 };
@@ -437,6 +438,14 @@ export type RootQueryPostBySlugArgs = {
 
 export type RootQueryUsedTagsArgs = {
   categorySlug?: InputMaybe<Scalars["String"]>;
+};
+
+export type RootQueryUserByUsernameArgs = {
+  username: Scalars["String"];
+};
+
+export type RootQueryUserSubscriptionsArgs = {
+  sort?: InputMaybe<Scalars["String"]>;
 };
 
 export type SendEmailChangeEmailType = {
@@ -529,6 +538,7 @@ export type UpdateUserProfileType = {
 
 export type User = {
   __typename?: "User";
+  avatar?: Maybe<DjangoImageType>;
   email: Scalars["String"];
   firstName: Scalars["String"];
   id: Scalars["ID"];
@@ -536,6 +546,7 @@ export type User = {
   isActive: Scalars["Boolean"];
   /** Designates whether the user can log into this admin site. */
   isStaff: Scalars["Boolean"];
+  isSubscribed: Scalars["Boolean"];
   /** Designates that this user has all permissions without explicitly assigning them. */
   isSuperuser: Scalars["Boolean"];
   lastName: Scalars["String"];
@@ -566,6 +577,7 @@ export type UserProfileInput = {
 };
 
 export type UserRegistrationInput = {
+  avatar?: InputMaybe<Scalars["Upload"]>;
   email: Scalars["String"];
   password1: Scalars["String"];
   password2: Scalars["String"];

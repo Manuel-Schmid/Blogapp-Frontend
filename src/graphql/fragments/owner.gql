@@ -1,5 +1,6 @@
 fragment Owner on User {
   id
+  username
   firstName
   lastName
 }

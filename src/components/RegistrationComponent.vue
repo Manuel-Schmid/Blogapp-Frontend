@@ -12,6 +12,13 @@ export default {
     const username = ref("");
     const password1 = ref("");
     const password2 = ref("");
+    const avatar = ref(undefined);
+
+    const onFileChange = (e: { target: { files: any[] } }) => {
+      if (e.target.files.length > 0) {
+        avatar.value = e.target.files[0];
+      }
+    };
 
     const onSubmit = () => {
       emit(
@@ -19,11 +26,20 @@ export default {
         email.value,
         username.value,
         password1.value,
-        password2.value
+        password2.value,
+        avatar.value
       );
     };
 
-    return { email, username, password1, password2, onSubmit };
+    return {
+      email,
+      username,
+      password1,
+      password2,
+      avatar,
+      onFileChange,
+      onSubmit,
+    };
   },
 };
 </script>
@@ -96,6 +112,20 @@ export default {
                 placeholder="••••••••"
                 class="form-input"
                 required=""
+              />
+            </div>
+            <div>
+              <label for="avatar" class="form-label">{{
+                this.$t("components.registration.avatar")
+              }}</label>
+              <input
+                type="file"
+                name="avatar"
+                id="avatar"
+                @change="onFileChange"
+                class="form-input"
+                accept="image/png, image/jpg, image/jpeg"
+                required
               />
             </div>
             <button @click="onSubmit" class="form-button">

@@ -75,12 +75,20 @@ export default {
         </p>
       </div>
       <div class="pr-10 text-right mt-3">
-        <p>
+        <div>
           -
-          {{
-            formatFullname(postData.owner.firstName, postData.owner.lastName)
-          }}
-        </p>
+          <router-link
+            :to="{
+              name: 'userDetail',
+              params: { username: postData.owner.username },
+            }"
+            class="hover:underline"
+          >
+            {{
+              formatFullname(postData.owner.firstName, postData.owner.lastName)
+            }}
+          </router-link>
+        </div>
       </div>
       <div class="px-8 py-2 mt-6">
         <img

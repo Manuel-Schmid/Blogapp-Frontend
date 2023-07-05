@@ -12,9 +12,11 @@ import {
   SubscriptionInput,
   Tag,
   UpdatePostStatusInput,
+  User,
 } from "../api/models";
 import Posts from "../graphql/getPosts.gql";
 import UserPosts from "../graphql/getUserPosts.gql";
+import UserDetail from "../graphql/getUserByUsername.gql";
 import NotificationPosts from "../graphql/getNotificationPosts.gql";
 import UserSubscriptions from "../graphql/getUserSubscriptions.gql";
 import PostBySlug from "../graphql/getPost.gql";
@@ -40,6 +42,7 @@ export type PostState = {
   paginatedUserPosts: PaginationPosts | null;
   paginatedNotificationPosts: PaginationPosts | null;
   post: Post | null;
+  userDetail: User | null;
   postTitles: PostTitleType[];
   userSubscriptions: Subscription[];
   tags: Tag[];
@@ -55,6 +58,7 @@ export const usePostStore = defineStore("blog", {
       paginatedUserPosts: null,
       paginatedNotificationPosts: null,
       post: null,
+      userDetail: null,
       postTitles: [],
       userSubscriptions: [],
       tags: [],
@@ -127,6 +131,15 @@ export const usePostStore = defineStore("blog", {
         },
       });
       this.paginatedUserPosts = response.data.paginatedUserPosts;
+    },
+    async fetchUserDetail(username: string) {
+      const response = await apolloClient.query({
+        query: UserDetail,
+        variables: {
+          username,
+        },
+      });
+      this.userDetail = response.data.userByUsername;
     },
     async fetchNotificationPosts(activePage: number) {
       const response = await apolloClient.query({
@@ -254,17 +267,12 @@ export const usePostStore = defineStore("blog", {
       }
     },
     async createSubscription(subscriptionInput: SubscriptionInput) {
-      if (this.post) {
-        const response = await apolloClient.mutate({
-          mutation: CreateSubscription,
-          variables: {
-            subscriptionInput,
-          },
-        });
-        if (response.data.createSubscription.success) {
-          await this.fetchPost(this.post.slug, false);
-        }
-      }
+      await apolloClient.mutate({
+        mutation: CreateSubscription,
+        variables: {
+          subscriptionInput,
+        },
+      });
     },
     async deleteSubscription(subscriptionInput: SubscriptionInput) {
       const response = await apolloClient.mutate({
